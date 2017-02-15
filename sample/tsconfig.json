@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "amd",
+        "moduleResolution": "node",
+        "isolatedModules": false,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "declaration": true,
+        "noImplicitAny": true,
+        "noImplicitUseStrict": false,
+        "strictNullChecks": true,
+        "noEmitHelpers": true,
+        "noLib": false,
+        "lib": ["es2017", "dom"],
+        "outDir": "dist/"
+    }
+}
