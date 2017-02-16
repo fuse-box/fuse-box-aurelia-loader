@@ -1,4 +1,4 @@
-(function(FuseBox){
+(function(FuseBox){FuseBox.$fuse$=FuseBox;
 var __fsbx_css = function(__filename, contents) {
     if (FuseBox.isServer) {
         return;
@@ -2530,7 +2530,6 @@ exports.ContextMenu = ContextMenu;
 });
 ___scope___.file("grid/v-grid.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4112,7 +4111,6 @@ module.exports.default =  "<template>\r\n  <!--\r\n    get the internal css, \r\
 });
 ___scope___.file("grid/attributes/v-changed.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4153,7 +4151,6 @@ var _a;
 //# sourceMappingURL=module.js.map
 });
 ___scope___.file("grid/attributes/v-data-handler.js", function(exports, require, module, __filename, __dirname){ 
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4244,7 +4241,6 @@ var _a;
 //# sourceMappingURL=module.js.map
 });
 ___scope___.file("grid/attributes/v-drag-drop-col.js", function(exports, require, module, __filename, __dirname){ 
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4612,7 +4608,6 @@ var _a;
 });
 ___scope___.file("grid/attributes/v-filter-observer.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4707,7 +4702,6 @@ var _a;
 //# sourceMappingURL=module.js.map
 });
 ___scope___.file("grid/attributes/v-filter.js", function(exports, require, module, __filename, __dirname){ 
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4907,7 +4901,6 @@ var _a;
 });
 ___scope___.file("grid/attributes/v-image.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4947,7 +4940,6 @@ var _a;
 //# sourceMappingURL=module.js.map
 });
 ___scope___.file("grid/attributes/v-menu.js", function(exports, require, module, __filename, __dirname){ 
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5110,7 +5102,6 @@ var _a;
 });
 ___scope___.file("grid/attributes/v-resize-col.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5272,7 +5263,6 @@ var _a;
 });
 ___scope___.file("grid/attributes/v-selection.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5346,7 +5336,6 @@ var _a;
 //# sourceMappingURL=module.js.map
 });
 ___scope___.file("grid/attributes/v-sort.js", function(exports, require, module, __filename, __dirname){ 
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5436,7 +5425,6 @@ var _a;
 //# sourceMappingURL=module.js.map
 });
 ___scope___.file("grid/v-grid-col.js", function(exports, require, module, __filename, __dirname){ 
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5614,7 +5602,6 @@ var _a, _b;
 });
 ___scope___.file("grid/v-grid-contextmenu.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5693,7 +5680,6 @@ var _a, _b;
 });
 ___scope___.file("grid/v-grid-footer.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5734,7 +5720,6 @@ var _a, _b;
 //# sourceMappingURL=module.js.map
 });
 ___scope___.file("grid/v-grid-group-element.js", function(exports, require, module, __filename, __dirname){ 
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5777,7 +5762,6 @@ var _a, _b;
 });
 ___scope___.file("grid/v-grid-group-row.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5819,7 +5803,6 @@ var _a, _b;
 });
 ___scope___.file("grid/v-grid-loadingscreen.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5860,7 +5843,6 @@ var _a, _b;
 //# sourceMappingURL=module.js.map
 });
 ___scope___.file("grid/v-grid-row-repeat.js", function(exports, require, module, __filename, __dirname){ 
-var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5978,8 +5960,7 @@ FuseBox.global("__fsbx_decorate", function(localArguments) {
 FuseBox.global("__metadata", function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 });
-
-FuseBox.import("aurelia-v-grid/index.js");
+FuseBox.expose([{"alias":"aurelia-v-grid","pkg":"aurelia-v-grid/index.js"}]);
 FuseBox.main("aurelia-v-grid/index.js");
 FuseBox.defaultPackageName = "aurelia-v-grid";
 })
