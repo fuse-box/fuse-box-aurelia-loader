@@ -1,0 +1,18 @@
+<template>
+  <require from="../components/grid-component"></require>
+  <section class="au-animate">
+    <h2>${heading}</h2>
+    <form role="form" submit.delegate="submit()">
+      <div class="form-group">
+        <label for="fn">Name</label>
+        <input type="text" value.bind="ds.entity.name" class="form-control" id="fn" placeholder="first name">
+      </div>
+      <div class="form-group">
+        <label for="ln">Country</label>
+        <input type="text" value.bind="ds.entity.country" class="form-control" id="ln" placeholder="last name">
+      </div>
+    </form>
+    <grid-component grid-connector.bind="gridConnector" ></grid-component>
+    
+  </section>
+</template>
