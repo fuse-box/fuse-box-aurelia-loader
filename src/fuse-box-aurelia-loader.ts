@@ -133,7 +133,8 @@ export class FuseBoxAureliaLoader extends Loader {
   */
   public loadTemplate(url: any): Promise<any> {
     debugPrint('info', 'loadTemplate => ', arguments);
-    return this._import(this.applyPluginToUrl(url, 'template-registry-entry'));
+    return this._import(this.applyPluginToUrl(url, 'template-registry-entry'))
+      .then((template: any) => this.moduleRegistry[url] = template);
   }
 
 
@@ -165,6 +166,7 @@ export class FuseBoxAureliaLoader extends Loader {
     debugPrint('info', 'loadModule => ', arguments);
     let module = this.loadWithFusebox(this.findFuseBoxPath(id));
     module = ensureOriginOnExports(module, id);
+    this.moduleRegistry[id] = module;
     return Promise.resolve(module);
   }
 

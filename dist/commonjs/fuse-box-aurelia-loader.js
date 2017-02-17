@@ -69,8 +69,10 @@ var FuseBoxAureliaLoader = (function (_super) {
         return Promise.all(loads);
     };
     FuseBoxAureliaLoader.prototype.loadTemplate = function (url) {
+        var _this = this;
         debugPrint('info', 'loadTemplate => ', arguments);
-        return this._import(this.applyPluginToUrl(url, 'template-registry-entry'));
+        return this._import(this.applyPluginToUrl(url, 'template-registry-entry'))
+            .then(function (template) { return _this.moduleRegistry[url] = template; });
     };
     FuseBoxAureliaLoader.prototype.loadText = function (url) {
         debugPrint('info', 'loadText => ', arguments);
@@ -85,6 +87,7 @@ var FuseBoxAureliaLoader = (function (_super) {
         debugPrint('info', 'loadModule => ', arguments);
         var module = this.loadWithFusebox(this.findFuseBoxPath(id));
         module = ensureOriginOnExports(module, id);
+        this.moduleRegistry[id] = module;
         return Promise.resolve(module);
     };
     FuseBoxAureliaLoader.prototype.addPlugin = function (pluginName, implementation) {
