@@ -134,11 +134,11 @@ var FuseBoxAureliaLoader = (function (_super) {
         var retunValue;
         var modulePart;
         switch (true) {
-            case path.startsWith('html-resource-plugin!'):
+            case path.indexOf('html-resource-plugin!') === 0:
                 retunValue = path;
                 debugPrint('error', 'WHY!', arguments);
                 break;
-            case path.startsWith('css-resource-plugin!'):
+            case path.indexOf('css-resource-plugin!') === 0:
                 path = path.replace('css-resource-plugin!', '');
                 modulePart = path.split('/')[0];
                 switch (true) {
@@ -155,7 +155,7 @@ var FuseBoxAureliaLoader = (function (_super) {
                         debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
                 }
                 break;
-            case path.includes('/'):
+            case path.indexOf('/') !== -1:
                 modulePart = path.split('/')[0];
                 switch (true) {
                     case this.fuseBoxExist(path):

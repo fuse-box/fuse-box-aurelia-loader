@@ -283,13 +283,13 @@ export class FuseBoxAureliaLoader extends Loader {
     switch (true) {
 
 
-      case path.startsWith('html-resource-plugin!'):
+      case path.indexOf('html-resource-plugin!') === 0:
         retunValue = path; // this should never trigger loadmodule should catch this...
         debugPrint('error', 'WHY!', arguments);
         break;
 
 
-      case path.startsWith('css-resource-plugin!'):
+      case path.indexOf('css-resource-plugin!') === 0:
 
         path = path.replace('css-resource-plugin!', '');
 
@@ -311,7 +311,7 @@ export class FuseBoxAureliaLoader extends Loader {
         break;
 
 
-      case path.includes('/'):
+      case path.indexOf('/') !== -1:
 
         // package path, lets test where it is
         modulePart = path.split('/')[0];
