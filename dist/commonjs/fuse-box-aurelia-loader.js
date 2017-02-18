@@ -42,6 +42,7 @@ var FuseBoxAureliaLoader = (function (_super) {
         _this.textPluginName = 'text';
         _this.loaderPlugins = Object.create(null);
         _this.moduleRegistry = Object.create(null);
+        _this.templateRegistry = Object.create(null);
         _this.useTemplateLoader(new aurelia_loader_default_1.TextTemplateLoader());
         var that = _this;
         _this.addPlugin('template-registry-entry', {
@@ -71,8 +72,16 @@ var FuseBoxAureliaLoader = (function (_super) {
         return Promise.all(loads);
     };
     FuseBoxAureliaLoader.prototype.loadTemplate = function (url) {
+        var _this = this;
         debugPrint('info', 'loadTemplate => ', arguments);
-        return this._import(this.applyPluginToUrl(url, 'template-registry-entry'));
+        if (this.templateRegistry[url]) {
+            return Promise.resolve(this.templateRegistry[url]);
+        }
+        return this._import(this.applyPluginToUrl(url, 'template-registry-entry')).then(function (template) {
+            _this.moduleRegistry[url] = template;
+            _this.templateRegistry[url] = template;
+            return template;
+        });
     };
     FuseBoxAureliaLoader.prototype.loadText = function (url) {
         debugPrint('info', 'loadText => ', arguments);
@@ -87,6 +96,7 @@ var FuseBoxAureliaLoader = (function (_super) {
         debugPrint('info', 'loadModule => ', arguments);
         var module = this.loadWithFusebox(this.findFuseBoxPath(id));
         module = ensureOriginOnExports(module, id);
+        this.moduleRegistry[id] = module;
         return Promise.resolve(module);
     };
     FuseBoxAureliaLoader.prototype.addPlugin = function (pluginName, implementation) {

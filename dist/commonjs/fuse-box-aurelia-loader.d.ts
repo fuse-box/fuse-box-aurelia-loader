@@ -3,6 +3,7 @@ export declare class FuseBoxAureliaLoader extends Loader {
     textPluginName: string;
     loaderPlugins: any;
     moduleRegistry: any;
+    templateRegistry: any;
     templateLoader: any;
     constructor();
     useTemplateLoader(templateLoader: any): void;
