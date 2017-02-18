@@ -67,6 +67,7 @@ export class FuseBoxAureliaLoader extends Loader {
   public textPluginName = 'text';
   public loaderPlugins = Object.create(null);
   public moduleRegistry: any;
+  public templateRegistry: any;
   public templateLoader: any;
 
 
@@ -76,6 +77,7 @@ export class FuseBoxAureliaLoader extends Loader {
   constructor() {
     super();
     this.moduleRegistry = Object.create(null);
+    this.templateRegistry = Object.create(null);
     this.useTemplateLoader(new TextTemplateLoader());
 
     let that = this;
@@ -133,8 +135,13 @@ export class FuseBoxAureliaLoader extends Loader {
   */
   public loadTemplate(url: any): Promise<any> {
     debugPrint('info', 'loadTemplate => ', arguments);
-    return this._import(this.applyPluginToUrl(url, 'template-registry-entry'))
-      .then((template: any) => this.moduleRegistry[url] = template);
+    if(this.templateRegistry[url]) {
+      return this.templateRegistry[url];
+    }
+    return this._import(this.applyPluginToUrl(url, 'template-registry-entry')).then((template: any) => {
+      this.moduleRegistry[url] = template;
+      this.templateRegistry[url] = template;
+    });
   }
 
 
