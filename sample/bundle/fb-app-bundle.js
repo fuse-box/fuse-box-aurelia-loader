@@ -1,30 +1,32 @@
 (function(FuseBox){FuseBox.$fuse$=FuseBox;
-var __fsbx_css = function(__filename, contents) {
+var __fsbx_css = function (__filename, contents) {
     if (FuseBox.isServer) {
         return;
     }
     var styleId = __filename.replace(/[\.\/]+/g, "-");
-    if (styleId.charAt(0) === '-') styleId = styleId.substring(1);
+    if (styleId.charAt(0) === '-')
+        styleId = styleId.substring(1);
     var exists = document.getElementById(styleId);
     if (!exists) {
-        //<link href="//fonts.googleapis.com/css?family=Covered+By+Your+Grace" rel="stylesheet" type="text/css">
         var s = document.createElement(contents ? "style" : "link");
         s.id = styleId;
         s.type = "text/css";
         if (contents) {
             s.innerHTML = contents;
-        } else {
+        }
+        else {
             s.rel = "stylesheet";
             s.href = __filename;
         }
         document.getElementsByTagName("head")[0].appendChild(s);
-    } else {
+    }
+    else {
         if (contents) {
             exists.innerHTML = contents;
         }
     }
-}
-FuseBox.on("async", function(name) {
+};
+FuseBox.on("async", function (name) {
     if (FuseBox.isServer) {
         return;
     }
@@ -33,6 +35,7 @@ FuseBox.on("async", function(name) {
         return false;
     }
 });
+
 FuseBox.pkg("default", {}, function(___scope___){
 ___scope___.file("main.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -46,10 +49,10 @@ FuseBox.pkg("fuse-box-aurelia-loader", {}, function (___scope___) {
     ___scope___.entry = "fuse-box-aurelia-loader.js";
 });
 FuseBox.pkg("aurelia-v-grid", {}, function (___scope___) {
-    ___scope___.entry = "index.js";
+    ___scope___.entry = 'index.js';
 });
 // add custom loader for fuse
-window.FUSEBOX_AURELIA_LOADER_LOGGING = true;
+// window.FUSEBOX_AURELIA_LOADER_LOGGING=true
 require("fuse-box-aurelia-loader");
 // start aurelia bootstrapper
 require("aurelia-bootstrapper");
@@ -58,7 +61,7 @@ function configure(aurelia) {
     aurelia.use
         .standardConfiguration()
         .developmentLogging()
-        .plugin("aurelia-v-grid");
+        .plugin('aurelia-v-grid');
     aurelia.start().then(function () { return aurelia.setRoot(); });
 }
 exports.configure = configure;
@@ -70,7 +73,7 @@ module.exports.default =  "<template>\n  <require from=\"components/nav-bar.html
 });
 ___scope___.file("components/grid-component.html", function(exports, require, module, __filename, __dirname){ 
 
-module.exports.default =  "<template>\r\n  <require from=\"../misc/valueConverter\"></require>\r\n    <h3>Plugin Test: Aurelia-v-grid :</h3>\r\n    \r\n    <v-grid \r\n        v-grid-connector.bind=\"gridConnector\" \r\n        v-header-height=\"50\"\r\n        style=\"width:900px;height:400px;user-select: none;border: solid 1px grey;\">\r\n     \r\n      <v-grid-col \r\n          col-filter-menu=\"filter:country\"\r\n          col-label-menu=\"sort:country;groupby:country;groupbytitle:country\" \r\n          col-width=\"200\" \r\n          col-drag-drop=\"title:Country;field:country\" \r\n          col-sort=\"field:country\"\r\n          col-filter=\"field:country\" \r\n          col-field=\"country\">\r\n        </v-grid-col>\r\n        \r\n\r\n        <v-grid-col \r\n          col-filter-menu=\"filter:name\"\r\n          col-label-menu=\"sort:name\" \r\n          col-width=\"200\" \r\n          col-drag-drop=\"title:name x;field:name\" \r\n          col-sort=\"field:name\"\r\n          col-filter=\"field:name\" \r\n          col-field=\"name\"\r\n          col-pin-right=\"true\">\r\n        </v-grid-col>\r\n\r\n\r\n        <v-grid-col\r\n          col-filter-menu=\"filter:index;filterkey:less\"\r\n          col-header-name=\"index\"\r\n          col-label-menu=\"sort:index\" \r\n          col-width=\"100\" \r\n          col-sort=\"field:index;asc:false\" \r\n          col-filter=\"field:index;operator:<;key:less\"\r\n          col-field=\"index | numberFormatter\"\r\n          col-pin-left=\"true\">\r\n        </v-grid-col>\r\n\r\n        <v-grid-col\r\n          col-filter-menu=\"filter:index;filterkey:greater\"\r\n          col-header-name=\"index\"\r\n          col-label-menu=\"sort:index\" \r\n          col-width=\"100\" \r\n          col-sort=\"field:index;asc:false\" \r\n          col-filter=\"field:index;operator:>;key:greater\" \r\n          col-field=\"index | numberFormatter\"\r\n          col-pin-left=\"true\">\r\n        </v-grid-col>\r\n        \r\n        <v-grid-col\r\n          col-filter-menu=\"filter:high\"\r\n          col-label-menu=\"sort:high;groupby:high\" \r\n          col-filter-menu=\"filter:high\" \r\n          col-width=\"100\" \r\n          col-drag-drop=\"title:high;field:high\" \r\n          col-sort=\"field:high\" \r\n          col-filter=\"field:high\" \r\n          col-field=\"high\">\r\n        </v-grid-col>\r\n\r\n        <v-grid-col\r\n          col-filter-menu=\"filter:bool\"\r\n          col-label-menu=\"sort:bool;groupby:bool\" \r\n          col-width=\"100\" \r\n          col-sort=\"field:bool\"\r\n          col-drag-drop=\"title:bool x;field:bool\" \r\n          col-filter=\"field:bool\" \r\n          col-field=\"bool | booleanFormatter\" \r\n          col-type=\"checkbox\">\r\n        </v-grid-col>\r\n\r\n        <v-grid-col\r\n          col-filter-menu=\"filter:number\"\r\n          col-label-menu=\"sort:number\"  \r\n          col-width=\"100\"\r\n          col-css=\"color:${tempRef.numberColor};font-weight:${tempRef.numberFont}\"\r\n          col-sort=\"field:number\" \r\n          col-filter=\"field:number;operator:<\" \r\n          col-display-edit=\"field:number;edit:editFormatNumber;display:displayFormatNumber\"\r\n          col-field=\"number\">\r\n        </v-grid-col>\r\n\r\n      </v-grid>\r\n\r\n</template>"
+module.exports.default =  "<template>\n  <require from=\"../misc/valueConverter\"></require>\n    <h3>Plugin Test: Aurelia-v-grid :</h3>\n    \n    <v-grid \n        v-grid-connector.bind=\"gridConnector\" \n        v-header-height=\"50\"\n        style=\"width:900px;height:400px;user-select: none;border: solid 1px grey;\">\n     \n      <v-grid-col \n          col-filter-menu=\"filter:country\"\n          col-label-menu=\"sort:country;groupby:country;groupbytitle:country\" \n          col-width=\"200\" \n          col-drag-drop=\"title:Country;field:country\" \n          col-sort=\"field:country\"\n          col-filter=\"field:country\" \n          col-field=\"country\">\n        </v-grid-col>\n        \n\n        <v-grid-col \n          col-filter-menu=\"filter:name\"\n          col-label-menu=\"sort:name\" \n          col-width=\"200\" \n          col-drag-drop=\"title:name x;field:name\" \n          col-sort=\"field:name\"\n          col-filter=\"field:name\" \n          col-field=\"name\"\n          col-pin-right=\"true\">\n        </v-grid-col>\n\n\n        <v-grid-col\n          col-filter-menu=\"filter:index;filterkey:less\"\n          col-header-name=\"index\"\n          col-label-menu=\"sort:index\" \n          col-width=\"100\" \n          col-sort=\"field:index;asc:false\" \n          col-filter=\"field:index;operator:<;key:less\"\n          col-field=\"index | numberFormatter\"\n          col-pin-left=\"true\">\n        </v-grid-col>\n\n        <v-grid-col\n          col-filter-menu=\"filter:index;filterkey:greater\"\n          col-header-name=\"index\"\n          col-label-menu=\"sort:index\" \n          col-width=\"100\" \n          col-sort=\"field:index;asc:false\" \n          col-filter=\"field:index;operator:>;key:greater\" \n          col-field=\"index | numberFormatter\"\n          col-pin-left=\"true\">\n        </v-grid-col>\n        \n        <v-grid-col\n          col-filter-menu=\"filter:high\"\n          col-label-menu=\"sort:high;groupby:high\" \n          col-filter-menu=\"filter:high\" \n          col-width=\"100\" \n          col-drag-drop=\"title:high;field:high\" \n          col-sort=\"field:high\" \n          col-filter=\"field:high\" \n          col-field=\"high\">\n        </v-grid-col>\n\n        <v-grid-col\n          col-filter-menu=\"filter:bool\"\n          col-label-menu=\"sort:bool;groupby:bool\" \n          col-width=\"100\" \n          col-sort=\"field:bool\"\n          col-drag-drop=\"title:bool x;field:bool\" \n          col-filter=\"field:bool\" \n          col-field=\"bool | booleanFormatter\" \n          col-type=\"checkbox\">\n        </v-grid-col>\n\n        <v-grid-col\n          col-filter-menu=\"filter:number\"\n          col-label-menu=\"sort:number\"  \n          col-width=\"100\"\n          col-css=\"color:${tempRef.numberColor};font-weight:${tempRef.numberFont}\"\n          col-sort=\"field:number\" \n          col-filter=\"field:number;operator:<\" \n          col-display-edit=\"field:number;edit:editFormatNumber;display:displayFormatNumber\"\n          col-field=\"number\">\n        </v-grid-col>\n\n      </v-grid>\n\n</template>"
 });
 ___scope___.file("components/nav-bar.html", function(exports, require, module, __filename, __dirname){ 
 
@@ -110,6 +113,7 @@ exports.App = App;
 });
 ___scope___.file("components/grid-component.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 "use strict";
 var aurelia_framework_1 = require("aurelia-framework");
 var GridComponent = (function () {
@@ -125,6 +129,7 @@ exports.GridComponent = GridComponent;
 
 });
 ___scope___.file("misc/blur-image.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 "use strict";
 var aurelia_framework_1 = require("aurelia-framework");
@@ -663,6 +668,7 @@ exports.ChildRouter = ChildRouter;
 });
 ___scope___.file("routes/users.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 "use strict";
 var aurelia_framework_1 = require("aurelia-framework");
 var aurelia_fetch_client_1 = require("aurelia-fetch-client");
@@ -695,6 +701,7 @@ var _a;
 
 });
 ___scope___.file("routes/welcome.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 "use strict";
 var aurelia_framework_1 = require("aurelia-framework");
@@ -732,110 +739,118 @@ var _a;
 FuseBox.pkg("fusebox-hot-reload", {}, function(___scope___){
 ___scope___.file("index.js", function(exports, require, module, __filename, __dirname){ 
 
-const Client = require("fusebox-websocket").SocketClient;
-
-module.exports = {
-    connect: (port) => {
-
-        if (FuseBox.isServer) {
-            return;
-        }
-        port = port || window.location.port;
-        let client = new Client({
-            port: port
-        });
-        client.connect();
-        console.log("connecting...");
-        client.on("source-changed", (data) => {
-            console.log(`Updating "${data.path}" ...`);
-            if (data.type === "js") {
-                FuseBox.flush();
-                FuseBox.dynamic(data.path, data.content);
-                if (FuseBox.mainFile) {
-                    FuseBox.import(FuseBox.mainFile)
-                }
-            }
-            if (data.type === "css" && __fsbx_css) {
-                __fsbx_css(data.path, data.content)
-            }
-        })
-        client.on("error", (erro) => {
-            console.log(error);
-        });
+"use strict";
+var Client = require("fusebox-websocket").SocketClient;
+exports.connect = function (port) {
+    if (FuseBox.isServer) {
+        return;
     }
-}
+    port = port || window.location.port;
+    var client = new Client({
+        port: port
+    });
+    client.connect();
+    console.log("connecting...");
+    client.on("source-changed", function (data) {
+        console.log("Updating \"" + data.path + "\" ...");
+        for (var index = 0; index < FuseBox.plugins.length; index++) {
+            var plugin = FuseBox.plugins[index];
+            if (plugin.hmrUpdate && plugin.hmrUpdate(data)) {
+                return;
+            }
+        }
+        if (data.type === "js") {
+            FuseBox.flush();
+            FuseBox.dynamic(data.path, data.content);
+            if (FuseBox.mainFile) {
+                FuseBox.import(FuseBox.mainFile);
+            }
+        }
+        if (data.type === "css" && __fsbx_css) {
+            __fsbx_css(data.path, data.content);
+        }
+    });
+    client.on("error", function (error) {
+        console.log(error);
+    });
+};
+
 });
 return ___scope___.entry = "index.js";
 });
 FuseBox.pkg("fusebox-websocket", {}, function(___scope___){
 ___scope___.file("index.js", function(exports, require, module, __filename, __dirname){ 
 
-const events = require("events");
-
-class SocketClient {
-    constructor(opts) {
+"use strict";
+var events = require("events");
+var SocketClient = (function () {
+    function SocketClient(opts) {
         opts = opts || {};
-        const port = opts.port || window.location.port;
-        const protocol = location.protocol === "https:" ? "wss://" : "ws://";
-        const domain = location.hostname || "localhost";
-        this.url = opts.host || `${protocol}${domain}:${port}`;
+        var port = opts.port || window.location.port;
+        var protocol = location.protocol === "https:" ? "wss://" : "ws://";
+        var domain = location.hostname || "localhost";
+        this.url = opts.host || "" + protocol + domain + ":" + port;
         this.authSent = false;
         this.emitter = new events.EventEmitter();
     }
-    reconnect(fn) {
-        setTimeout(() => {
-            this.emitter.emit("reconnect", { message: "Trying to reconnect" });
-            this.connect(fn);
+    SocketClient.prototype.reconnect = function (fn) {
+        var _this = this;
+        setTimeout(function () {
+            _this.emitter.emit("reconnect", { message: "Trying to reconnect" });
+            _this.connect(fn);
         }, 5000);
-    }
-    on(event, fn) {
+    };
+    SocketClient.prototype.on = function (event, fn) {
         this.emitter.on(event, fn);
-    }
-    connect(fn) {
+    };
+    SocketClient.prototype.connect = function (fn) {
+        var _this = this;
         console.log("connect", this.url);
-        setTimeout(() => {
-            this.client = new WebSocket(this.url);
-            this.bindEvents(fn);
+        setTimeout(function () {
+            _this.client = new WebSocket(_this.url);
+            _this.bindEvents(fn);
         }, 0);
-    }
-    close() {
+    };
+    SocketClient.prototype.close = function () {
         this.client.close();
-    }
-    send(eventName, data) {
+    };
+    SocketClient.prototype.send = function (eventName, data) {
         if (this.client.readyState === 1) {
             this.client.send(JSON.stringify({ event: eventName, data: data || {} }));
         }
-    }
-    error(data) {
+    };
+    SocketClient.prototype.error = function (data) {
         this.emitter.emit("error", data);
-    }
-    bindEvents(fn) {
-
-        this.client.onopen = (event) => {
+    };
+    SocketClient.prototype.bindEvents = function (fn) {
+        var _this = this;
+        this.client.onopen = function (event) {
             if (fn) {
-                fn(this);
+                fn(_this);
             }
         };
-        this.client.onerror = (event) => {
-            this.error({ reason: event.reason, message: "Socket error" });
+        this.client.onerror = function (event) {
+            _this.error({ reason: event.reason, message: "Socket error" });
         };
-        this.client.onclose = (event) => {
-            this.emitter.emit("close", { message: "Socket closed" });
+        this.client.onclose = function (event) {
+            _this.emitter.emit("close", { message: "Socket closed" });
             if (event.code !== 1011) {
-                this.reconnect(fn);
+                _this.reconnect(fn);
             }
         };
-        this.client.onmessage = (event) => {
-            let data = event.data;
+        this.client.onmessage = function (event) {
+            var data = event.data;
             if (data) {
-                let item = JSON.parse(data);
-                this.emitter.emit(item.type, item.data);
-                this.emitter.emit("*", item);
+                var item = JSON.parse(data);
+                _this.emitter.emit(item.type, item.data);
+                _this.emitter.emit("*", item);
             }
         };
-    }
-}
+    };
+    return SocketClient;
+}());
 exports.SocketClient = SocketClient;
+
 });
 return ___scope___.entry = "index.js";
 });
@@ -1180,4 +1195,4 @@ FuseBox.import("fusebox-hot-reload").connect(4444)
 FuseBox.import("default/main.js");
 FuseBox.main("default/main.js");
 })
-(function(e){var r="undefined"!=typeof window&&window.navigator;r&&(window.global=window),e=r&&"undefined"==typeof __fbx__dnm__?e:module.exports;var n=r?window.__fsbx__=window.__fsbx__||{}:global.$fsbx=global.$fsbx||{};r||(global.require=require);var t=n.p=n.p||{},i=n.e=n.e||{},a=function(e){var r=e.charCodeAt(0);if(r>=97&&r<=122||64===r){if(64===r){var n=e.split("/"),t=n.splice(2,n.length).join("/");return[n[0]+"/"+n[1],t||void 0]}var i=e.indexOf("/");if(i===-1)return[e];var a=e.substring(0,i),o=e.substring(i+1);return[a,o]}},o=function(e){return e.substring(0,e.lastIndexOf("/"))||"./"},f=function(){for(var e=[],r=0;r<arguments.length;r++)e[r]=arguments[r];for(var n=[],t=0,i=arguments.length;t<i;t++)n=n.concat(arguments[t].split("/"));for(var a=[],t=0,i=n.length;t<i;t++){var o=n[t];o&&"."!==o&&(".."===o?a.pop():a.push(o))}return""===n[0]&&a.unshift(""),a.join("/")||(a.length?"/":".")},s=function(e){var r=e.match(/\.(\w{1,})$/);if(r){var n=r[1];return n?e:e+".js"}return e+".js"},u=function(e){if(r){var n,t=document,i=t.getElementsByTagName("head")[0];/\.css$/.test(e)?(n=t.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=e):(n=t.createElement("script"),n.type="text/javascript",n.src=e,n.async=!0),i.insertBefore(n,i.firstChild)}},l=function(e,n){var i=n.path||"./",o=n.pkg||"default",u=a(e);u&&(i="./",o=u[0],n.v&&n.v[o]&&(o=o+"@"+n.v[o]),e=u[1]),e&&126===e.charCodeAt(0)&&(e=e.slice(2,e.length),i="./");var l=t[o];if(!l){if(r)throw'Package was not found "'+o+'"';return{serverReference:require(o)}}e||(e="./"+l.s.entry);var c,v=f(i,e),d=s(v),p=l.f[d];return!p&&d.indexOf("*")>-1&&(c=d),p||c||(d=f(v,"/","index.js"),p=l.f[d],p||(d=v+".js",p=l.f[d]),p||(p=l.f[v+".jsx"])),{file:p,wildcard:c,pkgName:o,versions:l.v,filePath:v,validPath:d}},c=function(e,n){if(!r)return n(/\.(js|json)$/.test(e)?global.require(e):"");var t;t=new XMLHttpRequest,t.onreadystatechange=function(){if(4==t.readyState)if(200==t.status){var r=t.getResponseHeader("Content-Type"),i=t.responseText;/json/.test(r)?i="module.exports = "+i:/javascript/.test(r)||(i="module.exports = "+JSON.stringify(i));var a=f("./",e);p.dynamic(a,i),n(p.import(e,{}))}else console.error(e+" was not found upon request"),n(void 0)},t.open("GET",e,!0),t.send()},v=function(e,r){var n=i[e];if(n)for(var t in n){var a=n[t].apply(null,r);if(a===!1)return!1}},d=function(e,n){if(void 0===n&&(n={}),58===e.charCodeAt(4)||58===e.charCodeAt(5))return u(e);var i=l(e,n);if(i.serverReference)return i.serverReference;var a=i.file;if(i.wildcard){var f=new RegExp(i.wildcard.replace(/\*/g,"@").replace(/[.?*+^$[\]\\(){}|-]/g,"\\$&").replace(/@/g,"[a-z0-9$_-]+"),"i"),s=t[i.pkgName];if(s){var p={};for(var g in s.f)f.test(g)&&(p[g]=d(i.pkgName+"/"+g));return p}}if(!a){var m="function"==typeof n,h=v("async",[e,n]);if(h===!1)return;return c(e,function(e){if(m)return n(e)})}var _=i.validPath,x=i.pkgName;if(a.locals&&a.locals.module)return a.locals.module.exports;var w=a.locals={},b=o(_);w.exports={},w.module={exports:w.exports},w.require=function(e,r){return d(e,{pkg:x,path:b,v:i.versions})},w.require.main={filename:r?"./":global.require.main.filename,paths:r?[]:global.require.main.paths};var y=[w.module.exports,w.require,w.module,_,b,x];v("before-import",y);var k=a.fn;return k.apply(0,y),v("after-import",y),w.module.exports},p=function(){function n(){}return n.global=function(e,n){var t=r?window:global;return void 0===n?t[e]:void(t[e]=n)},n.import=function(e,r){return d(e,r)},n.on=function(e,r){i[e]=i[e]||[],i[e].push(r)},n.exists=function(e){try{var r=l(e,{});return void 0!==r.file}catch(e){return!1}},n.remove=function(e){var r=l(e,{}),n=t[r.pkgName];n&&n.f[r.validPath]&&delete n.f[r.validPath]},n.main=function(e){return this.mainFile=e,n.import(e,{})},n.expose=function(r){for(var n in r){var t=r[n],i=d(t.pkg);e[t.alias]=i}},n.dynamic=function(r,n,t){var i=t&&t.pkg||"default";this.pkg(i,{},function(t){t.file(r,function(r,t,i,a,o){var f=new Function("__fbx__dnm__","exports","require","module","__filename","__dirname","__root__",n);f(!0,r,t,i,a,o,e)})})},n.flush=function(e){var r=t.default;if(e)return void(r.f[e]&&delete r.f[e].locals);for(var n in r.f){var i=r.f[n];delete i.locals}},n.pkg=function(e,r,n){if(t[e])return n(t[e].s);var i=t[e]={},a=i.f={};i.v=r;var o=i.s={file:function(e,r){a[e]={fn:r}}};return n(o)},n}();return p.packages=t,p.isBrowser=void 0!==r,p.isServer=!r,e.FuseBox=p}(this))
+(function(e){var r="undefined"!=typeof window&&window.navigator;r&&(window.global=window),e=r&&"undefined"==typeof __fbx__dnm__?e:module.exports;var n=r?window.__fsbx__=window.__fsbx__||{}:global.$fsbx=global.$fsbx||{};r||(global.require=require);var t=n.p=n.p||{},i=n.e=n.e||{},a=function(e){var r=e.charCodeAt(0);if(r>=97&&r<=122||64===r){if(64===r){var n=e.split("/"),t=n.splice(2,n.length).join("/");return[n[0]+"/"+n[1],t||void 0]}var i=e.indexOf("/");if(i===-1)return[e];var a=e.substring(0,i),o=e.substring(i+1);return[a,o]}},o=function(e){return e.substring(0,e.lastIndexOf("/"))||"./"},f=function(){for(var e=[],r=0;r<arguments.length;r++)e[r]=arguments[r];for(var n=[],t=0,i=arguments.length;t<i;t++)n=n.concat(arguments[t].split("/"));for(var a=[],t=0,i=n.length;t<i;t++){var o=n[t];o&&"."!==o&&(".."===o?a.pop():a.push(o))}return""===n[0]&&a.unshift(""),a.join("/")||(a.length?"/":".")},u=function(e){var r=e.match(/\.(\w{1,})$/);if(r){var n=r[1];return n?e:e+".js"}return e+".js"},s=function(e){if(r){var n,t=document,i=t.getElementsByTagName("head")[0];/\.css$/.test(e)?(n=t.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=e):(n=t.createElement("script"),n.type="text/javascript",n.src=e,n.async=!0),i.insertBefore(n,i.firstChild)}},l=function(e,r){for(var n in e)e.hasOwnProperty(n)&&r(n,e[n])},c=function(e,n){var i=n.path||"./",o=n.pkg||"default",s=a(e);s&&(i="./",o=s[0],n.v&&n.v[o]&&(o=o+"@"+n.v[o]),e=s[1]),e&&126===e.charCodeAt(0)&&(e=e.slice(2,e.length),i="./");var l=t[o];if(!l){if(r)throw'Package was not found "'+o+'"';return{serverReference:require(o)}}e||(e="./"+l.s.entry);var c,v=f(i,e),p=u(v),d=l.f[p];return!d&&p.indexOf("*")>-1&&(c=p),d||c||(p=f(v,"/","index.js"),d=l.f[p],d||(p=v+".js",d=l.f[p]),d||(d=l.f[v+".jsx"])),{file:d,wildcard:c,pkgName:o,versions:l.v,filePath:v,validPath:p}},v=function(e,n){if(!r)return n(/\.(js|json)$/.test(e)?global.require(e):"");var t;t=new XMLHttpRequest,t.onreadystatechange=function(){if(4==t.readyState)if(200==t.status){var r=t.getResponseHeader("Content-Type"),i=t.responseText;/json/.test(r)?i="module.exports = "+i:/javascript/.test(r)||(i="module.exports = "+JSON.stringify(i));var a=f("./",e);g.dynamic(a,i),n(g.import(e,{}))}else console.error(e+" was not found upon request"),n(void 0)},t.open("GET",e,!0),t.send()},p=function(e,r){var n=i[e];if(n)for(var t in n){var a=n[t].apply(null,r);if(a===!1)return!1}},d=function(e,n){if(void 0===n&&(n={}),58===e.charCodeAt(4)||58===e.charCodeAt(5))return s(e);var i=c(e,n);if(i.serverReference)return i.serverReference;var a=i.file;if(i.wildcard){var f=new RegExp(i.wildcard.replace(/\*/g,"@").replace(/[.?*+^$[\]\\(){}|-]/g,"\\$&").replace(/@/g,"[a-z0-9$_-]+"),"i"),u=t[i.pkgName];if(u){var l={};for(var g in u.f)f.test(g)&&(l[g]=d(i.pkgName+"/"+g));return l}}if(!a){var m="function"==typeof n,h=p("async",[e,n]);if(h===!1)return;return v(e,function(e){if(m)return n(e)})}var _=i.validPath,x=i.pkgName;if(a.locals&&a.locals.module)return a.locals.module.exports;var w=a.locals={},y=o(_);w.exports={},w.module={exports:w.exports},w.require=function(e,r){return d(e,{pkg:x,path:y,v:i.versions})},w.require.main={filename:r?"./":global.require.main.filename,paths:r?[]:global.require.main.paths};var b=[w.module.exports,w.require,w.module,_,y,x];p("before-import",b);var k=a.fn;return k.apply(0,b),p("after-import",b),w.module.exports},g=function(){function n(){}return n.global=function(e,n){var t=r?window:global;return void 0===n?t[e]:void(t[e]=n)},n.import=function(e,r){return d(e,r)},n.on=function(e,r){i[e]=i[e]||[],i[e].push(r)},n.exists=function(e){try{var r=c(e,{});return void 0!==r.file}catch(e){return!1}},n.remove=function(e){var r=c(e,{}),n=t[r.pkgName];n&&n.f[r.validPath]&&delete n.f[r.validPath]},n.main=function(e){return this.mainFile=e,n.import(e,{})},n.expose=function(r){var n=function(n){var t=r[n],i=t.alias,a=d(t.pkg);"*"===i?l(a,function(r,n){return e[r]=n}):"object"==typeof i?l(i,function(r,n){return e[n]=a[r]}):e[i]=a};for(var t in r)n(t)},n.dynamic=function(r,n,t){var i=t&&t.pkg||"default";this.pkg(i,{},function(t){t.file(r,function(r,t,i,a,o){var f=new Function("__fbx__dnm__","exports","require","module","__filename","__dirname","__root__",n);f(!0,r,t,i,a,o,e)})})},n.flush=function(e){var r=t.default;for(var n in r.f){var i=!e||e(n);if(i){var a=r.f[n];delete a.locals}}},n.pkg=function(e,r,n){if(t[e])return n(t[e].s);var i=t[e]={},a=i.f={};i.v=r;var o=i.s={file:function(e,r){a[e]={fn:r}}};return n(o)},n.addPlugin=function(e){this.plugins.push(e)},n}();return g.packages=t,g.isBrowser=void 0!==r,g.isServer=!r,g.plugins=[],e.FuseBox=g}(this))

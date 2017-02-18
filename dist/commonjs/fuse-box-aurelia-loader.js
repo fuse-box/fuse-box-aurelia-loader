@@ -7,6 +7,8 @@ var aurelia_metadata_1 = require("aurelia-metadata");
 var aurelia_loader_1 = require("aurelia-loader");
 var aurelia_loader_default_1 = require("aurelia-loader-default");
 var aurelia_pal_1 = require("aurelia-pal");
+var aurelia_logging_1 = require("aurelia-logging");
+var log = aurelia_logging_1.getLogger('fuse-box-aurelia-loader');
 function ensureOriginOnExports(executed, name) {
     var target = executed;
     var key;
@@ -26,10 +28,10 @@ function ensureOriginOnExports(executed, name) {
 function debugPrint(type, title, args) {
     if (window.FUSEBOX_AURELIA_LOADER_LOGGING) {
         if (type === 'error') {
-            console.log('[DEBUG-ERROR]:' + title, args);
+            log.error(title, args);
         }
         if (type === 'info') {
-            console.log('[DEBUG]:' + title, args);
+            log.debug(title, args);
         }
     }
 }

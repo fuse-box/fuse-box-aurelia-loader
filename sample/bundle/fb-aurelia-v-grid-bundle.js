@@ -1,30 +1,32 @@
 (function(FuseBox){FuseBox.$fuse$=FuseBox;
-var __fsbx_css = function(__filename, contents) {
+var __fsbx_css = function (__filename, contents) {
     if (FuseBox.isServer) {
         return;
     }
     var styleId = __filename.replace(/[\.\/]+/g, "-");
-    if (styleId.charAt(0) === '-') styleId = styleId.substring(1);
+    if (styleId.charAt(0) === '-')
+        styleId = styleId.substring(1);
     var exists = document.getElementById(styleId);
     if (!exists) {
-        //<link href="//fonts.googleapis.com/css?family=Covered+By+Your+Grace" rel="stylesheet" type="text/css">
         var s = document.createElement(contents ? "style" : "link");
         s.id = styleId;
         s.type = "text/css";
         if (contents) {
             s.innerHTML = contents;
-        } else {
+        }
+        else {
             s.rel = "stylesheet";
             s.href = __filename;
         }
         document.getElementsByTagName("head")[0].appendChild(s);
-    } else {
+    }
+    else {
         if (contents) {
             exists.innerHTML = contents;
         }
     }
-}
-FuseBox.on("async", function(name) {
+};
+FuseBox.on("async", function (name) {
     if (FuseBox.isServer) {
         return;
     }
@@ -33,6 +35,7 @@ FuseBox.on("async", function(name) {
         return false;
     }
 });
+
 FuseBox.pkg("aurelia-v-grid", {}, function(___scope___){
 ___scope___.file("index.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -45,7 +48,7 @@ function configure(config) {
     config.globalResources(prefix + '/attributes/v-filter', prefix + '/attributes/v-filter-observer', prefix + '/attributes/v-sort', prefix + '/attributes/v-image', prefix + '/attributes/v-drag-drop-col', prefix + '/attributes/v-changed', prefix + '/attributes/v-data-handler', prefix + '/attributes/v-resize-col', prefix + '/attributes/v-menu', prefix + '/attributes/v-selection', prefix + '/v-grid-row-repeat', prefix + '/v-grid-group-row', prefix + '/v-grid-group-element', prefix + '/v-grid-loadingscreen', prefix + '/v-grid-contextmenu', prefix + '/v-grid-footer', prefix + '/v-grid-col', prefix + '/v-grid');
 }
 exports.configure = configure;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=index.js.map
 });
 ___scope___.file("interfaces.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -99,7 +102,7 @@ var arrayGrouping_1 = require("./utils/arrayGrouping");
 exports.ArrayGrouping = arrayGrouping_1.ArrayGrouping;
 var footer_1 = require("./grid/footer");
 exports.Footer = footer_1.Footer;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=interfaces.js.map
 });
 ___scope___.file("grid/htmlCache.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -175,7 +178,7 @@ var HtmlCache = (function () {
     return HtmlCache;
 }());
 exports.HtmlCache = HtmlCache;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=htmlCache.js.map
 });
 ___scope___.file("grid/controller.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -524,7 +527,7 @@ var Controller = (function () {
     return Controller;
 }());
 exports.Controller = Controller;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=controller.js.map
 });
 ___scope___.file("grid/mainMarkup.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -553,12 +556,12 @@ var MainMarkup = (function () {
     return MainMarkup;
 }());
 exports.MainMarkup = MainMarkup;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=mainMarkup.js.map
 });
 ___scope___.file("grid/mainMarkupHtmlString.js", function(exports, require, module, __filename, __dirname){ 
 
 exports.MainMarkupHtmlString = "\n        <avg-top-panel v-drag-drop-col class=\"avg-top-panel\" css=\"height:$au{avgPanel_Height}px\">\n\n        </avg-top-panel>\n\n        <avg-header class=\"avg-header\" css=\"height:$au{avgHeader_Height}px;top:$au{avgHeader_Top}px\">\n\n          <avg-header-left class=\"avg-header-left\" css=\"width:$au{avgHeaderLeft_Width}px\">\n           </avg-header-left>  \n\n           <avg-header-main class=\"avg-header-main\" css=\"left:$au{avgHeaderMain_Left}px;right:$au{avgHeaderMain_Right}px\">\n             <avg-header-main-scroll css=\"width:$au{avgHeaderMainScroll_Width}px;height:$au{avgHeaderMainScroll_Height}px\"> \n             </avg-header-main-scroll> \n           </avg-header-main> \n\n           <avg-header-right class=\"avg-header-right\" css=\"right:$au{avgHeaderRight_Right}px;width:$au{avgHeaderRight_Width}px\">\n           </avg-header-right> \n\n        </avg-header>\n\n        <avg-content class=\"avg-content\" css=\"top:$au{avgContent_Top}px;bottom:$au{avgContent_Bottom}px\">\n           \n            <avg-content-left  class=\"avg-content-left\" css=\"width:$au{avgContentLeft_Width}px\">\n              <avg-content-left-scroll css=\"width:$au{avgContentLeftScroll_Width};height:$au{avgContentLeftScroll_Height}px\">  \n              </avg-content-left-scroll> \n            </avg-content-left>  \n\n            <avg-content-main  class=\"avg-content-main\" css=\"left:$au{avgContentMain_Left}px;right:$au{avgContentMain_Right}px\">\n              <avg-content-main-scroll css=\"min-width: 100%;width:$au{avgContentMainScroll_Width}px;height:$au{avgContentMainScroll_Height}px\"> \n              </avg-content-main-scroll> \n            </avg-content-main> \n\n            <avg-content-right  class=\"avg-content-right\" css=\"right:$au{avgContentRight_Right}px;width:$au{avgContentRight_Width}px\">\n              <avg-content-right-scroll css=\"width:$au{avgContentRightScroll_Width};height:$au{avgContentRightScroll_Height}px\">  \n              </avg-content-right-scroll> \n            </avg-content-right>  \n            \n        </avg-content>\n\n       <avg-footer class=\"avg-footer\" css=\"height:$au{avgFooter_Height}px\">\n       </avg-footer> \n\n       <avg-content-group css=\"left:0;right:0;top:$au{avgContentGroup_Top}px;bottom:$au{avgContentGroup_Bottom}px\">\n          <avg-content-group-scroll css=\"left:0;right:0;height:$au{avgContentGroup_Height}px\">  \n          </avg-content-group-scroll> \n        </avg-content-group> \n\n        <avg-content-vhandle css=\"right:0;bottom:$au{avgContentVhandle_Bottom}px;right:$au{avgContentVhandle_Right}px;left:$au{avgContentVhandle_Left}px;top:$au{avgContentVhandle_Top}px\">\n          <avg-content-vhandle-scroll css=\"width:5px;height:$au{avgContentVhandleScroll_Height}px\"> \n          </avg-content-vhandle-scroll> \n        </avg-content-vhandle> \n\n        <avg-content-hhandle css=\"bottom:$au{avgContentHhandle_Bottom}px;right:$au{avgContentHhandle_Right}px;left:$au{avgContentHhandle_Left}px;height:$au{avgContentHhandle_Height}px\">\n          <avg-content-hhandle-scroll css=\"height:7px;width:$au{avgContentHhandleScroll_Width}px\"> \n          </avg-content-hhandle-scroll> \n        </avg-content-hhandle> \n\n        ".replace(/\$(au{)/g, '${');
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=mainMarkupHtmlString.js.map
 });
 ___scope___.file("grid/mainScrollEvents.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -750,7 +753,7 @@ var MainScrollEvents = (function () {
     return MainScrollEvents;
 }());
 exports.MainScrollEvents = MainScrollEvents;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=mainScrollEvents.js.map
 });
 ___scope___.file("grid/rowMarkup.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -792,7 +795,7 @@ var RowMarkup = (function () {
     return RowMarkup;
 }());
 exports.RowMarkup = RowMarkup;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=rowMarkup.js.map
 });
 ___scope___.file("grid/rowScrollEvents.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -1136,7 +1139,7 @@ var RowScrollEvents = (function () {
     return RowScrollEvents;
 }());
 exports.RowScrollEvents = RowScrollEvents;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=rowScrollEvents.js.map
 });
 ___scope___.file("grid/columnMarkup.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -1343,7 +1346,7 @@ var ColumnMarkup = (function () {
     return ColumnMarkup;
 }());
 exports.ColumnMarkup = ColumnMarkup;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=columnMarkup.js.map
 });
 ___scope___.file("grid/columnMarkupHelper.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -1523,7 +1526,7 @@ var ColumnMarkupHelper = (function () {
     return ColumnMarkupHelper;
 }());
 exports.ColumnMarkupHelper = ColumnMarkupHelper;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=columnMarkupHelper.js.map
 });
 ___scope___.file("grid/htmlHeightWidth.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -1693,7 +1696,7 @@ var HtmlHeightWidth = (function () {
     return HtmlHeightWidth;
 }());
 exports.HtmlHeightWidth = HtmlHeightWidth;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=htmlHeightWidth.js.map
 });
 ___scope___.file("grid/viewSlots.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -1791,7 +1794,7 @@ var ViewSlots = (function () {
     return ViewSlots;
 }());
 exports.ViewSlots = ViewSlots;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=viewSlots.js.map
 });
 ___scope___.file("grid/columnBindingContext.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -1836,7 +1839,7 @@ var ColumnBindingContext = (function () {
     return ColumnBindingContext;
 }());
 exports.ColumnBindingContext = ColumnBindingContext;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=columnBindingContext.js.map
 });
 ___scope___.file("grid/rowDataBinder.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -1980,7 +1983,7 @@ var RowDataBinder = (function () {
     return RowDataBinder;
 }());
 exports.RowDataBinder = RowDataBinder;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=rowDataBinder.js.map
 });
 ___scope___.file("grid/rowClickHandler.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -2250,7 +2253,7 @@ var RowClickHandler = (function () {
     return RowClickHandler;
 }());
 exports.RowClickHandler = RowClickHandler;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=rowClickHandler.js.map
 });
 ___scope___.file("grid/groupingElements.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -2344,7 +2347,7 @@ var GroupingElements = (function () {
     return GroupingElements;
 }());
 exports.GroupingElements = GroupingElements;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=groupingElements.js.map
 });
 ___scope___.file("grid/loadingScreen.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -2398,7 +2401,7 @@ var LoadingScreen = (function () {
     return LoadingScreen;
 }());
 exports.LoadingScreen = LoadingScreen;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=loadingScreen.js.map
 });
 ___scope___.file("grid/contextMenu.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -2526,9 +2529,10 @@ var ContextMenu = (function () {
     return ContextMenu;
 }());
 exports.ContextMenu = ContextMenu;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=contextMenu.js.map
 });
 ___scope___.file("grid/v-grid.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2732,7 +2736,7 @@ __decorate([
 ], VGrid.prototype, "attVariableRowHeight", void 0);
 exports.VGrid = VGrid;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-grid.js.map
 });
 ___scope___.file("grid/footer.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -2762,7 +2766,7 @@ var Footer = (function () {
     return Footer;
 }());
 exports.Footer = Footer;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=footer.js.map
 });
 ___scope___.file("gridConnector.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -2944,7 +2948,7 @@ var GridConnector = (function () {
     return GridConnector;
 }());
 exports.GridConnector = GridConnector;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=gridConnector.js.map
 });
 ___scope___.file("dataSource.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -3207,7 +3211,7 @@ var DataSource = (function () {
     return DataSource;
 }());
 exports.DataSource = DataSource;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=dataSource.js.map
 });
 ___scope___.file("selection.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -3339,7 +3343,7 @@ var Selection = (function () {
     return Selection;
 }());
 exports.Selection = Selection;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=selection.js.map
 });
 ___scope___.file("collection.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -3415,7 +3419,7 @@ var Collection = (function () {
     return Collection;
 }());
 exports.Collection = Collection;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=collection.js.map
 });
 ___scope___.file("utils/arrayUtils.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -3535,7 +3539,7 @@ var ArrayUtils = (function () {
     return ArrayUtils;
 }());
 exports.ArrayUtils = ArrayUtils;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=arrayUtils.js.map
 });
 ___scope___.file("utils/arrayFilter.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -3714,7 +3718,7 @@ var ArrayFilter = (function () {
     return ArrayFilter;
 }());
 exports.ArrayFilter = ArrayFilter;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=arrayFilter.js.map
 });
 ___scope___.file("utils/arraySort.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -3878,7 +3882,7 @@ var ArraySort = (function () {
     return ArraySort;
 }());
 exports.ArraySort = ArraySort;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=arraySort.js.map
 });
 ___scope___.file("utils/arrayGrouping.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -4103,13 +4107,14 @@ var ArrayGrouping = (function () {
     return ArrayGrouping;
 }());
 exports.ArrayGrouping = ArrayGrouping;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=arrayGrouping.js.map
 });
 ___scope___.file("grid/v-grid.html", function(exports, require, module, __filename, __dirname){ 
 
-module.exports.default =  "<template>\r\n  <!--\r\n    get the internal css, \r\n    todo: we might want to be able to replace this\r\n  -->\r\n  <require from=\"./styles/main-element-tags.css\"></require>\r\n  <require from=\"./styles/main-elements.css\"></require>\r\n  <require from=\"./styles/contextmenu.css\"></require>\r\n  <require from=\"./styles/dragAndResize.css\"></require>\r\n  <require from=\"./styles/loader.css\"></require>\r\n  <require from=\"./styles/icons.css\"></require>\r\n  <require from=\"./styles/grouping.css\"></require>\r\n  <require from=\"./styles/cellsAndLabels.css\"></require>\r\n  <content>\r\n  </content>\r\n</template>\r\n"
+module.exports.default =  "<template>\n  <!--\n    get the internal css, \n    todo: we might want to be able to replace this\n  -->\n  <require from=\"./styles/main-element-tags.css\"></require>\n  <require from=\"./styles/main-elements.css\"></require>\n  <require from=\"./styles/contextmenu.css\"></require>\n  <require from=\"./styles/dragAndResize.css\"></require>\n  <require from=\"./styles/loader.css\"></require>\n  <require from=\"./styles/icons.css\"></require>\n  <require from=\"./styles/grouping.css\"></require>\n  <require from=\"./styles/cellsAndLabels.css\"></require>\n  <content>\n  </content>\n</template>\n"
 });
 ___scope___.file("grid/attributes/v-changed.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4148,9 +4153,10 @@ VGridAttributesOnChange = __decorate([
 ], VGridAttributesOnChange);
 exports.VGridAttributesOnChange = VGridAttributesOnChange;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-changed.js.map
 });
 ___scope___.file("grid/attributes/v-data-handler.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4238,9 +4244,10 @@ VGridAttributesDataHandler = __decorate([
 ], VGridAttributesDataHandler);
 exports.VGridAttributesDataHandler = VGridAttributesDataHandler;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-data-handler.js.map
 });
 ___scope___.file("grid/attributes/v-drag-drop-col.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4604,9 +4611,10 @@ VGridDragDropCol = __decorate([
 ], VGridDragDropCol);
 exports.VGridDragDropCol = VGridDragDropCol;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-drag-drop-col.js.map
 });
 ___scope___.file("grid/attributes/v-filter-observer.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4699,9 +4707,10 @@ VGridAttributesFilterObserver = __decorate([
 ], VGridAttributesFilterObserver);
 exports.VGridAttributesFilterObserver = VGridAttributesFilterObserver;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-filter-observer.js.map
 });
 ___scope___.file("grid/attributes/v-filter.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4897,9 +4906,10 @@ VGridAttributesFilter = __decorate([
 ], VGridAttributesFilter);
 exports.VGridAttributesFilter = VGridAttributesFilter;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-filter.js.map
 });
 ___scope___.file("grid/attributes/v-image.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4937,9 +4947,10 @@ VGridAttributesImageFix = __decorate([
 ], VGridAttributesImageFix);
 exports.VGridAttributesImageFix = VGridAttributesImageFix;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-image.js.map
 });
 ___scope___.file("grid/attributes/v-menu.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5098,9 +5109,10 @@ VGridAttributeMenu = __decorate([
 ], VGridAttributeMenu);
 exports.VGridAttributeMenu = VGridAttributeMenu;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-menu.js.map
 });
 ___scope___.file("grid/attributes/v-resize-col.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5259,9 +5271,10 @@ VGridAttributesResizeCol = __decorate([
 ], VGridAttributesResizeCol);
 exports.VGridAttributesResizeCol = VGridAttributesResizeCol;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-resize-col.js.map
 });
 ___scope___.file("grid/attributes/v-selection.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5333,9 +5346,10 @@ VGridAttributesSelection = __decorate([
 ], VGridAttributesSelection);
 exports.VGridAttributesSelection = VGridAttributesSelection;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-selection.js.map
 });
 ___scope___.file("grid/attributes/v-sort.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5422,9 +5436,10 @@ VGridAttributesSort = __decorate([
 ], VGridAttributesSort);
 exports.VGridAttributesSort = VGridAttributesSort;
 var _a;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-sort.js.map
 });
 ___scope___.file("grid/v-grid-col.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5598,9 +5613,10 @@ VGridElementColConfig = __decorate([
 ], VGridElementColConfig);
 exports.VGridElementColConfig = VGridElementColConfig;
 var _a, _b;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-grid-col.js.map
 });
 ___scope___.file("grid/v-grid-contextmenu.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5676,9 +5692,10 @@ VGridContextmenu = __decorate([
 ], VGridContextmenu);
 exports.VGridContextmenu = VGridContextmenu;
 var _a, _b;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-grid-contextmenu.js.map
 });
 ___scope___.file("grid/v-grid-footer.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5717,9 +5734,10 @@ VGridFooter = __decorate([
 ], VGridFooter);
 exports.VGridFooter = VGridFooter;
 var _a, _b;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-grid-footer.js.map
 });
 ___scope___.file("grid/v-grid-group-element.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5758,9 +5776,10 @@ VGridGroupElement = __decorate([
 ], VGridGroupElement);
 exports.VGridGroupElement = VGridGroupElement;
 var _a, _b;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-grid-group-element.js.map
 });
 ___scope___.file("grid/v-grid-group-row.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5799,9 +5818,10 @@ VGridGroupRow = __decorate([
 ], VGridGroupRow);
 exports.VGridGroupRow = VGridGroupRow;
 var _a, _b;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-grid-group-row.js.map
 });
 ___scope___.file("grid/v-grid-loadingscreen.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5840,9 +5860,10 @@ VGridLoadingScreen = __decorate([
 ], VGridLoadingScreen);
 exports.VGridLoadingScreen = VGridLoadingScreen;
 var _a, _b;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-grid-loadingscreen.js.map
 });
 ___scope___.file("grid/v-grid-row-repeat.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5896,39 +5917,39 @@ VGridElementRowRepeat = __decorate([
 ], VGridElementRowRepeat);
 exports.VGridElementRowRepeat = VGridElementRowRepeat;
 var _a, _b;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=v-grid-row-repeat.js.map
 });
 ___scope___.file("grid/styles/cellsAndLabels.css", function(exports, require, module, __filename, __dirname){ 
 
-__fsbx_css("grid/styles/cellsAndLabels.css", "/*here we can have utility classes the users can use to simply fy use, and that we can use with future markup generator*/\r\n\r\n.avg-default .avg-header-input-top {\r\n  box-sizing: border-box;\r\n  border: 0;\r\n  border-bottom: 1px solid rgb(230, 230, 230) !important;\r\n  border-radius: initial;\r\n  box-shadow: initial;\r\n  height: 50% !important;\r\n  width: 100%;\r\n  background-color: white !important;\r\n  padding: 5px 10px;\r\n  margin: initial !important;\r\n  transition: initial !important;\r\n}\r\n\r\n.avg-default .avg-header-input-bottom {\r\n  box-sizing: border-box;\r\n  border: 0;\r\n  border-radius: initial;\r\n  box-shadow: initial;\r\n  border-top: 1px solid rgb(230, 230, 230) !important;\r\n  height: 50% !important;\r\n  width: 100%;\r\n  background-color: white !important;\r\n  padding: 5px 10px;\r\n  margin: initial !important;\r\n  transition: initial !important;\r\n}\r\n\r\n.avg-default .avg-row-checkbox-100 {\r\n  height: 100% !important;\r\n  width: initial;\r\n  left: initial !important;\r\n  position: initial !important;\r\n  display: block;\r\n  opacity: initial !important;\r\n  margin: auto !important;\r\n}\r\n\r\n.avg-default .avg-row-checkbox-50 {\r\n  height: 50% !important;\r\n  width: initial;\r\n  opacity: initial;\r\n  left: initial !important;\r\n  position: initial !important;\r\n  display: block;\r\n  margin: auto !important;\r\n}\r\n\r\n.avg-default .avg-row-input {\r\n  box-sizing: border-box;\r\n  border: 0;\r\n  border-radius: initial;\r\n  box-shadow: initial;\r\n  height: 100% !important;\r\n  width: 100%;\r\n  background-color: transparent;\r\n  padding: 5px 10px !important;\r\n}\r\n\r\n.avg-default .avg-image-round {\r\n  border-radius: 50%;\r\n  height: 100%;\r\n  box-sizing: border-box;\r\n  position: relative;\r\n  left: 50%;\r\n  transform: translateX(-50%);\r\n  padding-top: 5px;\r\n}\r\n\r\n.avg-default .avg-label-bottom {\r\n  box-sizing: border-box;\r\n  border: 0;\r\n  border-radius: initial;\r\n  box-shadow: initial;\r\n  height: 50%;\r\n  width: 100%;\r\n  position: relative;\r\n  margin: 0 !important;\r\n  padding-top: 5px;\r\n  text-align: center;\r\n  overflow: hidden;\r\n}\r\n\r\n.avg-default .avg-label-top {\r\n  box-sizing: border-box;\r\n  border: 0;\r\n  border-radius: initial;\r\n  box-shadow: initial;\r\n  height: 50%;\r\n  width: 100%;\r\n  position: relative;\r\n  margin: 0 !important;\r\n  padding-top: 5px;\r\n  text-align: center;\r\n  overflow: hidden;\r\n}\r\n\r\n/*.avg-default .avg-label-top p {\r\n  margin: 0 !important;\r\n}\r\n\r\n.avg-default .avg-label-bottom p {\r\n  margin: 0 !important;\r\n}*/\r\n\r\n.avg-default .avg-label-full {\r\n  box-sizing: border-box;\r\n  border: 0;\r\n  border-radius: initial;\r\n  box-shadow: initial;\r\n  height: 100%;\r\n  width: 100%;\r\n  position: relative;\r\n  margin: 0 !important;\r\n  padding-top: 5px;\r\n  text-align: center;\r\n}\r\n");
+__fsbx_css("grid/styles/cellsAndLabels.css", "/*here we can have utility classes the users can use to simply fy use, and that we can use with future markup generator*/\n\n.avg-default .avg-header-input-top {\n  box-sizing: border-box;\n  border: 0;\n  border-bottom: 1px solid rgb(230, 230, 230) !important;\n  border-radius: initial;\n  box-shadow: initial;\n  height: 50% !important;\n  width: 100%;\n  background-color: white !important;\n  padding: 5px 10px;\n  margin: initial !important;\n  transition: initial !important;\n}\n\n.avg-default .avg-header-input-bottom {\n  box-sizing: border-box;\n  border: 0;\n  border-radius: initial;\n  box-shadow: initial;\n  border-top: 1px solid rgb(230, 230, 230) !important;\n  height: 50% !important;\n  width: 100%;\n  background-color: white !important;\n  padding: 5px 10px;\n  margin: initial !important;\n  transition: initial !important;\n}\n\n.avg-default .avg-row-checkbox-100 {\n  height: 100% !important;\n  width: initial;\n  left: initial !important;\n  position: initial !important;\n  display: block;\n  opacity: initial !important;\n  margin: auto !important;\n}\n\n.avg-default .avg-row-checkbox-50 {\n  height: 50% !important;\n  width: initial;\n  opacity: initial;\n  left: initial !important;\n  position: initial !important;\n  display: block;\n  margin: auto !important;\n}\n\n.avg-default .avg-row-input {\n  box-sizing: border-box;\n  border: 0;\n  border-radius: initial;\n  box-shadow: initial;\n  height: 100% !important;\n  width: 100%;\n  background-color: transparent;\n  padding: 5px 10px !important;\n}\n\n.avg-default .avg-image-round {\n  border-radius: 50%;\n  height: 100%;\n  box-sizing: border-box;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  padding-top: 5px;\n}\n\n.avg-default .avg-label-bottom {\n  box-sizing: border-box;\n  border: 0;\n  border-radius: initial;\n  box-shadow: initial;\n  height: 50%;\n  width: 100%;\n  position: relative;\n  margin: 0 !important;\n  padding-top: 5px;\n  text-align: center;\n  overflow: hidden;\n}\n\n.avg-default .avg-label-top {\n  box-sizing: border-box;\n  border: 0;\n  border-radius: initial;\n  box-shadow: initial;\n  height: 50%;\n  width: 100%;\n  position: relative;\n  margin: 0 !important;\n  padding-top: 5px;\n  text-align: center;\n  overflow: hidden;\n}\n\n/*.avg-default .avg-label-top p {\n  margin: 0 !important;\n}\n\n.avg-default .avg-label-bottom p {\n  margin: 0 !important;\n}*/\n\n.avg-default .avg-label-full {\n  box-sizing: border-box;\n  border: 0;\n  border-radius: initial;\n  box-shadow: initial;\n  height: 100%;\n  width: 100%;\n  position: relative;\n  margin: 0 !important;\n  padding-top: 5px;\n  text-align: center;\n}\n");
 });
 ___scope___.file("grid/styles/contextmenu.css", function(exports, require, module, __filename, __dirname){ 
 
-__fsbx_css("grid/styles/contextmenu.css", ".avg-default.avg-menu {\r\n  position: absolute;\r\n  z-index: 10;\r\n  background-color: rgb(240, 240, 240);\r\n  min-width: 170px;\r\n}\r\n\r\n.avg-default .avg-menu--active {\r\n  display: block;\r\n}\r\n\r\n.avg-default .avg-menu__items {\r\n  padding-left: 0;\r\n  padding-bottom: 3px;\r\n}\r\n\r\n.avg-default .avg-menu__item {\r\n  list-style: none;\r\n}\r\n\r\n.avg-default .avg-menu__item p {\r\n  margin: 0 0 0 10px;\r\n}\r\n\r\n.avg-default .avg-menu__item:hover {\r\n  border-left: 6px solid grey;\r\n  background-color: lightcyan\r\n}\r\n");
+__fsbx_css("grid/styles/contextmenu.css", ".avg-default.avg-menu {\n  position: absolute;\n  z-index: 10;\n  background-color: rgb(240, 240, 240);\n  min-width: 170px;\n}\n\n.avg-default .avg-menu--active {\n  display: block;\n}\n\n.avg-default .avg-menu__items {\n  padding-left: 0;\n  padding-bottom: 3px;\n}\n\n.avg-default .avg-menu__item {\n  list-style: none;\n}\n\n.avg-default .avg-menu__item p {\n  margin: 0 0 0 10px;\n}\n\n.avg-default .avg-menu__item:hover {\n  border-left: 6px solid grey;\n  background-color: lightcyan\n}\n");
 });
 ___scope___.file("grid/styles/dragAndResize.css", function(exports, require, module, __filename, __dirname){ 
 
-__fsbx_css("grid/styles/dragAndResize.css", ".avg-default .avg-draggable-handler {\r\n  position: absolute;\r\n  cursor: w-resize;\r\n  width: 15px;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\r\n  z-index: 900;\r\n}\r\n\r\n.avg-default .avg-vGridDragHandle {\r\n  cursor: move;\r\n}\r\n\r\n.avg-default.avg-drag {\r\n  border: 1px solid rgb(230, 230, 230);\r\n  box-sizing: border-box;\r\n  box-shadow: initial;\r\n  line-height: 50%;\r\n  pointer-events: none;\r\n  background-color: rgb(240, 240, 240);\r\n  height: 25px;\r\n  min-width: 100px;\r\n  position: absolute;\r\n  padding-top: 5px;\r\n  text-align: center;\r\n}\r\n");
+__fsbx_css("grid/styles/dragAndResize.css", ".avg-default .avg-draggable-handler {\n  position: absolute;\n  cursor: w-resize;\n  width: 15px;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  z-index: 900;\n}\n\n.avg-default .avg-vGridDragHandle {\n  cursor: move;\n}\n\n.avg-default.avg-drag {\n  border: 1px solid rgb(230, 230, 230);\n  box-sizing: border-box;\n  box-shadow: initial;\n  line-height: 50%;\n  pointer-events: none;\n  background-color: rgb(240, 240, 240);\n  height: 25px;\n  min-width: 100px;\n  position: absolute;\n  padding-top: 5px;\n  text-align: center;\n}\n");
 });
 ___scope___.file("grid/styles/grouping.css", function(exports, require, module, __filename, __dirname){ 
 
-__fsbx_css("grid/styles/grouping.css", ".avg-default .avg-grouping {\r\n  background-color: rgb(240, 240, 240);\r\n  position: relative;\r\n  margin: 3px;\r\n  height: 80%;\r\n  box-sizing: border-box;\r\n  padding-left: 10px;\r\n  padding-right: 10px;\r\n  display: block;\r\n  float: left;\r\n  border: 1px solid rgb(230, 230, 230);\r\n}\r\n\r\n.avg-default .avg-colunHelper {\r\n  top: 0;\r\n  width: 2px;\r\n  left: 0;\r\n  height: 100%;\r\n  box-sizing: border-box;\r\n  position: absolute;\r\n}\r\n\r\n.avg-default .avg-group-full {\r\n  border: 1px solid rgb(230, 230, 230);\r\n  box-sizing: border-box;\r\n  box-shadow: initial;\r\n  line-height: 50%;\r\n  background-color: rgb(240, 240, 240);\r\n  margin: 3px;\r\n  height: 80%;\r\n  position: relative;\r\n  float: left;\r\n  padding-top: 5px;\r\n}\r\n\r\n.avg-default .avg-grouping-element {\r\n  box-sizing: border-box;\r\n  border: 0;\r\n  border-radius: initial;\r\n  box-shadow: initial;\r\n  height: 100%;\r\n  width: 100%;\r\n  position: relative;\r\n  margin: 0 !important;\r\n  display: flex;\r\n  text-align: center;\r\n}\r\n");
+__fsbx_css("grid/styles/grouping.css", ".avg-default .avg-grouping {\n  background-color: rgb(240, 240, 240);\n  position: relative;\n  margin: 3px;\n  height: 80%;\n  box-sizing: border-box;\n  padding-left: 10px;\n  padding-right: 10px;\n  display: block;\n  float: left;\n  border: 1px solid rgb(230, 230, 230);\n}\n\n.avg-default .avg-colunHelper {\n  top: 0;\n  width: 2px;\n  left: 0;\n  height: 100%;\n  box-sizing: border-box;\n  position: absolute;\n}\n\n.avg-default .avg-group-full {\n  border: 1px solid rgb(230, 230, 230);\n  box-sizing: border-box;\n  box-shadow: initial;\n  line-height: 50%;\n  background-color: rgb(240, 240, 240);\n  margin: 3px;\n  height: 80%;\n  position: relative;\n  float: left;\n  padding-top: 5px;\n}\n\n.avg-default .avg-grouping-element {\n  box-sizing: border-box;\n  border: 0;\n  border-radius: initial;\n  box-shadow: initial;\n  height: 100%;\n  width: 100%;\n  position: relative;\n  margin: 0 !important;\n  display: flex;\n  text-align: center;\n}\n");
 });
 ___scope___.file("grid/styles/icons.css", function(exports, require, module, __filename, __dirname){ 
 
-__fsbx_css("grid/styles/icons.css", "\r\n.avg-default .avg-fa-sort-number[data-vgridsort]:after {\r\n  font: x-small;\r\n  font-size: 8px;\r\n  content: attr(data-vgridsort);\r\n}\r\n\r\n\r\n.avg-default .icon {\r\n  /* Lets the icon inherit the text color. */\r\n  fill: currentColor;\r\n\r\n  /* Inherit the text’s size too. Also allows sizing\r\n     the icon by changing its font-size. */\r\n  width: 1em;\r\n  height: 1em;\r\n\r\n  /* Nice visual alignment for icons alongside text.\r\n     (I got a few questions about this and: with most\r\n     fonts and styles, this works better than just\r\n     vertical-align:middle. Try it and see what you\r\n     like best. */\r\n  vertical-align: -0.15em;\r\n\r\n  /* Paths and strokes that overflow the viewBox can\r\n     show in IE. If you use normalize.css, it already\r\n     sets this. */\r\n  overflow: hidden;\r\n}\r\n\r\n.avg-default .iconhidden{\r\n  display:none\r\n}\r\n\r\n.avg-grouping:hover .iconhidden { display:block; }\r\n    \r\n\r\n \r\n");
+__fsbx_css("grid/styles/icons.css", "\n.avg-default .avg-fa-sort-number[data-vgridsort]:after {\n  font: x-small;\n  font-size: 8px;\n  content: attr(data-vgridsort);\n}\n\n\n.avg-default .icon {\n  /* Lets the icon inherit the text color. */\n  fill: currentColor;\n\n  /* Inherit the text’s size too. Also allows sizing\n     the icon by changing its font-size. */\n  width: 1em;\n  height: 1em;\n\n  /* Nice visual alignment for icons alongside text.\n     (I got a few questions about this and: with most\n     fonts and styles, this works better than just\n     vertical-align:middle. Try it and see what you\n     like best. */\n  vertical-align: -0.15em;\n\n  /* Paths and strokes that overflow the viewBox can\n     show in IE. If you use normalize.css, it already\n     sets this. */\n  overflow: hidden;\n}\n\n.avg-default .iconhidden{\n  display:none\n}\n\n.avg-grouping:hover .iconhidden { display:block; }\n    \n\n \n");
 });
 ___scope___.file("grid/styles/loader.css", function(exports, require, module, __filename, __dirname){ 
 
-__fsbx_css("grid/styles/loader.css", ".avg-default .avg-overlay {\r\n  position: absolute;\r\n  left: 0;\r\n  top: 0;\r\n  min-width: 100%;\r\n  min-height: 100%;\r\n  height: 100%;\r\n  width: 100%;\r\n  z-index: 9999 !important;\r\n  background: rgba(0, 0, 0, 0.3);\r\n  color: black;\r\n}\r\n\r\n.avg-default .avg-progress-indicator {\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 10000;\r\n  transform: translate(-50%, -50%);\r\n  width: 150px;\r\n  background-color: gray;\r\n}\r\n\r\n.avg-default .avg-progress-bar {\r\n  -webkit-animation: progress-bar-stripes 2s linear infinite;\r\n  -o-animation: progress-bar-stripes 2s linear infinite;\r\n  animation: progress-bar-stripes 2s linear infinite;\r\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);\r\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);\r\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);\r\n  -webkit-background-size: 40px 40px;\r\n  background-size: 40px 40px;\r\n  color: black;\r\n  text-align: center;\r\n}\r\n");
+__fsbx_css("grid/styles/loader.css", ".avg-default .avg-overlay {\n  position: absolute;\n  left: 0;\n  top: 0;\n  min-width: 100%;\n  min-height: 100%;\n  height: 100%;\n  width: 100%;\n  z-index: 9999 !important;\n  background: rgba(0, 0, 0, 0.3);\n  color: black;\n}\n\n.avg-default .avg-progress-indicator {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  z-index: 10000;\n  transform: translate(-50%, -50%);\n  width: 150px;\n  background-color: gray;\n}\n\n.avg-default .avg-progress-bar {\n  -webkit-animation: progress-bar-stripes 2s linear infinite;\n  -o-animation: progress-bar-stripes 2s linear infinite;\n  animation: progress-bar-stripes 2s linear infinite;\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);\n  -webkit-background-size: 40px 40px;\n  background-size: 40px 40px;\n  color: black;\n  text-align: center;\n}\n");
 });
 ___scope___.file("grid/styles/main-element-tags.css", function(exports, require, module, __filename, __dirname){ 
 
-__fsbx_css("grid/styles/main-element-tags.css", "/*here is the main tag css, keeping them here, so theming will be easier */\r\n\r\nv-grid {\r\n  display: block;\r\n  position: relative;\r\n}\r\n\r\navg-top-panel {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  width: 100%;\r\n  top: 0;\r\n}\r\n\r\navg-footer {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  width: 100%;\r\n  bottom: 0;\r\n}\r\n\r\navg-header {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  display: inline-block;\r\n  width: 100%;\r\n}\r\n\r\navg-content {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  width: 100%;\r\n}\r\n\r\navg-header-left {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  height: 100%;\r\n}\r\n\r\navg-header-main {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  height: 100%;\r\n  overflow: hidden;\r\n}\r\n\r\navg-header-main-scroll {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  height: 100%;\r\n}\r\n\r\n\r\navg-header-right {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  height: 100%;\r\n}\r\n\r\navg-content-left {\r\n  z-index:5;\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  height: 100%;\r\n  overflow: hidden;\r\n  overflow-y: hidden;\r\n}\r\n\r\n\r\navg-content-left-scroll {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n}\r\n\r\navg-content-main {\r\n  z-index:6;\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  height: 100%;\r\n  overflow: hidden;\r\n  overflow-x: hidden;\r\n  overflow-y: hidden;\r\n}\r\n\r\navg-content-main-scroll {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n}\r\n\r\navg-content-right {\r\n  z-index:7;\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  height: 100%;\r\n  overflow: hidden;\r\n  overflow-y: hidden;\r\n}\r\n\r\n\r\n\r\navg-content-right-scroll {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n}\r\n\r\navg-content-group {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  overflow-x: hidden;\r\n  overflow-y: hidden;\r\n}\r\n\r\navg-content-group-scroll {\r\n  z-index: 9;\r\n  pointer-events: none;\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n}\r\n\r\navg-content-vhandle {\r\n  z-index: 10;\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  overflow-x: hidden;\r\n  overflow-y: scroll;\r\n}\r\n\r\navg-content-vhandle-scroll {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n}\r\n\r\n\r\n\r\navg-content-hhandle {\r\n  z-index:10;\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n  overflow-x: scroll;\r\n  overflow-y: hidden;\r\n}\r\n\r\navg-content-hhandle-scroll {\r\n  position: absolute;\r\n  box-sizing: border-box;\r\n}\r\n\r\navg-row {\r\n  width: 100%;\r\n  min-width: 1px; /*without this left scrolltop will not be set when hidden*/\r\n  position: absolute;\r\n}\r\n\r\navg-col {\r\n  position: absolute;\r\n  height: 100%;\r\n}\r\n");
+__fsbx_css("grid/styles/main-element-tags.css", "/*here is the main tag css, keeping them here, so theming will be easier */\n\nv-grid {\n  display: block;\n  position: relative;\n}\n\navg-top-panel {\n  position: absolute;\n  box-sizing: border-box;\n  width: 100%;\n  top: 0;\n}\n\navg-footer {\n  position: absolute;\n  box-sizing: border-box;\n  width: 100%;\n  bottom: 0;\n}\n\navg-header {\n  position: absolute;\n  box-sizing: border-box;\n  display: inline-block;\n  width: 100%;\n}\n\navg-content {\n  position: absolute;\n  box-sizing: border-box;\n  width: 100%;\n}\n\navg-header-left {\n  position: absolute;\n  box-sizing: border-box;\n  height: 100%;\n}\n\navg-header-main {\n  position: absolute;\n  box-sizing: border-box;\n  height: 100%;\n  overflow: hidden;\n}\n\navg-header-main-scroll {\n  position: absolute;\n  box-sizing: border-box;\n  height: 100%;\n}\n\n\navg-header-right {\n  position: absolute;\n  box-sizing: border-box;\n  height: 100%;\n}\n\navg-content-left {\n  z-index:5;\n  position: absolute;\n  box-sizing: border-box;\n  height: 100%;\n  overflow: hidden;\n  overflow-y: hidden;\n}\n\n\navg-content-left-scroll {\n  position: absolute;\n  box-sizing: border-box;\n}\n\navg-content-main {\n  z-index:6;\n  position: absolute;\n  box-sizing: border-box;\n  height: 100%;\n  overflow: hidden;\n  overflow-x: hidden;\n  overflow-y: hidden;\n}\n\navg-content-main-scroll {\n  position: absolute;\n  box-sizing: border-box;\n}\n\navg-content-right {\n  z-index:7;\n  position: absolute;\n  box-sizing: border-box;\n  height: 100%;\n  overflow: hidden;\n  overflow-y: hidden;\n}\n\n\n\navg-content-right-scroll {\n  position: absolute;\n  box-sizing: border-box;\n}\n\navg-content-group {\n  position: absolute;\n  box-sizing: border-box;\n  overflow-x: hidden;\n  overflow-y: hidden;\n}\n\navg-content-group-scroll {\n  z-index: 9;\n  pointer-events: none;\n  position: absolute;\n  box-sizing: border-box;\n}\n\navg-content-vhandle {\n  z-index: 10;\n  position: absolute;\n  box-sizing: border-box;\n  overflow-x: hidden;\n  overflow-y: scroll;\n}\n\navg-content-vhandle-scroll {\n  position: absolute;\n  box-sizing: border-box;\n}\n\n\n\navg-content-hhandle {\n  z-index:10;\n  position: absolute;\n  box-sizing: border-box;\n  overflow-x: scroll;\n  overflow-y: hidden;\n}\n\navg-content-hhandle-scroll {\n  position: absolute;\n  box-sizing: border-box;\n}\n\navg-row {\n  width: 100%;\n  min-width: 1px; /*without this left scrolltop will not be set when hidden*/\n  position: absolute;\n}\n\navg-col {\n  position: absolute;\n  height: 100%;\n}\n");
 });
 ___scope___.file("grid/styles/main-elements.css", function(exports, require, module, __filename, __dirname){ 
 
-__fsbx_css("grid/styles/main-elements.css", "﻿.avg-default {\r\n  border: 1px solid rgb(230, 230, 230);\r\n  -webkit-touch-callout: none;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n\r\n.avg-default .avg-top-panel {\r\n  border-bottom: 1px solid rgb(230, 230, 230);\r\n  background-color: rgb(240, 240, 240);\r\n}\r\n\r\n.avg-default .avg-header {\r\n  border-bottom: 1px solid rgb(230, 230, 230);\r\n}\r\n\r\n.avg-default .avg-footer {\r\n  border-top: 1px solid rgb(230, 230, 230);\r\n  background-color: rgb(240, 240, 240);\r\n}\r\n\r\n.avg-default .avg-content-right {\r\n  background-color: white;\r\n  border-top: 1px solid rgb(230, 230, 230);\r\n}\r\n\r\n.avg-default .avg-content-left {\r\n  background-color: white;\r\n  border-top: 1px solid rgb(230, 230, 230);\r\n}\r\n\r\n.avg-default .avg-header-main {\r\n  background-color: rgb(240, 240, 240);\r\n}\r\n\r\n.avg-default .avg-header-left {\r\n  background-color: rgb(240, 240, 240);\r\n}\r\n\r\n.avg-default .avg-header-right {\r\n  background-color: rgb(240, 240, 240);\r\n}\r\n\r\n.avg-default .avg-content-main {\r\n  background-color: white;\r\n  border-top: 1px solid rgb(230, 230, 230);\r\n}\r\n\r\n.avg-default .avg-row {\r\n  border-bottom: 1px solid rgb(230, 230, 230);\r\n}\r\n\r\n.avg-default .avg-header-left .avg-col {\r\n  /*white-space: nowrap;*/\r\n  box-sizing: border-box;\r\n  text-overflow: ellipsis;\r\n  border-right: 1px solid rgb(230, 230, 230);\r\n  overflow: hidden;\r\n}\r\n\r\n.avg-default .avg-header-main .avg-col {\r\n  /*white-space: nowrap;*/\r\n  box-sizing: border-box;\r\n  text-overflow: ellipsis;\r\n  border-right: 1px solid rgb(230, 230, 230);\r\n  overflow: hidden;\r\n}\r\n\r\n.avg-default .avg-header-right .avg-col {\r\n  box-sizing: border-box;\r\n  border-left: 1px solid rgb(230, 230, 230);\r\n}\r\n\r\n.avg-default .avg-content-left .avg-col {\r\n  white-space: nowrap;\r\n  box-sizing: border-box;\r\n  text-overflow: ellipsis;\r\n  border-right: 1px solid rgb(230, 230, 230);\r\n  overflow: hidden;\r\n}\r\n\r\n.avg-default .avg-content-main .avg-col {\r\n  white-space: nowrap;\r\n  text-overflow: ellipsis;\r\n  border-right: 1px solid rgb(230, 230, 230);\r\n  overflow: hidden;\r\n}\r\n\r\n.avg-default .avg-content-right .avg-col {\r\n  border-left: 1px solid rgb(230, 230, 230);\r\n}\r\n\r\n.avg-default .avg-col-group {\r\n  pointer-events: all;\r\n  box-sizing: border-box;\r\n  white-space: nowrap;\r\n  text-overflow: ellipsis;\r\n  background-color: rgb(250, 250, 250);\r\n  border-top: 1px solid rgb(230, 230, 230);\r\n  padding: 5px 10px;\r\n}\r\n\r\n.avg-default .avg-col-grouping {\r\n  white-space: nowrap;\r\n  box-sizing: border-box;\r\n  text-overflow: ellipsis;\r\n  background-color: rgb(250, 250, 250);\r\n  border-right: 1px solid rgb(230, 230, 230);\r\n  overflow: hidden;\r\n}\r\n\r\n.avg-default .avg-col-grouping-header {\r\n  white-space: nowrap;\r\n  text-overflow: ellipsis;\r\n  background-color: rgb(240, 240, 240);\r\n  border-right: 1px solid rgb(230, 230, 230);\r\n  overflow: hidden;\r\n}\r\n\r\n.avg-default .avg-selected-row {\r\n  box-shadow: none;\r\n  background-color: rgb(203, 195, 203);\r\n}\r\n");
+__fsbx_css("grid/styles/main-elements.css", "﻿.avg-default {\n  border: 1px solid rgb(230, 230, 230);\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.avg-default .avg-top-panel {\n  border-bottom: 1px solid rgb(230, 230, 230);\n  background-color: rgb(240, 240, 240);\n}\n\n.avg-default .avg-header {\n  border-bottom: 1px solid rgb(230, 230, 230);\n}\n\n.avg-default .avg-footer {\n  border-top: 1px solid rgb(230, 230, 230);\n  background-color: rgb(240, 240, 240);\n}\n\n.avg-default .avg-content-right {\n  background-color: white;\n  border-top: 1px solid rgb(230, 230, 230);\n}\n\n.avg-default .avg-content-left {\n  background-color: white;\n  border-top: 1px solid rgb(230, 230, 230);\n}\n\n.avg-default .avg-header-main {\n  background-color: rgb(240, 240, 240);\n}\n\n.avg-default .avg-header-left {\n  background-color: rgb(240, 240, 240);\n}\n\n.avg-default .avg-header-right {\n  background-color: rgb(240, 240, 240);\n}\n\n.avg-default .avg-content-main {\n  background-color: white;\n  border-top: 1px solid rgb(230, 230, 230);\n}\n\n.avg-default .avg-row {\n  border-bottom: 1px solid rgb(230, 230, 230);\n}\n\n.avg-default .avg-header-left .avg-col {\n  /*white-space: nowrap;*/\n  box-sizing: border-box;\n  text-overflow: ellipsis;\n  border-right: 1px solid rgb(230, 230, 230);\n  overflow: hidden;\n}\n\n.avg-default .avg-header-main .avg-col {\n  /*white-space: nowrap;*/\n  box-sizing: border-box;\n  text-overflow: ellipsis;\n  border-right: 1px solid rgb(230, 230, 230);\n  overflow: hidden;\n}\n\n.avg-default .avg-header-right .avg-col {\n  box-sizing: border-box;\n  border-left: 1px solid rgb(230, 230, 230);\n}\n\n.avg-default .avg-content-left .avg-col {\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-overflow: ellipsis;\n  border-right: 1px solid rgb(230, 230, 230);\n  overflow: hidden;\n}\n\n.avg-default .avg-content-main .avg-col {\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  border-right: 1px solid rgb(230, 230, 230);\n  overflow: hidden;\n}\n\n.avg-default .avg-content-right .avg-col {\n  border-left: 1px solid rgb(230, 230, 230);\n}\n\n.avg-default .avg-col-group {\n  pointer-events: all;\n  box-sizing: border-box;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  background-color: rgb(250, 250, 250);\n  border-top: 1px solid rgb(230, 230, 230);\n  padding: 5px 10px;\n}\n\n.avg-default .avg-col-grouping {\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-overflow: ellipsis;\n  background-color: rgb(250, 250, 250);\n  border-right: 1px solid rgb(230, 230, 230);\n  overflow: hidden;\n}\n\n.avg-default .avg-col-grouping-header {\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  background-color: rgb(240, 240, 240);\n  border-right: 1px solid rgb(230, 230, 230);\n  overflow: hidden;\n}\n\n.avg-default .avg-selected-row {\n  box-shadow: none;\n  background-color: rgb(203, 195, 203);\n}\n");
 });
 });
 FuseBox.global("__fsbx_decorate", function(localArguments) {
@@ -5964,4 +5985,4 @@ FuseBox.expose([{"alias":"aurelia-v-grid","pkg":"aurelia-v-grid/index.js"}]);
 FuseBox.main("aurelia-v-grid/index.js");
 FuseBox.defaultPackageName = "aurelia-v-grid";
 })
-(function(e){var r="undefined"!=typeof window&&window.navigator;r&&(window.global=window),e=r&&"undefined"==typeof __fbx__dnm__?e:module.exports;var n=r?window.__fsbx__=window.__fsbx__||{}:global.$fsbx=global.$fsbx||{};r||(global.require=require);var t=n.p=n.p||{},i=n.e=n.e||{},a=function(e){var r=e.charCodeAt(0);if(r>=97&&r<=122||64===r){if(64===r){var n=e.split("/"),t=n.splice(2,n.length).join("/");return[n[0]+"/"+n[1],t||void 0]}var i=e.indexOf("/");if(i===-1)return[e];var a=e.substring(0,i),o=e.substring(i+1);return[a,o]}},o=function(e){return e.substring(0,e.lastIndexOf("/"))||"./"},f=function(){for(var e=[],r=0;r<arguments.length;r++)e[r]=arguments[r];for(var n=[],t=0,i=arguments.length;t<i;t++)n=n.concat(arguments[t].split("/"));for(var a=[],t=0,i=n.length;t<i;t++){var o=n[t];o&&"."!==o&&(".."===o?a.pop():a.push(o))}return""===n[0]&&a.unshift(""),a.join("/")||(a.length?"/":".")},s=function(e){var r=e.match(/\.(\w{1,})$/);if(r){var n=r[1];return n?e:e+".js"}return e+".js"},u=function(e){if(r){var n,t=document,i=t.getElementsByTagName("head")[0];/\.css$/.test(e)?(n=t.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=e):(n=t.createElement("script"),n.type="text/javascript",n.src=e,n.async=!0),i.insertBefore(n,i.firstChild)}},l=function(e,n){var i=n.path||"./",o=n.pkg||"default",u=a(e);u&&(i="./",o=u[0],n.v&&n.v[o]&&(o=o+"@"+n.v[o]),e=u[1]),e&&126===e.charCodeAt(0)&&(e=e.slice(2,e.length),i="./");var l=t[o];if(!l){if(r)throw'Package was not found "'+o+'"';return{serverReference:require(o)}}e||(e="./"+l.s.entry);var c,v=f(i,e),d=s(v),p=l.f[d];return!p&&d.indexOf("*")>-1&&(c=d),p||c||(d=f(v,"/","index.js"),p=l.f[d],p||(d=v+".js",p=l.f[d]),p||(p=l.f[v+".jsx"])),{file:p,wildcard:c,pkgName:o,versions:l.v,filePath:v,validPath:d}},c=function(e,n){if(!r)return n(/\.(js|json)$/.test(e)?global.require(e):"");var t;t=new XMLHttpRequest,t.onreadystatechange=function(){if(4==t.readyState)if(200==t.status){var r=t.getResponseHeader("Content-Type"),i=t.responseText;/json/.test(r)?i="module.exports = "+i:/javascript/.test(r)||(i="module.exports = "+JSON.stringify(i));var a=f("./",e);p.dynamic(a,i),n(p.import(e,{}))}else console.error(e+" was not found upon request"),n(void 0)},t.open("GET",e,!0),t.send()},v=function(e,r){var n=i[e];if(n)for(var t in n){var a=n[t].apply(null,r);if(a===!1)return!1}},d=function(e,n){if(void 0===n&&(n={}),58===e.charCodeAt(4)||58===e.charCodeAt(5))return u(e);var i=l(e,n);if(i.serverReference)return i.serverReference;var a=i.file;if(i.wildcard){var f=new RegExp(i.wildcard.replace(/\*/g,"@").replace(/[.?*+^$[\]\\(){}|-]/g,"\\$&").replace(/@/g,"[a-z0-9$_-]+"),"i"),s=t[i.pkgName];if(s){var p={};for(var g in s.f)f.test(g)&&(p[g]=d(i.pkgName+"/"+g));return p}}if(!a){var m="function"==typeof n,h=v("async",[e,n]);if(h===!1)return;return c(e,function(e){if(m)return n(e)})}var _=i.validPath,x=i.pkgName;if(a.locals&&a.locals.module)return a.locals.module.exports;var w=a.locals={},b=o(_);w.exports={},w.module={exports:w.exports},w.require=function(e,r){return d(e,{pkg:x,path:b,v:i.versions})},w.require.main={filename:r?"./":global.require.main.filename,paths:r?[]:global.require.main.paths};var y=[w.module.exports,w.require,w.module,_,b,x];v("before-import",y);var k=a.fn;return k.apply(0,y),v("after-import",y),w.module.exports},p=function(){function n(){}return n.global=function(e,n){var t=r?window:global;return void 0===n?t[e]:void(t[e]=n)},n.import=function(e,r){return d(e,r)},n.on=function(e,r){i[e]=i[e]||[],i[e].push(r)},n.exists=function(e){try{var r=l(e,{});return void 0!==r.file}catch(e){return!1}},n.remove=function(e){var r=l(e,{}),n=t[r.pkgName];n&&n.f[r.validPath]&&delete n.f[r.validPath]},n.main=function(e){return this.mainFile=e,n.import(e,{})},n.expose=function(r){for(var n in r){var t=r[n],i=d(t.pkg);e[t.alias]=i}},n.dynamic=function(r,n,t){var i=t&&t.pkg||"default";this.pkg(i,{},function(t){t.file(r,function(r,t,i,a,o){var f=new Function("__fbx__dnm__","exports","require","module","__filename","__dirname","__root__",n);f(!0,r,t,i,a,o,e)})})},n.flush=function(e){var r=t.default;if(e)return void(r.f[e]&&delete r.f[e].locals);for(var n in r.f){var i=r.f[n];delete i.locals}},n.pkg=function(e,r,n){if(t[e])return n(t[e].s);var i=t[e]={},a=i.f={};i.v=r;var o=i.s={file:function(e,r){a[e]={fn:r}}};return n(o)},n}();return p.packages=t,p.isBrowser=void 0!==r,p.isServer=!r,e.FuseBox=p}(this))
+(function(e){var r="undefined"!=typeof window&&window.navigator;r&&(window.global=window),e=r&&"undefined"==typeof __fbx__dnm__?e:module.exports;var n=r?window.__fsbx__=window.__fsbx__||{}:global.$fsbx=global.$fsbx||{};r||(global.require=require);var t=n.p=n.p||{},i=n.e=n.e||{},a=function(e){var r=e.charCodeAt(0);if(r>=97&&r<=122||64===r){if(64===r){var n=e.split("/"),t=n.splice(2,n.length).join("/");return[n[0]+"/"+n[1],t||void 0]}var i=e.indexOf("/");if(i===-1)return[e];var a=e.substring(0,i),o=e.substring(i+1);return[a,o]}},o=function(e){return e.substring(0,e.lastIndexOf("/"))||"./"},f=function(){for(var e=[],r=0;r<arguments.length;r++)e[r]=arguments[r];for(var n=[],t=0,i=arguments.length;t<i;t++)n=n.concat(arguments[t].split("/"));for(var a=[],t=0,i=n.length;t<i;t++){var o=n[t];o&&"."!==o&&(".."===o?a.pop():a.push(o))}return""===n[0]&&a.unshift(""),a.join("/")||(a.length?"/":".")},u=function(e){var r=e.match(/\.(\w{1,})$/);if(r){var n=r[1];return n?e:e+".js"}return e+".js"},s=function(e){if(r){var n,t=document,i=t.getElementsByTagName("head")[0];/\.css$/.test(e)?(n=t.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=e):(n=t.createElement("script"),n.type="text/javascript",n.src=e,n.async=!0),i.insertBefore(n,i.firstChild)}},l=function(e,r){for(var n in e)e.hasOwnProperty(n)&&r(n,e[n])},c=function(e,n){var i=n.path||"./",o=n.pkg||"default",s=a(e);s&&(i="./",o=s[0],n.v&&n.v[o]&&(o=o+"@"+n.v[o]),e=s[1]),e&&126===e.charCodeAt(0)&&(e=e.slice(2,e.length),i="./");var l=t[o];if(!l){if(r)throw'Package was not found "'+o+'"';return{serverReference:require(o)}}e||(e="./"+l.s.entry);var c,v=f(i,e),p=u(v),d=l.f[p];return!d&&p.indexOf("*")>-1&&(c=p),d||c||(p=f(v,"/","index.js"),d=l.f[p],d||(p=v+".js",d=l.f[p]),d||(d=l.f[v+".jsx"])),{file:d,wildcard:c,pkgName:o,versions:l.v,filePath:v,validPath:p}},v=function(e,n){if(!r)return n(/\.(js|json)$/.test(e)?global.require(e):"");var t;t=new XMLHttpRequest,t.onreadystatechange=function(){if(4==t.readyState)if(200==t.status){var r=t.getResponseHeader("Content-Type"),i=t.responseText;/json/.test(r)?i="module.exports = "+i:/javascript/.test(r)||(i="module.exports = "+JSON.stringify(i));var a=f("./",e);g.dynamic(a,i),n(g.import(e,{}))}else console.error(e+" was not found upon request"),n(void 0)},t.open("GET",e,!0),t.send()},p=function(e,r){var n=i[e];if(n)for(var t in n){var a=n[t].apply(null,r);if(a===!1)return!1}},d=function(e,n){if(void 0===n&&(n={}),58===e.charCodeAt(4)||58===e.charCodeAt(5))return s(e);var i=c(e,n);if(i.serverReference)return i.serverReference;var a=i.file;if(i.wildcard){var f=new RegExp(i.wildcard.replace(/\*/g,"@").replace(/[.?*+^$[\]\\(){}|-]/g,"\\$&").replace(/@/g,"[a-z0-9$_-]+"),"i"),u=t[i.pkgName];if(u){var l={};for(var g in u.f)f.test(g)&&(l[g]=d(i.pkgName+"/"+g));return l}}if(!a){var m="function"==typeof n,h=p("async",[e,n]);if(h===!1)return;return v(e,function(e){if(m)return n(e)})}var _=i.validPath,x=i.pkgName;if(a.locals&&a.locals.module)return a.locals.module.exports;var w=a.locals={},y=o(_);w.exports={},w.module={exports:w.exports},w.require=function(e,r){return d(e,{pkg:x,path:y,v:i.versions})},w.require.main={filename:r?"./":global.require.main.filename,paths:r?[]:global.require.main.paths};var b=[w.module.exports,w.require,w.module,_,y,x];p("before-import",b);var k=a.fn;return k.apply(0,b),p("after-import",b),w.module.exports},g=function(){function n(){}return n.global=function(e,n){var t=r?window:global;return void 0===n?t[e]:void(t[e]=n)},n.import=function(e,r){return d(e,r)},n.on=function(e,r){i[e]=i[e]||[],i[e].push(r)},n.exists=function(e){try{var r=c(e,{});return void 0!==r.file}catch(e){return!1}},n.remove=function(e){var r=c(e,{}),n=t[r.pkgName];n&&n.f[r.validPath]&&delete n.f[r.validPath]},n.main=function(e){return this.mainFile=e,n.import(e,{})},n.expose=function(r){var n=function(n){var t=r[n],i=t.alias,a=d(t.pkg);"*"===i?l(a,function(r,n){return e[r]=n}):"object"==typeof i?l(i,function(r,n){return e[n]=a[r]}):e[i]=a};for(var t in r)n(t)},n.dynamic=function(r,n,t){var i=t&&t.pkg||"default";this.pkg(i,{},function(t){t.file(r,function(r,t,i,a,o){var f=new Function("__fbx__dnm__","exports","require","module","__filename","__dirname","__root__",n);f(!0,r,t,i,a,o,e)})})},n.flush=function(e){var r=t.default;for(var n in r.f){var i=!e||e(n);if(i){var a=r.f[n];delete a.locals}}},n.pkg=function(e,r,n){if(t[e])return n(t[e].s);var i=t[e]={},a=i.f={};i.v=r;var o=i.s={file:function(e,r){a[e]={fn:r}}};return n(o)},n.addPlugin=function(e){this.plugins.push(e)},n}();return g.packages=t,g.isBrowser=void 0!==r,g.isServer=!r,g.plugins=[],e.FuseBox=g}(this))
