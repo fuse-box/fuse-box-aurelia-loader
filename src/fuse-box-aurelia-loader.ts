@@ -2,8 +2,9 @@ import { Origin } from 'aurelia-metadata';
 import { Loader } from 'aurelia-loader';
 import { TextTemplateLoader } from 'aurelia-loader-default';
 import { PLATFORM } from 'aurelia-pal';
+import {getLogger, Logger} from 'aurelia-logging';
 
-
+const log: Logger = getLogger('fuse-box-aurelia-loader');
 
 function ensureOriginOnExports(executed: any, name: any) {
   let target = executed;
@@ -33,25 +34,20 @@ function ensureOriginOnExports(executed: any, name: any) {
 
 /**
  * helper function during development
- * window.FUSEBOX_AURELIA_LOADER_LOGGING nees to be set to true in app
- * todo: switch with aurleia native dev log
  *
  * @param {string} type
  * @param {string} title
  * @param {*} args
  */
-declare var window: any;
+
 declare var FuseBox: any;
 function debugPrint(type: string, title: string, args: any) {
-  if (window.FUSEBOX_AURELIA_LOADER_LOGGING) {
-    // todo: switch with aurleia native dev log
-    if (type === 'error') {
-      console.log('[DEBUG-ERROR]:' + title, args);
-    }
+  if (type === 'error') {
+    log.error(title, args);
+  }
 
-    if (type === 'info') {
-      console.log('[DEBUG]:' + title, args);
-    }
+  if (type === 'info') {
+    log.debug(title, args);
   }
 }
 
