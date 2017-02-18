@@ -73,7 +73,7 @@ var FuseBoxAureliaLoader = (function (_super) {
         var _this = this;
         debugPrint('info', 'loadTemplate => ', arguments);
         if (this.templateRegistry[url]) {
-            return this.templateRegistry[url];
+            return Promise.resolve(this.templateRegistry[url]);
         }
         return this._import(this.applyPluginToUrl(url, 'template-registry-entry')).then(function (template) {
             _this.moduleRegistry[url] = template;

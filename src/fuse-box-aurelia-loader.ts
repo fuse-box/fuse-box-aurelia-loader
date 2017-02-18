@@ -136,7 +136,7 @@ export class FuseBoxAureliaLoader extends Loader {
   public loadTemplate(url: any): Promise<any> {
     debugPrint('info', 'loadTemplate => ', arguments);
     if(this.templateRegistry[url]) {
-      return this.templateRegistry[url];
+      return Promise.resolve(this.templateRegistry[url]);
     }
     return this._import(this.applyPluginToUrl(url, 'template-registry-entry')).then((template: any) => {
       this.moduleRegistry[url] = template;
