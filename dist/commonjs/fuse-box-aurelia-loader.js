@@ -78,6 +78,7 @@ var FuseBoxAureliaLoader = (function (_super) {
         return this._import(this.applyPluginToUrl(url, 'template-registry-entry')).then(function (template) {
             _this.moduleRegistry[url] = template;
             _this.templateRegistry[url] = template;
+            return template;
         });
     };
     FuseBoxAureliaLoader.prototype.loadText = function (url) {

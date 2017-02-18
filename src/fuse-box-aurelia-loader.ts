@@ -141,6 +141,7 @@ export class FuseBoxAureliaLoader extends Loader {
     return this._import(this.applyPluginToUrl(url, 'template-registry-entry')).then((template: any) => {
       this.moduleRegistry[url] = template;
       this.templateRegistry[url] = template;
+      return template;
     });
   }
 
