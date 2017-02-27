@@ -1,32 +1,52 @@
 import { Origin } from 'aurelia-metadata';
-import { Loader } from 'aurelia-loader';
-import { TextTemplateLoader } from 'aurelia-loader-default';
-import { PLATFORM } from 'aurelia-pal';
-import {getLogger, Logger} from 'aurelia-logging';
+import { Loader, TemplateRegistryEntry } from 'aurelia-loader';
+import { PLATFORM, DOM } from 'aurelia-pal';
+import { getLogger, Logger } from 'aurelia-logging';
+export type LoaderPlugin = { fetch: (address: string) => Promise<TemplateRegistryEntry> | TemplateRegistryEntry };
 
 const log: Logger = getLogger('fuse-box-aurelia-loader');
 
-function ensureOriginOnExports(executed: any, name: any) {
-  let target = executed;
+
+/**
+* An implementation of the TemplateLoader interface implemented with text-based loading.
+*/
+export class TextTemplateLoader {
+  /**
+  * Loads a template.
+  * @param loader The loader that is requesting the template load.
+  * @param entry The TemplateRegistryEntry to load and populate with a template.
+  * @return A promise which resolves when the TemplateRegistryEntry is loaded with a template.
+  */
+  public async loadTemplate(loader: Loader, entry: TemplateRegistryEntry) {
+    const text = await loader.loadText(entry.address);
+    entry.template = DOM.createTemplateFromMarkup(text);
+  }
+}
+
+
+export function ensureOriginOnExports(moduleExports: any, moduleId: string) {
+  let target = moduleExports;
   let key;
   let exportedValue;
 
   if (target.__useDefault) {
-    target = target['default'];
+    target = target.default;
   }
 
-  Origin.set(target, new Origin(name, 'default'));
+  Origin.set(target, new Origin(moduleId, 'default'));
 
-  // tslint:disable-next-line:forin
-  for (key in target) {
-    exportedValue = target[key];
+  if (typeof target === 'object') {
+    // tslint:disable-next-line:forin
+    for (key in target) {
+      exportedValue = target[key];
 
-    if (typeof exportedValue === 'function') {
-      Origin.set(exportedValue, new Origin(name, key));
+      if (typeof exportedValue === 'function') {
+        Origin.set(exportedValue, new Origin(moduleId, key));
+      }
     }
   }
 
-  return executed;
+  return moduleExports;
 }
 
 
@@ -64,7 +84,8 @@ export class FuseBoxAureliaLoader extends Loader {
   public loaderPlugins = Object.create(null);
   public moduleRegistry: any;
   public templateRegistry: any;
-  public templateLoader: any;
+  public templateLoader: TextTemplateLoader;
+  public modulesBeingLoaded = new Map<string, Promise<any>>();
 
 
   /**
@@ -73,16 +94,17 @@ export class FuseBoxAureliaLoader extends Loader {
   constructor() {
     super();
     this.moduleRegistry = Object.create(null);
-    this.templateRegistry = Object.create(null);
+
     this.useTemplateLoader(new TextTemplateLoader());
 
-    let that = this;
-
     this.addPlugin('template-registry-entry', {
-      'fetch': function (address: any) {
+      'fetch': async (address: any) => {
         debugPrint('info', 'template-registry-entry- fetch =>', address);
-        let entry = that.getOrCreateTemplateRegistryEntry(address);
-        return entry.templateIsLoaded ? entry : that.templateLoader.loadTemplate(that, entry).then(() => entry);
+        const entry = this.getOrCreateTemplateRegistryEntry(address);
+        if (!entry.templateIsLoaded) {
+          await this.templateLoader.loadTemplate(this, entry);
+        }
+        return entry;
       }
     });
 
@@ -94,9 +116,10 @@ export class FuseBoxAureliaLoader extends Loader {
   * Instructs the loader to use a specific TemplateLoader instance for loading templates
   * @param templateLoader The instance of TemplateLoader to use for loading templates.
   */
-  public useTemplateLoader(templateLoader: any) {
+  public useTemplateLoader(templateLoader: TextTemplateLoader) {
     this.templateLoader = templateLoader;
   }
+
 
 
 
@@ -107,19 +130,9 @@ export class FuseBoxAureliaLoader extends Loader {
   */
   public loadAllModules(ids: any): Promise<any> {
     debugPrint('info', 'loadAllModules => ', arguments);
-    let loads = [];
-
-    for (let i = 0, ii = ids.length; i < ii; ++i) {
-      let item = ids[i];
-      if (item.endsWith('.html')) {
-        loads.push(this._import(item));
-      } else {
-        loads.push(this.loadModule(item));
-      }
-
-    }
-
-    return Promise.all(loads);
+    return Promise.all(
+      ids.map(id => this.loadModule(id))
+    );
   }
 
 
@@ -131,14 +144,7 @@ export class FuseBoxAureliaLoader extends Loader {
   */
   public loadTemplate(url: any): Promise<any> {
     debugPrint('info', 'loadTemplate => ', arguments);
-    if(this.templateRegistry[url]) {
-      return Promise.resolve(this.templateRegistry[url]);
-    }
-    return this._import(this.applyPluginToUrl(url, 'template-registry-entry')).then((template: any) => {
-      this.moduleRegistry[url] = template;
-      this.templateRegistry[url] = template;
-      return template;
-    });
+    return this.loadModule(this.applyPluginToUrl(url, 'template-registry-entry'));
   }
 
 
@@ -155,7 +161,7 @@ export class FuseBoxAureliaLoader extends Loader {
         return textOrModule;
       }
       return textOrModule['default'];
-    })
+    });
 
   }
 
@@ -166,12 +172,24 @@ export class FuseBoxAureliaLoader extends Loader {
   * @param id The module id to normalize.
   * @return A Promise for the loaded module.
   */
-  public loadModule(id: any) {
-    debugPrint('info', 'loadModule => ', arguments);
-    let module = this.loadWithFusebox(this.findFuseBoxPath(id));
-    module = ensureOriginOnExports(module, id);
-    this.moduleRegistry[id] = module;
-    return Promise.resolve(module);
+  public async loadModule(moduleId: any) {
+    debugPrint('info', 'loadModule => ', moduleId);
+    let existing = this.moduleRegistry[moduleId];
+    if (existing) {
+      return existing;
+    }
+
+    let beingLoaded = this.modulesBeingLoaded.get(moduleId);
+    if (beingLoaded) {
+      return beingLoaded;
+    }
+
+    beingLoaded = this._import(moduleId);
+    this.modulesBeingLoaded.set(moduleId, beingLoaded);
+    const moduleExports = await beingLoaded;
+    this.moduleRegistry[moduleId] = ensureOriginOnExports(moduleExports, moduleId);
+    this.modulesBeingLoaded.delete(moduleId);
+    return moduleExports;
   }
 
 
@@ -182,11 +200,7 @@ export class FuseBoxAureliaLoader extends Loader {
   * @param implementation The plugin implementation.
   */
   public addPlugin(pluginName: any, implementation: any) {
-    debugPrint('info', 'loadModule => ', arguments);
-    if (!this.loaderPlugins[pluginName]) {
-      this.loaderPlugins[pluginName] = implementation;
-    }
-
+    this.loaderPlugins[pluginName] = implementation;
   }
 
 
@@ -209,13 +223,12 @@ export class FuseBoxAureliaLoader extends Loader {
   * @param id The module id.
   * @param source The source to map the module to.
   */
-  public map(id: any, source: any) {
-    debugPrint('info', 'map =>', [id, source]);
-  }
+  public map(id: any, source: any) {/*nothing*/};
 
 
 
-  public _import(address: any): any {
+  public async _import(address: any): Promise<any> {
+
     const addressParts = address.split('!');
     const moduleId = addressParts.splice(addressParts.length - 1, 1)[0];
     const loaderPlugin = addressParts.length === 1 ? addressParts[0] : null;
@@ -225,10 +238,16 @@ export class FuseBoxAureliaLoader extends Loader {
       if (!plugin) {
         throw new Error(`Plugin ${loaderPlugin} is not registered in the loader.`);
       }
-      return Promise.resolve(plugin.fetch(moduleId));
+      return await plugin.fetch(moduleId);
     }
-    // throw new Error(`Unable to find module with ID: ${moduleId}`);
-    return null;
+
+    // not loader plugin....
+    let module = this.loadWithFusebox(this.findFuseBoxPath(moduleId));
+    module = ensureOriginOnExports(module, moduleId);
+    this.moduleRegistry[moduleId] = module;
+    return Promise.resolve(module);
+
+
   }
 
 
@@ -288,19 +307,10 @@ export class FuseBoxAureliaLoader extends Loader {
     let modulePart;
     switch (true) {
 
+      case path.indexOf('/') !== -1:
 
-      case path.indexOf('html-resource-plugin!') === 0:
-        retunValue = path; // this should never trigger loadmodule should catch this...
-        debugPrint('error', 'WHY!', arguments);
-        break;
-
-
-      case path.indexOf('css-resource-plugin!') === 0:
-
-        path = path.replace('css-resource-plugin!', '');
-
+        // package path, lets test where it is
         modulePart = path.split('/')[0];
-
         switch (true) {
           case this.fuseBoxExist(path):
             retunValue = path;
@@ -309,26 +319,7 @@ export class FuseBoxAureliaLoader extends Loader {
             retunValue = '~/' + path;
             break;
           case this.fuseBoxExist(path.replace(modulePart, modulePart + '/dist/commonjs')):
-            retunValue = path.replace(modulePart, modulePart + '/dist/commonjs');
-            break;
-          default:
-            debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
-        }
-        break;
-
-
-      case path.indexOf('/') !== -1:
-
-        // package path, lets test where it is
-        modulePart = path.split('/')[0];
-        switch (true) {
-          case this.fuseBoxExist(path):// exsist sometimes fails...
-            retunValue = path;
-            break;
-          case this.fuseBoxExist('~/' + path):
-            retunValue = '~/' + path;
-            break;
-          case this.fuseBoxExist(path.replace(modulePart, modulePart + '/dist/commonjs')):
+            // workaround for commonjs path
             retunValue = path.replace(modulePart, modulePart + '/dist/commonjs');
             break;
           default:
@@ -359,4 +350,7 @@ export class FuseBoxAureliaLoader extends Loader {
 
 }
 
+
+
 PLATFORM.Loader = FuseBoxAureliaLoader;
+
