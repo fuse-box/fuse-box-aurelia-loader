@@ -8,7 +8,7 @@ var build = function() {
         outFile: "./bundle/fb-app-bundle.js",
         useCache: false,
         plugins: [
-            fb.CSSPlugin(),
+            [/\.css$/, fb.RawPlugin({extensions: ['.css']})],
             fb.HTMLPlugin({
                 useDefault: true
             }),

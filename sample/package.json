@@ -4,10 +4,11 @@
   "description": "fusebox test",
   "main": "index.js",
   "scripts": {
-    "build-all": "npm run build-aurelia && npm run build-grid && npm run build-app",
-    "build-app":"node ./build/fb-app-build-bundle",
-    "build-grid":"node ./build/fb-aurelia-v-grid-build-bundle",
-    "build-aurelia":"node ./build/fb-aurelia-framework-build-bundle"
+    "build-all": "npm run build-aurelia && npm run build-grid && npm run build-loader && npm run build-app",
+    "build-app":"node ./build/FB_app",
+    "build-grid":"node ./build/FB_aurelia-v-grid",
+    "build-loader":"node ./build/FB_fuse-box-aurelia-loader",
+    "build-aurelia":"node ./build/FB_aurelia-framework"
   },
   "author": "vegar.ringdal@gmail.com",
   "license": "MIT",
