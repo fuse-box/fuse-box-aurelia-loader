@@ -6,6 +6,7 @@ ___scope___.file("main.js", function(exports, require, module, __filename, __dir
 Object.defineProperty(exports, "__esModule", { value: true });
 // add custom loader for fuse
 window.FUSEBOX_AURELIA_LOADER_LOGGING = true;
+window.FUSEBOX_AURELIA_LOADER_HMR = true;
 require("fuse-box-aurelia-loader");
 // start aurelia bootstrapper
 require("aurelia-bootstrapper");
@@ -67,6 +68,8 @@ exports.App = App;
 });
 ___scope___.file("components/grid-component.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
@@ -83,6 +86,8 @@ exports.GridComponent = GridComponent;
 
 });
 ___scope___.file("misc/blur-image.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -626,6 +631,8 @@ exports.ChildRouter = ChildRouter;
 });
 ___scope___.file("routes/users.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
@@ -660,6 +667,8 @@ var _a;
 });
 ___scope___.file("routes/welcome.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
@@ -692,6 +701,10 @@ Welcome = __decorate([
 exports.Welcome = Welcome;
 var _a;
 
+});
+___scope___.file("routes/test.css", function(exports, require, module, __filename, __dirname){ 
+
+module.exports = "body {\r\n    background-color: yellow;\r\n}"
 });
 });
 FuseBox.pkg("fusebox-hot-reload", {}, function(___scope___){

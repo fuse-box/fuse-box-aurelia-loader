@@ -28,7 +28,8 @@ var build = function() {
     + aurelia-templating-resources 
     + aurelia-event-aggregator 
     + aurelia-history-browser 
-    + aurelia-templating-router`);
+    + aurelia-templating-router
+    + aurelia-hot-module-reload`);
 
 }
 
