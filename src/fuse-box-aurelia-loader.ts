@@ -2,6 +2,8 @@ import { Origin } from 'aurelia-metadata';
 import { Loader, TemplateRegistryEntry } from 'aurelia-loader';
 import { PLATFORM, DOM } from 'aurelia-pal';
 import { getLogger, Logger } from 'aurelia-logging';
+import { Container } from 'aurelia-dependency-injection';
+import { Aurelia } from 'aurelia-framework';
 export type LoaderPlugin = { fetch: (address: string) => Promise<TemplateRegistryEntry> | TemplateRegistryEntry };
 
 const log: Logger = getLogger('fuse-box-aurelia-loader');
@@ -223,7 +225,7 @@ export class FuseBoxAureliaLoader extends Loader {
   * @param id The module id.
   * @param source The source to map the module to.
   */
-  public map(id: any, source: any) {/*nothing*/};
+  public map(id: any, source: any) {/*nothing*/ };
 
 
 
@@ -354,3 +356,11 @@ export class FuseBoxAureliaLoader extends Loader {
 
 PLATFORM.Loader = FuseBoxAureliaLoader;
 
+document.addEventListener("aurelia-started", () => {
+  if ((<any>window).FUSEBOX_AURELIA_LOADER_HMR) {
+    let container = Container.instance;
+    let aurelia = container.get(Aurelia);
+    let FuseBoxAureliaHmrPlugin = require('./fuse-box-aurelia-hmr-plugin').FuseBoxAureliaHmrPlugin;
+    FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader as any));
+  }
+};
