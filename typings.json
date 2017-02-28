@@ -1,6 +1,6 @@
 {
-  "name": "aurelia-v-grid",
-  "main": "dist/amd/index.d.ts",
+  "name": "fuse-box-aurelia-loader",
+  "main": "dist/commonjs/index.d.ts",
   "dependencies": {
     "aurelia-binding": "github:aurelia/binding",
     "aurelia-bootstrapper": "github:aurelia/bootstrapper",
@@ -24,13 +24,13 @@
     "aurelia-templating": "github:aurelia/templating",
     "aurelia-templating-binding": "github:aurelia/templating-binding",
     "aurelia-templating-resources": "github:aurelia/templating-resources",
-    "aurelia-templating-router": "github:aurelia/templating-router"
+    "aurelia-templating-router": "github:aurelia/templating-router",
+    "aurelia-hot-module-reload":"github:aurelia/hot-module-reload"
   },
   "globalDevDependencies": {
     
   },
   "globalDependencies": {
-    "url": "github:aurelia/fetch-client/doc/url.d.ts#bbe0777ef710d889a05759a65fa2c9c3865fc618",
-    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160524142046"
+
   }
 }
