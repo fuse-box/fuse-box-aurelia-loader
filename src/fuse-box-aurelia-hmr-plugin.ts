@@ -1,6 +1,4 @@
 import { HmrContext } from 'aurelia-hot-module-reload';
-import { inject } from 'aurelia-dependency-injection';
-import { Loader } from 'aurelia-loader';
 import { getLogger, Logger } from 'aurelia-logging';
 import { FuseBoxAureliaLoader } from 'fuse-box-aurelia-loader';
 
