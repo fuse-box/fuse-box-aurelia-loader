@@ -162,7 +162,11 @@ export class FuseBoxAureliaLoader extends Loader {
       if (typeof textOrModule === 'string') {
         return textOrModule;
       }
-      return textOrModule['default'];
+      if  (textOrModule['default']) {
+        return textOrModule['default'];
+      } else {
+        return '';
+      }
     });
 
   }
