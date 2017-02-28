@@ -69,6 +69,7 @@ exports.App = App;
 });
 ___scope___.file("components/grid-component.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
@@ -85,6 +86,7 @@ exports.GridComponent = GridComponent;
 
 });
 ___scope___.file("misc/blur-image.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -628,6 +630,7 @@ exports.ChildRouter = ChildRouter;
 });
 ___scope___.file("routes/users.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
@@ -661,6 +664,7 @@ var _a;
 
 });
 ___scope___.file("routes/welcome.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

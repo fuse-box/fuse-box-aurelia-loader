@@ -237,7 +237,12 @@ var FuseBoxAureliaLoader = (function (_super) {
             if (typeof textOrModule === 'string') {
                 return textOrModule;
             }
-            return textOrModule['default'];
+            if (textOrModule['default']) {
+                return textOrModule['default'];
+            }
+            else {
+                return '';
+            }
         });
     };
     FuseBoxAureliaLoader.prototype.loadModule = function (moduleId) {
