@@ -42,8 +42,9 @@ var aurelia_hot_module_reload_1 = require("aurelia-hot-module-reload");
 var aurelia_logging_1 = require("aurelia-logging");
 var log = aurelia_logging_1.getLogger('fuse-box-aurelia-hmr-plugin');
 var FuseBoxAureliaHmrPlugin = (function () {
-    function FuseBoxAureliaHmrPlugin(loader) {
+    function FuseBoxAureliaHmrPlugin(loader, reloadPage) {
         this.context = new aurelia_hot_module_reload_1.HmrContext(loader);
+        this.reloadPage = reloadPage;
         log.debug('Constructed fuse-box aurelia HMR plugin');
     }
     FuseBoxAureliaHmrPlugin.prototype.hmrUpdate = function (data) {
@@ -52,25 +53,32 @@ var FuseBoxAureliaHmrPlugin = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(data.type === 'js')) return [3 /*break*/, 4];
+                        if (!this.reloadPage) return [3 /*break*/, 1];
+                        clearTimeout(this.timer);
+                        this.timer = setTimeout(function () {
+                            document.location.reload();
+                        }, 250);
+                        return [3 /*break*/, 5];
+                    case 1:
+                        if (!(data.type === 'js')) return [3 /*break*/, 5];
                         log.debug('Updating view or view model', data);
                         FuseBox.flush();
                         FuseBox.dynamic(data.path, data.content);
                         if (FuseBox.mainFile) {
                             FuseBox.import(FuseBox.mainFile);
                         }
-                        if (!(data.path.indexOf('.html') >= 0)) return [3 /*break*/, 2];
+                        if (!(data.path.indexOf('.html') >= 0)) return [3 /*break*/, 3];
                         return [4 /*yield*/, this.context.handleViewChange(data.path)];
-                    case 1:
+                    case 2:
                         _a.sent();
                         return [2 /*return*/, true];
-                    case 2:
+                    case 3:
                         moduleId = data.path.substr(0, data.path.length - 3);
                         return [4 /*yield*/, this.context.handleModuleChange(moduleId, {})];
-                    case 3:
+                    case 4:
                         _a.sent();
                         return [2 /*return*/, true];
-                    case 4: return [2 /*return*/, false];
+                    case 5: return [2 /*return*/, false];
                 }
             });
         });
@@ -266,7 +274,7 @@ var FuseBoxAureliaLoader = (function (_super) {
         debugPrint('info', 'normalize =>', [moduleId, relativeTo]);
         return Promise.resolve(moduleId);
     };
-    FuseBoxAureliaLoader.prototype.map = function (id, source) { };
+    FuseBoxAureliaLoader.prototype.map = function () { };
     ;
     FuseBoxAureliaLoader.prototype._import = function (address) {
         return __awaiter(this, void 0, void 0, function () {
@@ -323,11 +331,18 @@ var FuseBoxAureliaLoader = (function (_super) {
                     case this.fuseBoxExist('~/' + path):
                         retunValue = '~/' + path;
                         break;
-                    case this.fuseBoxExist(path.replace(modulePart, modulePart + '/dist/commonjs')):
-                        retunValue = path.replace(modulePart, modulePart + '/dist/commonjs');
-                        break;
                     default:
-                        debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
+                        var moduleId = Object.keys(FuseBox.packages)
+                            .find(function (name) { return path.startsWith(name + "/"); });
+                        if (moduleId) {
+                            var resources = Object.keys(FuseBox.packages[moduleId].f);
+                            var resourceName_1 = path.replace(moduleId + "/", '');
+                            var resourceEntry = resources.find(function (r) { return r.endsWith(resourceName_1 + '.js'); });
+                            retunValue = moduleId + "/" + resourceEntry;
+                        }
+                        if (!this.fuseBoxExist(retunValue)) {
+                            debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
+                        }
                 }
                 break;
             default:
@@ -348,12 +363,12 @@ var FuseBoxAureliaLoader = (function (_super) {
 }(aurelia_loader_1.Loader));
 exports.FuseBoxAureliaLoader = FuseBoxAureliaLoader;
 aurelia_pal_1.PLATFORM.Loader = FuseBoxAureliaLoader;
-document.addEventListener("aurelia-started", function () {
-    if (window.FUSEBOX_AURELIA_LOADER_HMR) {
+document.addEventListener('aurelia-started', function () {
+    if (window.FUSEBOX_AURELIA_LOADER_HMR || window.FUSEBOX_AURELIA_LOADER_RELOAD) {
         var container = aurelia_dependency_injection_1.Container.instance;
         var aurelia = container.get(aurelia_framework_1.Aurelia);
         var FuseBoxAureliaHmrPlugin = require('./fuse-box-aurelia-hmr-plugin').FuseBoxAureliaHmrPlugin;
-        FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader));
+        FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader, window.FUSEBOX_AURELIA_LOADER_RELOAD));
     }
 });
 //# sourceMappingURL=fuse-box-aurelia-loader.js.map
