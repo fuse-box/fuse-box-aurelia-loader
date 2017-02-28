@@ -38,8 +38,9 @@ var aurelia_hot_module_reload_1 = require("aurelia-hot-module-reload");
 var aurelia_logging_1 = require("aurelia-logging");
 var log = aurelia_logging_1.getLogger('fuse-box-aurelia-hmr-plugin');
 var FuseBoxAureliaHmrPlugin = (function () {
-    function FuseBoxAureliaHmrPlugin(loader) {
+    function FuseBoxAureliaHmrPlugin(loader, reloadPage) {
         this.context = new aurelia_hot_module_reload_1.HmrContext(loader);
+        this.reloadPage = reloadPage;
         log.debug('Constructed fuse-box aurelia HMR plugin');
     }
     FuseBoxAureliaHmrPlugin.prototype.hmrUpdate = function (data) {
@@ -48,25 +49,32 @@ var FuseBoxAureliaHmrPlugin = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(data.type === 'js')) return [3 /*break*/, 4];
+                        if (!this.reloadPage) return [3 /*break*/, 1];
+                        clearTimeout(this.timer);
+                        this.timer = setTimeout(function () {
+                            document.location.reload();
+                        }, 250);
+                        return [3 /*break*/, 5];
+                    case 1:
+                        if (!(data.type === 'js')) return [3 /*break*/, 5];
                         log.debug('Updating view or view model', data);
                         FuseBox.flush();
                         FuseBox.dynamic(data.path, data.content);
                         if (FuseBox.mainFile) {
                             FuseBox.import(FuseBox.mainFile);
                         }
-                        if (!(data.path.indexOf('.html') >= 0)) return [3 /*break*/, 2];
+                        if (!(data.path.indexOf('.html') >= 0)) return [3 /*break*/, 3];
                         return [4 /*yield*/, this.context.handleViewChange(data.path)];
-                    case 1:
+                    case 2:
                         _a.sent();
                         return [2 /*return*/, true];
-                    case 2:
+                    case 3:
                         moduleId = data.path.substr(0, data.path.length - 3);
                         return [4 /*yield*/, this.context.handleModuleChange(moduleId, {})];
-                    case 3:
+                    case 4:
                         _a.sent();
                         return [2 /*return*/, true];
-                    case 4: return [2 /*return*/, false];
+                    case 5: return [2 /*return*/, false];
                 }
             });
         });

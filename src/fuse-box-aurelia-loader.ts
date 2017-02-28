@@ -365,12 +365,22 @@ export class FuseBoxAureliaLoader extends Loader {
 
 
 PLATFORM.Loader = FuseBoxAureliaLoader;
+
 declare var require: any;
+// listen for aurleia started events
 document.addEventListener('aurelia-started', () => {
-  if ((<any>window).FUSEBOX_AURELIA_LOADER_HMR) {
+
+  // if HMR or RELOAD activated
+  if ((<any>window).FUSEBOX_AURELIA_LOADER_HMR || (<any>window).FUSEBOX_AURELIA_LOADER_RELOAD) {
+
+    // get instance
     let container = Container.instance;
     let aurelia = container.get(Aurelia);
+
+    // require, dont want to require dis unless dev mode
     let FuseBoxAureliaHmrPlugin = require('./fuse-box-aurelia-hmr-plugin').FuseBoxAureliaHmrPlugin;
-    FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader as any));
+
+    // create and push plugin
+    FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader as any, (<any>window).FUSEBOX_AURELIA_LOADER_RELOAD));
   }
 });

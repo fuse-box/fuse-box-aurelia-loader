@@ -272,10 +272,10 @@ var FuseBoxAureliaLoader = (function (_super) {
 exports.FuseBoxAureliaLoader = FuseBoxAureliaLoader;
 aurelia_pal_1.PLATFORM.Loader = FuseBoxAureliaLoader;
 document.addEventListener('aurelia-started', function () {
-    if (window.FUSEBOX_AURELIA_LOADER_HMR) {
+    if (window.FUSEBOX_AURELIA_LOADER_HMR || window.FUSEBOX_AURELIA_LOADER_RELOAD) {
         var container = aurelia_dependency_injection_1.Container.instance;
         var aurelia = container.get(aurelia_framework_1.Aurelia);
         var FuseBoxAureliaHmrPlugin = require('./fuse-box-aurelia-hmr-plugin').FuseBoxAureliaHmrPlugin;
-        FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader));
+        FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader, window.FUSEBOX_AURELIA_LOADER_RELOAD));
     }
 });
