@@ -4,6 +4,7 @@ import { PLATFORM, DOM } from 'aurelia-pal';
 import { getLogger, Logger } from 'aurelia-logging';
 import { Container } from 'aurelia-dependency-injection';
 import { Aurelia } from 'aurelia-framework';
+import { FuseBoxAureliaHmrPlugin } from './fuse-box-aurelia-hmr-plugin';
 export type LoaderPlugin = { fetch: (address: string) => Promise<TemplateRegistryEntry> | TemplateRegistryEntry };
 
 const log: Logger = getLogger('fuse-box-aurelia-loader');
@@ -162,7 +163,7 @@ export class FuseBoxAureliaLoader extends Loader {
       if (typeof textOrModule === 'string') {
         return textOrModule;
       }
-      if  (textOrModule['default']) {
+      if (textOrModule['default']) {
         return textOrModule['default'];
       } else {
         return '';
@@ -370,7 +371,7 @@ export class FuseBoxAureliaLoader extends Loader {
 
 PLATFORM.Loader = FuseBoxAureliaLoader;
 
-declare var require: any;
+
 // listen for aurleia started events
 document.addEventListener('aurelia-started', () => {
 
@@ -380,9 +381,6 @@ document.addEventListener('aurelia-started', () => {
     // get instance
     let container = Container.instance;
     let aurelia = container.get(Aurelia);
-
-    // require, dont want to require dis unless dev mode
-    let FuseBoxAureliaHmrPlugin = require('./fuse-box-aurelia-hmr-plugin').FuseBoxAureliaHmrPlugin;
 
     // create and push plugin
     FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader as any, (<any>window).FUSEBOX_AURELIA_LOADER_RELOAD));

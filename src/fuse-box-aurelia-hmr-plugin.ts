@@ -1,24 +1,22 @@
-import { HmrContext } from 'aurelia-hot-module-reload';
-import { getLogger, Logger } from 'aurelia-logging';
 import { FuseBoxAureliaLoader } from './fuse-box-aurelia-loader';
 
-const log: Logger = getLogger('fuse-box-aurelia-hmr-plugin');
-
 declare var FuseBox: any;
+declare var require: any;
 
 export class FuseBoxAureliaHmrPlugin {
-    private context: HmrContext;
+    private context: any;
     private reloadPage: boolean;
     private timer: number;
     constructor(loader: FuseBoxAureliaLoader, reloadPage: boolean) {
+        let HmrContext = require('aurelia-hot-module-reload').HmrContext;
         this.context = new HmrContext(loader);
         this.reloadPage = reloadPage;
-        log.debug('Constructed fuse-box aurelia HMR plugin');
     }
 
     public async hmrUpdate(data: any): Promise<boolean> {
 
         if (this.reloadPage) {
+            // incase its building many...(maybe this is not needed)
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 document.location.reload();
@@ -26,7 +24,6 @@ export class FuseBoxAureliaHmrPlugin {
         } else {
 
             if (data.type === 'js') {
-                log.debug('Updating view or view model', data);
 
                 // first let fusebox change the code
                 FuseBox.flush();

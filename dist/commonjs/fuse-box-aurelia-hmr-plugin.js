@@ -34,14 +34,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var aurelia_hot_module_reload_1 = require("aurelia-hot-module-reload");
-var aurelia_logging_1 = require("aurelia-logging");
-var log = aurelia_logging_1.getLogger('fuse-box-aurelia-hmr-plugin');
 var FuseBoxAureliaHmrPlugin = (function () {
     function FuseBoxAureliaHmrPlugin(loader, reloadPage) {
-        this.context = new aurelia_hot_module_reload_1.HmrContext(loader);
+        var HmrContext = require('aurelia-hot-module-reload').HmrContext;
+        this.context = new HmrContext(loader);
         this.reloadPage = reloadPage;
-        log.debug('Constructed fuse-box aurelia HMR plugin');
     }
     FuseBoxAureliaHmrPlugin.prototype.hmrUpdate = function (data) {
         return __awaiter(this, void 0, void 0, function () {
@@ -57,7 +54,6 @@ var FuseBoxAureliaHmrPlugin = (function () {
                         return [3 /*break*/, 5];
                     case 1:
                         if (!(data.type === 'js')) return [3 /*break*/, 5];
-                        log.debug('Updating view or view model', data);
                         FuseBox.flush();
                         FuseBox.dynamic(data.path, data.content);
                         if (FuseBox.mainFile) {

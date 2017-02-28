@@ -50,6 +50,7 @@ var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_logging_1 = require("aurelia-logging");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_framework_1 = require("aurelia-framework");
+var fuse_box_aurelia_hmr_plugin_1 = require("./fuse-box-aurelia-hmr-plugin");
 var log = aurelia_logging_1.getLogger('fuse-box-aurelia-loader');
 var TextTemplateLoader = (function () {
     function TextTemplateLoader() {
@@ -280,7 +281,6 @@ document.addEventListener('aurelia-started', function () {
     if (window.FUSEBOX_AURELIA_LOADER_HMR || window.FUSEBOX_AURELIA_LOADER_RELOAD) {
         var container = aurelia_dependency_injection_1.Container.instance;
         var aurelia = container.get(aurelia_framework_1.Aurelia);
-        var FuseBoxAureliaHmrPlugin = require('./fuse-box-aurelia-hmr-plugin').FuseBoxAureliaHmrPlugin;
-        FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader, window.FUSEBOX_AURELIA_LOADER_RELOAD));
+        FuseBox.plugins.push(new fuse_box_aurelia_hmr_plugin_1.FuseBoxAureliaHmrPlugin(aurelia.loader, window.FUSEBOX_AURELIA_LOADER_RELOAD));
     }
 });
