@@ -130,7 +130,7 @@ export class FuseBoxAureliaLoader extends Loader {
   * @param ids The set of module ids to load.
   * @return A Promise for an array of loaded modules.
   */
-  public loadAllModules(ids: any): Promise<any> {
+  public loadAllModules(ids: any[]): Promise<any> {
     debugPrint('info', 'loadAllModules => ', arguments);
     return Promise.all(
       ids.map(id => this.loadModule(id))
@@ -225,7 +225,7 @@ export class FuseBoxAureliaLoader extends Loader {
   * @param id The module id.
   * @param source The source to map the module to.
   */
-  public map(id: any, source: any) {/*nothing*/ };
+  public map(/*id: any, source: any*/) {/*nothing*/ };
 
 
 
@@ -320,13 +320,23 @@ export class FuseBoxAureliaLoader extends Loader {
           case this.fuseBoxExist('~/' + path):
             retunValue = '~/' + path;
             break;
-          case this.fuseBoxExist(path.replace(modulePart, modulePart + '/dist/commonjs')):
-            // workaround for commonjs path
-            retunValue = path.replace(modulePart, modulePart + '/dist/commonjs');
-            break;
           default:
 
-            debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
+            //@arabsight elegant solution in his loader
+            let moduleId = Object.keys(FuseBox.packages)
+              .find(name => path.startsWith(`${name}/`));
+
+            if (moduleId) {
+              let resources = Object.keys(FuseBox.packages[moduleId].f);
+              let resourceName = path.replace(`${moduleId}/`, '');
+              let resourceEntry = resources.find(r => r.endsWith(resourceName + '.js'));
+              retunValue = `${moduleId}/${resourceEntry}`;
+            }
+
+            if (!this.fuseBoxExist(retunValue)) {
+              debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
+            }
+
         }
         break;
 
@@ -355,8 +365,8 @@ export class FuseBoxAureliaLoader extends Loader {
 
 
 PLATFORM.Loader = FuseBoxAureliaLoader;
-
-document.addEventListener("aurelia-started", () => {
+declare var require: any;
+document.addEventListener('aurelia-started', () => {
   if ((<any>window).FUSEBOX_AURELIA_LOADER_HMR) {
     let container = Container.instance;
     let aurelia = container.get(Aurelia);

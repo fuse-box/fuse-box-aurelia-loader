@@ -15,13 +15,13 @@ export declare class FuseBoxAureliaLoader extends Loader {
     modulesBeingLoaded: Map<string, Promise<any>>;
     constructor();
     useTemplateLoader(templateLoader: TextTemplateLoader): void;
-    loadAllModules(ids: any): Promise<any>;
+    loadAllModules(ids: any[]): Promise<any>;
     loadTemplate(url: any): Promise<any>;
     loadText(url: any): Promise<any>;
     loadModule(moduleId: any): Promise<any>;
     addPlugin(pluginName: any, implementation: any): void;
     normalize(moduleId: any, relativeTo: any): Promise<any>;
-    map(id: any, source: any): void;
+    map(): void;
     _import(address: any): Promise<any>;
     applyPluginToUrl(url: any, pluginName: any): string;
     loadWithFusebox(args: any): any;

@@ -182,7 +182,7 @@ var FuseBoxAureliaLoader = (function (_super) {
         debugPrint('info', 'normalize =>', [moduleId, relativeTo]);
         return Promise.resolve(moduleId);
     };
-    FuseBoxAureliaLoader.prototype.map = function (id, source) { };
+    FuseBoxAureliaLoader.prototype.map = function () { };
     ;
     FuseBoxAureliaLoader.prototype._import = function (address) {
         return __awaiter(this, void 0, void 0, function () {
@@ -239,11 +239,18 @@ var FuseBoxAureliaLoader = (function (_super) {
                     case this.fuseBoxExist('~/' + path):
                         retunValue = '~/' + path;
                         break;
-                    case this.fuseBoxExist(path.replace(modulePart, modulePart + '/dist/commonjs')):
-                        retunValue = path.replace(modulePart, modulePart + '/dist/commonjs');
-                        break;
                     default:
-                        debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
+                        var moduleId = Object.keys(FuseBox.packages)
+                            .find(function (name) { return path.startsWith(name + "/"); });
+                        if (moduleId) {
+                            var resources = Object.keys(FuseBox.packages[moduleId].f);
+                            var resourceName_1 = path.replace(moduleId + "/", '');
+                            var resourceEntry = resources.find(function (r) { return r.endsWith(resourceName_1 + '.js'); });
+                            retunValue = moduleId + "/" + resourceEntry;
+                        }
+                        if (!this.fuseBoxExist(retunValue)) {
+                            debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
+                        }
                 }
                 break;
             default:
@@ -264,7 +271,7 @@ var FuseBoxAureliaLoader = (function (_super) {
 }(aurelia_loader_1.Loader));
 exports.FuseBoxAureliaLoader = FuseBoxAureliaLoader;
 aurelia_pal_1.PLATFORM.Loader = FuseBoxAureliaLoader;
-document.addEventListener("aurelia-started", function () {
+document.addEventListener('aurelia-started', function () {
     if (window.FUSEBOX_AURELIA_LOADER_HMR) {
         var container = aurelia_dependency_injection_1.Container.instance;
         var aurelia = container.get(aurelia_framework_1.Aurelia);

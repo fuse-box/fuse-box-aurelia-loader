@@ -1,6 +1,6 @@
 import { HmrContext } from 'aurelia-hot-module-reload';
 import { getLogger, Logger } from 'aurelia-logging';
-import { FuseBoxAureliaLoader } from 'fuse-box-aurelia-loader';
+import { FuseBoxAureliaLoader } from './fuse-box-aurelia-loader';
 
 const log: Logger = getLogger('fuse-box-aurelia-hmr-plugin');
 
