@@ -363,4 +363,4 @@ document.addEventListener("aurelia-started", () => {
     let FuseBoxAureliaHmrPlugin = require('./fuse-box-aurelia-hmr-plugin').FuseBoxAureliaHmrPlugin;
     FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader as any));
   }
-};
+});
