@@ -5,22 +5,27 @@ declare var require: any;
 
 export class FuseBoxAureliaHmrPlugin {
     private context: any;
-    private reloadPage: boolean;
+    private reloadPageOnly: boolean;
     private timer: number;
-    constructor(loader: FuseBoxAureliaLoader, reloadPage: boolean) {
-        let HmrContext = require('aurelia-hot-module-reload').HmrContext;
-        this.context = new HmrContext(loader);
-        this.reloadPage = reloadPage;
+    constructor(loader: FuseBoxAureliaLoader, reloadPageOnly: boolean) {
+        if (!reloadPageOnly) {
+            // no need to have this if they are using the reload only
+            let HmrContext = require('aurelia-hot-module-reload').HmrContext;
+            this.context = new HmrContext(loader);
+        }
+        this.reloadPageOnly = reloadPageOnly;
     }
 
     public async hmrUpdate(data: any): Promise<boolean> {
 
-        if (this.reloadPage) {
-            // incase its building many...(maybe this is not needed)
+        if (this.reloadPageOnly) {
+
+            // incase its building many...(maybe this is not needed) //todo check
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 document.location.reload();
             }, 250);
+
         } else {
 
             if (data.type === 'js') {

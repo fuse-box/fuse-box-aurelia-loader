@@ -327,7 +327,7 @@ export class FuseBoxAureliaLoader extends Loader {
             break;
           default:
 
-            //@arabsight elegant solution in his loader
+            // @arabsight elegant solution in his loader
             let moduleId = Object.keys(FuseBox.packages)
               .find(name => path.startsWith(`${name}/`));
 

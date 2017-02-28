@@ -35,10 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var FuseBoxAureliaHmrPlugin = (function () {
-    function FuseBoxAureliaHmrPlugin(loader, reloadPage) {
-        var HmrContext = require('aurelia-hot-module-reload').HmrContext;
-        this.context = new HmrContext(loader);
-        this.reloadPage = reloadPage;
+    function FuseBoxAureliaHmrPlugin(loader, reloadPageOnly) {
+        if (!reloadPageOnly) {
+            var HmrContext = require('aurelia-hot-module-reload').HmrContext;
+            this.context = new HmrContext(loader);
+        }
+        this.reloadPageOnly = reloadPageOnly;
     }
     FuseBoxAureliaHmrPlugin.prototype.hmrUpdate = function (data) {
         return __awaiter(this, void 0, void 0, function () {
@@ -46,7 +48,7 @@ var FuseBoxAureliaHmrPlugin = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!this.reloadPage) return [3 /*break*/, 1];
+                        if (!this.reloadPageOnly) return [3 /*break*/, 1];
                         clearTimeout(this.timer);
                         this.timer = setTimeout(function () {
                             document.location.reload();
