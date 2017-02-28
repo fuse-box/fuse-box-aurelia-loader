@@ -1,8 +1,8 @@
 
 
 // add custom loader for fuse
-window.FUSEBOX_AURELIA_LOADER_LOGGING=true
-window.FUSEBOX_AURELIA_LOADER_HMR=true
+(<any>window).FUSEBOX_AURELIA_LOADER_LOGGING = true;
+(<any>window).FUSEBOX_AURELIA_LOADER_HMR = true;
 import 'fuse-box-aurelia-loader';
 
 // start aurelia bootstrapper
