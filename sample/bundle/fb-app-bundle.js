@@ -43,7 +43,7 @@ module.exports.default =  "<template>\r\n  <require from=\"../misc/blur-image\">
 });
 ___scope___.file("routes/welcome.html", function(exports, require, module, __filename, __dirname){ 
 
-module.exports.default =  "<template>\r\n  <require from=\"../components/grid-component\"></require>\r\n  <section class=\"au-animate\">\r\n    <h2>${heading}</h2>\r\n    <form role=\"form\" submit.delegate=\"submit()\">\r\n      <div class=\"form-group\">\r\n        <label for=\"fn\">Name</label>\r\n        <input type=\"text\" value.bind=\"ds.entity.name\" class=\"form-control\" id=\"fn\" placeholder=\"first name\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"ln\">Country</label>\r\n        <input type=\"text\" value.bind=\"ds.entity.country\" class=\"form-control\" id=\"ln\" placeholder=\"last name\">\r\n      </div>\r\n    </form>\r\n    <grid-component grid-connector.bind=\"gridConnector\" ></grid-component>\r\n    \r\n  </section>\r\n</template>\r\n"
+module.exports.default =  "<template>\r\n  <require from=\"../components/grid-component\"></require>\r\n  <section class=\"au-animate\">\r\n    <h2>${heading}</h2>\r\n    <form role=\"form\" submit.delegate=\"submit()\">\r\n      <div class=\"form-group\">\r\n        <label for=\"fn\">Name</label>\r\n        <input type=\"text\" value.bind=\"ds.entity.name\" class=\"form-control\" id=\"fn\" placeholder=\"first name\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"ln\">Country</label>\r\n        <input type=\"text\" value.bind=\"ds.entity.country\" class=\"form-control\" id=\"ln\" placeholder=\"last name\">\r\n      </div>\r\n    </form>\r\n    <div class=\"form-group\">\r\n        <label>Full Name</label>\r\n        <p class=\"help-block\">${ds.entity.name | upper}</p>\r\n      </div>\r\n    <grid-component grid-connector.bind=\"gridConnector\" ></grid-component>\r\n    \r\n  </section>\r\n</template>\r\n"
 });
 ___scope___.file("app.js", function(exports, require, module, __filename, __dirname){ 
 
@@ -71,6 +71,15 @@ var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
@@ -87,6 +96,15 @@ exports.GridComponent = GridComponent;
 
 });
 ___scope___.file("misc/blur-image.js", function(exports, require, module, __filename, __dirname){ 
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
@@ -636,6 +654,15 @@ var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
 var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
+var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
@@ -670,9 +697,6 @@ var _a;
 });
 ___scope___.file("routes/welcome.js", function(exports, require, module, __filename, __dirname){ 
 var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
-var __decorate = __fsbx_decorate(arguments)
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
@@ -686,7 +710,7 @@ var Welcome = (function () {
         this.dummyDataGenerator = dummyDataGenerator;
         this.heading = 'Welcome to the Fuse-Box-Aurelia-Loader Sample!';
         //generate some temp data for the grid
-        this.dummyDataGenerator.generateData(10000, function (data) {
+        this.dummyDataGenerator.generateData(1000, function (data) {
             _this.dummydata = data;
         });
         //create a datasource for the grid
@@ -703,6 +727,15 @@ Welcome = __decorate([
     __metadata("design:paramtypes", [typeof (_a = typeof dummyDataGenerator_1.DummyDataGenerator !== "undefined" && dummyDataGenerator_1.DummyDataGenerator) === "function" && _a || Object])
 ], Welcome);
 exports.Welcome = Welcome;
+var UpperValueConverter = (function () {
+    function UpperValueConverter() {
+    }
+    UpperValueConverter.prototype.toView = function (value) {
+        return value && value.toLowerCase();
+    };
+    return UpperValueConverter;
+}());
+exports.UpperValueConverter = UpperValueConverter;
 var _a;
 
 });
