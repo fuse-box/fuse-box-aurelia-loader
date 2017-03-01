@@ -38,14 +38,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var aurelia_hot_module_reload_1 = require("aurelia-hot-module-reload");
-var aurelia_logging_1 = require("aurelia-logging");
-var log = aurelia_logging_1.getLogger('fuse-box-aurelia-hmr-plugin');
 var FuseBoxAureliaHmrPlugin = (function () {
-    function FuseBoxAureliaHmrPlugin(loader, reloadPage) {
-        this.context = new aurelia_hot_module_reload_1.HmrContext(loader);
-        this.reloadPage = reloadPage;
-        log.debug('Constructed fuse-box aurelia HMR plugin');
+    function FuseBoxAureliaHmrPlugin(loader, reloadPageOnly) {
+        if (!reloadPageOnly) {
+            var HmrContext = require('aurelia-hot-module-reload').HmrContext;
+            this.context = new HmrContext(loader);
+        }
+        this.reloadPageOnly = reloadPageOnly;
     }
     FuseBoxAureliaHmrPlugin.prototype.hmrUpdate = function (data) {
         return __awaiter(this, void 0, void 0, function () {
@@ -53,7 +52,7 @@ var FuseBoxAureliaHmrPlugin = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!this.reloadPage) return [3 /*break*/, 1];
+                        if (!this.reloadPageOnly) return [3 /*break*/, 1];
                         clearTimeout(this.timer);
                         this.timer = setTimeout(function () {
                             document.location.reload();
@@ -61,7 +60,6 @@ var FuseBoxAureliaHmrPlugin = (function () {
                         return [3 /*break*/, 5];
                     case 1:
                         if (!(data.type === 'js')) return [3 /*break*/, 5];
-                        log.debug('Updating view or view model', data);
                         FuseBox.flush();
                         FuseBox.dynamic(data.path, data.content);
                         if (FuseBox.mainFile) {
@@ -142,6 +140,7 @@ var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_logging_1 = require("aurelia-logging");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_framework_1 = require("aurelia-framework");
+var fuse_box_aurelia_hmr_plugin_1 = require("./fuse-box-aurelia-hmr-plugin");
 var log = aurelia_logging_1.getLogger('fuse-box-aurelia-loader');
 var TextTemplateLoader = (function () {
     function TextTemplateLoader() {
@@ -183,21 +182,22 @@ function ensureOriginOnExports(moduleExports, moduleId) {
 }
 exports.ensureOriginOnExports = ensureOriginOnExports;
 function debugPrint(type, title, args) {
-    if (type === 'error') {
-        log.error(title, args);
-    }
-    if (type === 'info') {
-        log.debug(title, args);
+    if (window.FUSEBOX_AURELIA_LOADER_LOGGING) {
+        if (type === 'error') {
+            log.error(title, args);
+        }
+        if (type === 'info') {
+            log.debug(title, args);
+        }
     }
 }
 var FuseBoxAureliaLoader = (function (_super) {
     __extends(FuseBoxAureliaLoader, _super);
     function FuseBoxAureliaLoader() {
         var _this = _super.call(this) || this;
-        _this.textPluginName = 'text';
         _this.loaderPlugins = Object.create(null);
-        _this.modulesBeingLoaded = new Map();
         _this.moduleRegistry = Object.create(null);
+        _this.modulesBeingLoaded = new Map();
         _this.useTemplateLoader(new TextTemplateLoader());
         _this.addPlugin('template-registry-entry', {
             'fetch': function (address) { return __awaiter(_this, void 0, void 0, function () {
@@ -372,8 +372,7 @@ document.addEventListener('aurelia-started', function () {
     if (window.FUSEBOX_AURELIA_LOADER_HMR || window.FUSEBOX_AURELIA_LOADER_RELOAD) {
         var container = aurelia_dependency_injection_1.Container.instance;
         var aurelia = container.get(aurelia_framework_1.Aurelia);
-        var FuseBoxAureliaHmrPlugin = require('./fuse-box-aurelia-hmr-plugin').FuseBoxAureliaHmrPlugin;
-        FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader, window.FUSEBOX_AURELIA_LOADER_RELOAD));
+        FuseBox.plugins.push(new fuse_box_aurelia_hmr_plugin_1.FuseBoxAureliaHmrPlugin(aurelia.loader, window.FUSEBOX_AURELIA_LOADER_RELOAD));
     }
 });
 //# sourceMappingURL=fuse-box-aurelia-loader.js.map

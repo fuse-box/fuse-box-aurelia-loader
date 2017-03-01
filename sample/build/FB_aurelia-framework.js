@@ -9,7 +9,7 @@ var build = function() {
         plugins: [
             [/\.css$/, fb.RawPlugin({extensions: ['.css']})],
             fb.HTMLPlugin(),
-            fb.TypeScriptHelpers()
+            fb.TypeScriptHelpers(),
         ]
     })
 
