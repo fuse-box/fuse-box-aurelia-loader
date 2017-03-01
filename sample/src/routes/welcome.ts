@@ -14,7 +14,7 @@ export class Welcome {
   constructor(public dummyDataGenerator: DummyDataGenerator) {
 
     //generate some temp data for the grid
-    this.dummyDataGenerator.generateData(10000, (data: any) => {
+    this.dummyDataGenerator.generateData(1000, (data: any) => {
       this.dummydata = data;
     });
 
@@ -28,6 +28,12 @@ export class Welcome {
     this.ds.setArray(this.dummydata);
   }
 
+}
+
+export class UpperValueConverter {
+  public toView(value: any) {
+    return value && value.toLowerCase();
+  }
 }
 
 

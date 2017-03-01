@@ -4,20 +4,16 @@ var build = function() {
     let fuse = fb.FuseBox;
 
     let bundle = fuse.init({
-        package: "fuse-box-aurelia-loader",
-        homeDir: "../src",
+        homeDir: "./src",
         outFile: "./bundle/fb-aurelia-framework-bundle.js",
-        globals: {
-            "fuse-box-aurelia-loader": "fuse-box-aurelia-loader"
-        },
         plugins: [
-            fb.CSSPlugin(),
+            [/\.css$/, fb.RawPlugin({extensions: ['.css']})],
             fb.HTMLPlugin(),
             fb.TypeScriptHelpers()
         ]
     })
 
-    bundle.bundle(`>[fuse-box-aurelia-loader.ts]
+    bundle.bundle(`
     + aurelia-bootstrapper
     + aurelia-framework
     + aurelia-pal
@@ -32,7 +28,8 @@ var build = function() {
     + aurelia-templating-resources 
     + aurelia-event-aggregator 
     + aurelia-history-browser 
-    + aurelia-templating-router`);
+    + aurelia-templating-router
+    + aurelia-hot-module-reload`);
 
 }
 
