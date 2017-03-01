@@ -12,8 +12,14 @@ var build = function() {
             fb.HTMLPlugin({
                 useDefault: true
             }),
-            fb.TypeScriptHelpers()
-        ]
+            fb.TypeScriptHelpers(),
+            fb.SourceMapPlainJsPlugin()
+        ],
+        sourceMap: {
+            bundleReference: "./fb-app-bundle.js.map",
+            outFile: "./bundle/fb-app-bundle.js.map",
+        }
+        
     });
 
     // Start dev server
