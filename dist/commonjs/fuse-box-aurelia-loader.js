@@ -92,11 +92,13 @@ function ensureOriginOnExports(moduleExports, moduleId) {
 }
 exports.ensureOriginOnExports = ensureOriginOnExports;
 function debugPrint(type, title, args) {
-    if (type === 'error') {
-        log.error(title, args);
-    }
-    if (type === 'info') {
-        log.debug(title, args);
+    if (window.FUSEBOX_AURELIA_LOADER_LOGGING) {
+        if (type === 'error') {
+            log.error(title, args);
+        }
+        if (type === 'info') {
+            log.debug(title, args);
+        }
     }
 }
 var FuseBoxAureliaLoader = (function (_super) {

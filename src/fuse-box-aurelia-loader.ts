@@ -65,12 +65,16 @@ export function ensureOriginOnExports(moduleExports: any, moduleId: string) {
 
 declare var FuseBox: any;
 function debugPrint(type: string, title: string, args: any) {
-  if (type === 'error') {
-    log.error(title, args);
-  }
+  if ((<any>window).FUSEBOX_AURELIA_LOADER_LOGGING) {
 
-  if (type === 'info') {
-    log.debug(title, args);
+    if (type === 'error') {
+      log.error(title, args);
+    }
+
+    if (type === 'info') {
+      log.debug(title, args);
+    }
+
   }
 }
 
