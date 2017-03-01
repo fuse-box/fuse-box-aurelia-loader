@@ -7,10 +7,8 @@ export declare class TextTemplateLoader {
 }
 export declare function ensureOriginOnExports(moduleExports: any, moduleId: string): any;
 export declare class FuseBoxAureliaLoader extends Loader {
-    textPluginName: string;
     loaderPlugins: any;
     moduleRegistry: any;
-    templateRegistry: any;
     templateLoader: TextTemplateLoader;
     modulesBeingLoaded: Map<string, Promise<any>>;
     constructor();

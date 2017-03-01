@@ -105,10 +105,9 @@ var FuseBoxAureliaLoader = (function (_super) {
     __extends(FuseBoxAureliaLoader, _super);
     function FuseBoxAureliaLoader() {
         var _this = _super.call(this) || this;
-        _this.textPluginName = 'text';
         _this.loaderPlugins = Object.create(null);
-        _this.modulesBeingLoaded = new Map();
         _this.moduleRegistry = Object.create(null);
+        _this.modulesBeingLoaded = new Map();
         _this.useTemplateLoader(new TextTemplateLoader());
         _this.addPlugin('template-registry-entry', {
             'fetch': function (address) { return __awaiter(_this, void 0, void 0, function () {

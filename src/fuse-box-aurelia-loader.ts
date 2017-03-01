@@ -84,13 +84,9 @@ function debugPrint(type: string, title: string, args: any) {
 * A default implementation of the Loader abstraction which works with SystemJS, RequireJS and Dojo Loader.
 */
 export class FuseBoxAureliaLoader extends Loader {
-  /**
-  * The name of the underlying native loader plugin used to load text.
-  */
-  public textPluginName = 'text';
+
   public loaderPlugins = Object.create(null);
-  public moduleRegistry: any;
-  public templateRegistry: any;
+  public moduleRegistry = Object.create(null);
   public templateLoader: TextTemplateLoader;
   public modulesBeingLoaded = new Map<string, Promise<any>>();
 
@@ -100,7 +96,6 @@ export class FuseBoxAureliaLoader extends Loader {
   */
   constructor() {
     super();
-    this.moduleRegistry = Object.create(null);
 
     this.useTemplateLoader(new TextTemplateLoader());
 
