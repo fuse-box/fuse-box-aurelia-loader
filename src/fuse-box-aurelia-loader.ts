@@ -64,8 +64,20 @@ export function ensureOriginOnExports(moduleExports: any, moduleId: string) {
  */
 
 declare var FuseBox: any;
+
+let env: any;
+try {
+  env = FuseBox.import('process').env;
+} catch (e) {
+  env = {};
+  console.log(e);
+}
+
+let logging = env.FB_AU_LOG || (<any>window).FUSEBOX_AURELIA_LOADER_LOGGING;
+
+
 function debugPrint(type: string, title: string, args: any) {
-  if ((<any>window).FUSEBOX_AURELIA_LOADER_LOGGING) {
+  if (logging) {
 
     if (type === 'error') {
       log.error(title, args);
@@ -109,6 +121,8 @@ export class FuseBoxAureliaLoader extends Loader {
         return entry;
       }
     });
+
+    
 
   }
 
@@ -374,8 +388,21 @@ PLATFORM.Loader = FuseBoxAureliaLoader;
 // listen for aurleia started events
 document.addEventListener('aurelia-started', () => {
 
+  // lets check for en
+  let env: any;
+
+  try {
+    env = FuseBox.import('process').env;
+  } catch (e) {
+    env = {};
+    console.log(e);
+  }
+
+  let hmr = env.FB_AU_HMR || (<any>window).FUSEBOX_AURELIA_LOADER_HMR;
+  let reload = env.FB_AU_RELOAD || (<any>window).FUSEBOX_AURELIA_LOADER_RELOAD;
+
   // if HMR or RELOAD activated
-  if ((<any>window).FUSEBOX_AURELIA_LOADER_HMR || (<any>window).FUSEBOX_AURELIA_LOADER_RELOAD) {
+  if (hmr || reload) {
 
     // get instance
     let container = Container.instance;

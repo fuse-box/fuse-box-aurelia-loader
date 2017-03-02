@@ -91,8 +91,17 @@ function ensureOriginOnExports(moduleExports, moduleId) {
     return moduleExports;
 }
 exports.ensureOriginOnExports = ensureOriginOnExports;
+var env;
+try {
+    env = FuseBox.import('process').env;
+}
+catch (e) {
+    env = {};
+    console.log(e);
+}
+var logging = env.FB_AU_LOG || window.FUSEBOX_AURELIA_LOADER_LOGGING;
 function debugPrint(type, title, args) {
-    if (window.FUSEBOX_AURELIA_LOADER_LOGGING) {
+    if (logging) {
         if (type === 'error') {
             log.error(title, args);
         }
@@ -279,7 +288,17 @@ var FuseBoxAureliaLoader = (function (_super) {
 exports.FuseBoxAureliaLoader = FuseBoxAureliaLoader;
 aurelia_pal_1.PLATFORM.Loader = FuseBoxAureliaLoader;
 document.addEventListener('aurelia-started', function () {
-    if (window.FUSEBOX_AURELIA_LOADER_HMR || window.FUSEBOX_AURELIA_LOADER_RELOAD) {
+    var env;
+    try {
+        env = FuseBox.import('process').env;
+    }
+    catch (e) {
+        env = {};
+        console.log(e);
+    }
+    var hmr = env.FB_AU_HMR || window.FUSEBOX_AURELIA_LOADER_HMR;
+    var reload = env.FB_AU_RELOAD || window.FUSEBOX_AURELIA_LOADER_RELOAD;
+    if (hmr || reload) {
         var container = aurelia_dependency_injection_1.Container.instance;
         var aurelia = container.get(aurelia_framework_1.Aurelia);
         FuseBox.plugins.push(new fuse_box_aurelia_hmr_plugin_1.FuseBoxAureliaHmrPlugin(aurelia.loader, window.FUSEBOX_AURELIA_LOADER_RELOAD));

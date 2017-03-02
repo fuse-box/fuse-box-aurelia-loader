@@ -6,14 +6,19 @@ var build = function() {
     let bundle = fuse.init({
         homeDir: "./src",
         outFile: "./bundle/fb-app-bundle.js",
-        useCache: false,
+        useCache: true,
         plugins: [
             [/\.css$/, fb.RawPlugin({extensions: ['.css']})],
             fb.HTMLPlugin({
                 useDefault: true
             }),
             fb.TypeScriptHelpers(),
-            fb.SourceMapPlainJsPlugin()
+            fb.SourceMapPlainJsPlugin(),
+            fb.EnvPlugin({ 
+                FB_AU_LOG: false,
+                FB_AU_HMR: false,
+                FB_AU_RELOAD: true 
+            })
         ],
         sourceMap: {
             bundleReference: "./fb-app-bundle.js.map",
@@ -28,6 +33,21 @@ var build = function() {
         + [**/*.html] 
         + [**/*.ts] 
         + [**/*.css]
+        + aurelia-bootstrapper
+        + aurelia-framework
+        + aurelia-pal
+        + aurelia-metadata
+        + aurelia-polyfills
+        + aurelia-fetch-client
+        + aurelia-pal-browser
+        + aurelia-animator-css
+        + aurelia-logging-console 
+        + aurelia-templating-binding 
+        + aurelia-templating-resources 
+        + aurelia-event-aggregator 
+        + aurelia-history-browser 
+        + aurelia-templating-router
+        + aurelia-hot-module-reload
         `, {
         root: './'
     })
