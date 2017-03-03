@@ -301,6 +301,6 @@ document.addEventListener('aurelia-started', function () {
     if (hmr || reload) {
         var container = aurelia_dependency_injection_1.Container.instance;
         var aurelia = container.get(aurelia_framework_1.Aurelia);
-        FuseBox.plugins.push(new fuse_box_aurelia_hmr_plugin_1.FuseBoxAureliaHmrPlugin(aurelia.loader, window.FUSEBOX_AURELIA_LOADER_RELOAD));
+        FuseBox.plugins.push(new fuse_box_aurelia_hmr_plugin_1.FuseBoxAureliaHmrPlugin(aurelia.loader, reload));
     }
 });

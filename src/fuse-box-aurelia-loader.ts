@@ -409,6 +409,6 @@ document.addEventListener('aurelia-started', () => {
     let aurelia = container.get(Aurelia);
 
     // create and push plugin
-    FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader as any, (<any>window).FUSEBOX_AURELIA_LOADER_RELOAD));
+    FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader as any, reload));
   }
 });
