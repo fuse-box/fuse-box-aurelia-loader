@@ -1,7 +1,7 @@
 {
   "name": "fuse-box-aurelia-loader",
   "version": "1.0.2",
-  "description": "Fuse-Box loader for Aurleia framework",
+  "description": "Fuse-Box loader for Aurelia framework",
   "keywords": [
     "aurelia",
     "fuse-box-bundler",

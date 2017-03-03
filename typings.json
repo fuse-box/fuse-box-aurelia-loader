@@ -1,6 +1,6 @@
 {
   "name": "fuse-box-aurelia-loader",
-  "main": "dist/commonjs/index.d.ts",
+  "main": "dist/commonjs/fuse-box-aurelia-loader.d.ts",
   "dependencies": {
     "aurelia-binding": "github:aurelia/binding",
     "aurelia-bootstrapper": "github:aurelia/bootstrapper",
