@@ -7,16 +7,18 @@ export class FuseBoxAureliaHmrPlugin {
     private context: any;
     private reloadPageOnly: boolean;
     private timer: number;
+    private loader: any;
     constructor(loader: FuseBoxAureliaLoader, reloadPageOnly: boolean) {
         if (!reloadPageOnly) {
             // no need to have this if they are using the reload only
             let HmrContext = require('aurelia-hot-module-reload').HmrContext;
             this.context = new HmrContext(loader);
+            this.loader = loader;
         }
         this.reloadPageOnly = reloadPageOnly;
     }
 
-    public async hmrUpdate(data: any): Promise<boolean> {
+    public hmrUpdate(data: any): boolean {
 
         if (this.reloadPageOnly) {
 
@@ -39,12 +41,18 @@ export class FuseBoxAureliaHmrPlugin {
 
                 // call Aurelia HMR module
                 if (data.path.indexOf('.html') >= 0) {
-                    await this.context.handleViewChange(data.path);
+                    this.context.handleViewChange(data.path); // <- returns promise...
                     return true;
                 } else {
-                    let moduleId = data.path.substr(0, data.path.length - 3); // remove .js
-                    await this.context.handleModuleChange(moduleId, {});
-                    return true;
+                    if (data.path.indexOf('.css') >= 0) {
+                        this.loader.moduleRegistry[data.path] = true; // need to have this module without css-resouses!
+                        this.context.reloadCss(data.path);
+                        return true;
+                    } else {
+                        let moduleId = data.path.substr(0, data.path.length - 3); // remove .js
+                        this.context.handleModuleChange(moduleId, {}); // <- returns promise...
+                        return true;
+                    }
                 }
             }
         }
