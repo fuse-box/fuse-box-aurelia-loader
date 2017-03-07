@@ -262,6 +262,10 @@ var FuseBoxAureliaLoader = (function (_super) {
                             var resources = Object.keys(FuseBox.packages[moduleId].f);
                             var resourceName_1 = path.replace(moduleId + "/", '');
                             var resourceEntry = resources.find(function (r) { return r.endsWith(resourceName_1 + '.js'); });
+                            var resourceEntryCheck = resources.find(function (r) { return r.endsWith('/' + resourceName_1 + '.js'); });
+                            if (resourceEntry !== resourceEntryCheck) {
+                                resourceEntry = resourceEntryCheck;
+                            }
                             retunValue = moduleId + "/" + resourceEntry;
                         }
                         if (!this.fuseBoxExist(retunValue)) {
