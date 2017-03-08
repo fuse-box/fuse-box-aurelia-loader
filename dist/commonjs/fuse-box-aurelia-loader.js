@@ -259,14 +259,10 @@ var FuseBoxAureliaLoader = (function (_super) {
                         var moduleId = Object.keys(FuseBox.packages)
                             .find(function (name) { return path.startsWith(name + "/"); });
                         if (moduleId) {
-                            var resources = Object.keys(FuseBox.packages[moduleId].f);
-                            var resourceName_1 = path.replace(moduleId + "/", '');
-                            var resourceEntry = resources.find(function (r) { return r.endsWith(resourceName_1 + '.js'); });
-                            var resourceEntryCheck = resources.find(function (r) { return r.endsWith('/' + resourceName_1 + '.js'); });
-                            if (resourceEntry !== resourceEntryCheck) {
-                                resourceEntry = resourceEntryCheck;
-                            }
-                            retunValue = moduleId + "/" + resourceEntry;
+                            var parentEntry = FuseBox.packages[moduleId].s.entry;
+                            var resourceName = path.replace(moduleId, '');
+                            var entry = parentEntry.replace(/\/([^\/]+)\/?$/, resourceName);
+                            return moduleId + "/" + entry;
                         }
                         if (!this.fuseBoxExist(retunValue)) {
                             debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
