@@ -122,7 +122,7 @@ export class FuseBoxAureliaLoader extends Loader {
       }
     });
 
-    
+
 
   }
 
@@ -345,17 +345,10 @@ export class FuseBoxAureliaLoader extends Loader {
               .find(name => path.startsWith(`${name}/`));
 
             if (moduleId) {
-              let resources = Object.keys(FuseBox.packages[moduleId].f);
-              let resourceName = path.replace(`${moduleId}/`, '');
-              let resourceEntry = resources.find(r => r.endsWith(resourceName + '.js'));
-
-              // fix for if resources is ending the same... this will fail if many sub folders and same file name
-              // todo: improve, get root of package commonjs file to be sure.
-              let resourceEntryCheck = resources.find(r => r.endsWith('/' + resourceName + '.js'));
-              if (resourceEntry !== resourceEntryCheck) {
-                resourceEntry = resourceEntryCheck;
-              }
-              retunValue = `${moduleId}/${resourceEntry}`;
+              let parentEntry = FuseBox.packages[moduleId].s.entry;
+              let resourceName = path.replace(moduleId, '');
+              let entry = parentEntry.replace(/\/([^\/]+)\/?$/, resourceName);
+              return `${moduleId}/${entry}`;
             }
 
             if (!this.fuseBoxExist(retunValue)) {
