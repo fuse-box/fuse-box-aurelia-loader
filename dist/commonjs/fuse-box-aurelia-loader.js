@@ -262,7 +262,7 @@ var FuseBoxAureliaLoader = (function (_super) {
                             var parentEntry = FuseBox.packages[moduleId].s.entry;
                             var resourceName = path.replace(moduleId, '');
                             var entry = parentEntry.replace(/\/([^\/]+)\/?$/, resourceName);
-                            return moduleId + "/" + entry;
+                            retunValue = moduleId + "/" + entry;
                         }
                         if (!this.fuseBoxExist(retunValue)) {
                             debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
