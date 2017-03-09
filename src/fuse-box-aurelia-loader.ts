@@ -348,7 +348,7 @@ export class FuseBoxAureliaLoader extends Loader {
               let parentEntry = FuseBox.packages[moduleId].s.entry;
               let resourceName = path.replace(moduleId, '');
               let entry = parentEntry.replace(/\/([^\/]+)\/?$/, resourceName);
-              return `${moduleId}/${entry}`;
+              retunValue = `${moduleId}/${entry}`;
             }
 
             if (!this.fuseBoxExist(retunValue)) {
