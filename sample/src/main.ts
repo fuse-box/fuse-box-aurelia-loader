@@ -1,18 +1,19 @@
+(<any>window).FUSEBOX_AURELIA_LOADER_RELOAD = true;
+(<any>window).FUSEBOX_AURELIA_LOADER_LOGGING = true;
 
-// add custom loader for fuse
+import { Aurelia } from 'aurelia-framework';
 import 'fuse-box-aurelia-loader';
-
-// start aurelia bootstrapper
 import 'aurelia-bootstrapper';
 
-
-
-// aurelia configuration
-export function configure(aurelia) {
+export async function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
-    .developmentLogging()
-    .plugin("aurelia-v-grid");
+    .developmentLogging();
 
-  aurelia.start().then(() => aurelia.setRoot());
+  aurelia.use.plugin('aurelia-materialize-bridge', (b: any) => b.useAll().preventWavesAttach());
+
+  // (<any>window).Waves = {};
+
+  await aurelia.start();
+  await aurelia.setRoot('app');
 }

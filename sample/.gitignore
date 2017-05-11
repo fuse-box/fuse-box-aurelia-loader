@@ -1,4 +1,7 @@
+# Dependency directories
 node_modules
-.fusebox
-bundle
 
+#fusebox cache
+.fusebox
+
+dist/*

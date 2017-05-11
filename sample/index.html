@@ -1,29 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Aurelia</title>
+    <title>Welcome to Aurelia with FuseBox</title>
+    <link href="./styles/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 
-    <!--load jquery and bootstrap and styles... just to make it look nice..-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
-
-  </head>
-
-   <body aurelia-app="main">
-     <div class="splash">
-      <div class="message">Aurelia Navigation Skeleton</div>
-      <i class="fa fa-spinner fa-spin"></i>
-    </div>
-     
-    <!--Load our bundles-->
-    <!--<script src="./bundle/fb-aurelia-framework-bundle.js"></script>  issue with process getting added... -->
-    <script src="./bundle/fuse-box-aurelia-loader/fb-fuse-box-aurelia-loader-bundle.js"></script>
-    <script src="./bundle/aurelia-v-grid/fb-aurelia-v-grid-bundle.js"></script>
-    <script src="./bundle/fb-app-bundle.js"></script>
-    
-    
-  </body>
+<body aurelia-app="main">
+    <script type="text/javascript" charset="utf-8" src="./dist/fuse-box-aurelia-loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="./dist/vendor.js"></script>
+    <script type="text/javascript" charset="utf-8" src="./dist/app.js"></script>
+</body>
 </html>
