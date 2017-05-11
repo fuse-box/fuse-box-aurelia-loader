@@ -1,16 +1,17 @@
-import {Router, RouterConfiguration} from 'aurelia-router';
+import { Router, RouterConfiguration } from 'aurelia-router';
 
 export class App {
-  public router: Router;
+    public router: Router;
 
-  public configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = 'FuseBox-Aurelia-loader';
-    config.map([
-      { route: ['', 'welcome'], name: 'welcome',      moduleId: './routes/welcome',      nav: true, title: 'Welcome' },
-      { route: 'users',         name: 'users',        moduleId: './routes/users',        nav: true, title: 'Github Users' },
-      { route: 'child-router',  name: 'child-router', moduleId: './routes/child-router', nav: true, title: 'Child Router' }
-    ]);
+    public configureRouter(config: RouterConfiguration, router: Router) {
+        config.title = 'Aurelia';
+        config.map([
+            { route: ['', 'welcome'], name: 'welcome', moduleId: './routes/welcome', nav: true, title: 'Fusebox Aurelia Seed' },
+            { route: 'aurelia-materialize-bridge', name: 'mat-bridge', moduleId: './routes/mat-bridge', nav: true, title: 'Materialize-Bridge' },
+            { route: 'aurelia-kendoui-bridge', name: 'kendo-bridge', moduleId: './routes/kendo-bridge', nav: true, title: 'KendoUi-Bridge' },
+            { route: 'v-grid', name: 'v-grid', moduleId: './routes/v-grid', nav: true, title: 'V-Grid' }
+        ]);
 
-    this.router = router;
-  }
+        this.router = router;
+    }
 }

@@ -1,30 +1,18 @@
-<template bindable="router">
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle Navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">
-        <i class="fa fa-home"></i>
-        <span>${router.title}</span>
-      </a>
-    </div>
+<template>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Fusebox</a>
+            <ul class="right hide-on-med-and-down">
+                <li repeat.for="row of router.navigation" md-waves>
+                    <a href.bind="row.href" class="${ row.isActive ? 'active' : '' }">${row.title}</a>
+                </li>
+            </ul>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
-          <a data-toggle="collapse" data-target="#bs-example-navbar-collapse-1.in" href.bind="row.href">${row.title}</a>
-        </li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li class="loader" if.bind="router.isNavigating">
-          <i class="fa fa-spinner fa-spin fa-2x"></i>
-        </li>
-      </ul>
-    </div>
-  </nav>
+            <ul id="nav-mobile" class="side-nav">
+                <li repeat.for="row of router.navigation">
+                    <a href.bind="row.href" class="${ row.isActive ? 'active' : '' }">${row.title}</a>
+                </li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
 </template>

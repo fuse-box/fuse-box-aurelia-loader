@@ -1,13 +1,13 @@
-# aurelia-fusebox-test
+# fuse-box-aurelia-seed
 
-# info
-* Added plugin with custom html/attributes to test that it loads
-
-#Install:
+## How to install:
 ```npm install```
 
-#run
-```node fuse```
+## How to run:
+```npm run start```
 
-#demo
-https://vegarringdal.github.io/aurelia-fusebox-test/
+## Live Demo:
+[live sample](https://fuse-box.github.io/fuse-box-aurelia-seed/)
+
+## Loader used:
+[fuse-box-aurelia-loader](https://github.com/fuse-box/fuse-box-aurelia-loader)
