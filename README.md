@@ -1,27 +1,29 @@
 # fuse-box-aurelia-loader
 
-###How to install
+### How to install
 ```npm install git://github.com/fuse-box/fuse-box-aurelia-loader```
 
 
-###Sample
+### How to use
 
 ```javascript
 
 // optional..
 // activate logging (when aurelia developmentLogging is used)
+// have this as optional, since it prints out a lot.
 window.FUSEBOX_AURELIA_LOADER_LOGGING = true; 
 
 
-//These can also be set by using the "EnvPlugin" in fuse.
-//fb.EnvPlugin({ 
+//These can also be set by using the "EnvPlugin" in fuse build setup
+// EnvPlugin({ 
 //    FB_AU_LOG: false,
 //})
 
-// if you are having issues check console for FuseBox.import("process").env to make sure it set
+// TIP: If you are having issues check console for FuseBox.import("process").env to make sure it set
 
 
-// the next 2 import statements can be replaced by plugin, see "autoLoadAureliaLoaders" in next code block
+// The next 2 import statements can be replaced by plugin in your fuse build setup
+// See "autoLoadAureliaLoaders" in next code block
 // add custom loader for fuse
 import 'fuse-box-aurelia-loader';
 // start aurelia bootstrapper
@@ -39,6 +41,7 @@ export function configure(aurelia) {
 ```
 
 
+### Plugin sample
 Simple auto load plugin to inject the loaders
 
 ```javascript
@@ -51,7 +54,10 @@ var autoLoadAureliaLoaders =function() {
     }
     return new loader();
 }
-
-
-
 ```
+
+
+### How to develop/improve loader
+ * run `node setup` to to npm install in root and sample folder
+ * run `gulp watch` to start sample
+ * run `gulp build` to create new build
