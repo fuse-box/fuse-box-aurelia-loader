@@ -1,6 +1,6 @@
 {
   "name": "fuse-box-aurelia-seed",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Fuse box sample on aurelia",
   "scripts": {
     "start": "node fuse run"
@@ -22,17 +22,15 @@
     "aurelia-task-queue": "^1.2.0",
     "aurelia-templating": "^1.4.2",
     "bluebird": "^3.5.0",
-    "fuse-box": "^2.0.0",
+    "fuse-box": "^2.2.0-beta.22",
     "fuse-box-aurelia-loader": "git://github.com/fuse-box/fuse-box-aurelia-loader.git",
-    "fuse-box-typechecker": "git://github.com/fuse-box/fuse-box-typechecker.git",
+    "fuse-box-typechecker": "git://github.com/vegarringdal/fuse-box-typechecker.git",
     "less": "^2.7.2",
     "source-map": "^0.5.6",
     "stylus": "^0.54.5",
-    "tslint": "^5.2.0",
-    "typescript": "2.3.2",
-    "whatwg-fetch": "^2.0.2"
-  },
-  "dependencies": {
+    "tslint": "^5.4.3",
+    "typescript": "2.3.4",
+    "whatwg-fetch": "^2.0.3",
     "aurelia-materialize-bridge": "^0.28.0",
     "materialize-css": "^0.98.2"
   }

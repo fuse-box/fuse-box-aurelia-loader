@@ -17,8 +17,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t;
-    return { next: verb(0), "throw": verb(1), "return": verb(2) };
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -48,9 +48,6 @@ var aurelia_metadata_1 = require("aurelia-metadata");
 var aurelia_loader_1 = require("aurelia-loader");
 var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_logging_1 = require("aurelia-logging");
-var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
-var aurelia_framework_1 = require("aurelia-framework");
-var fuse_box_aurelia_hmr_plugin_1 = require("./fuse-box-aurelia-hmr-plugin");
 var log = aurelia_logging_1.getLogger('fuse-box-aurelia-loader');
 var TextTemplateLoader = (function () {
     function TextTemplateLoader() {
@@ -60,11 +57,11 @@ var TextTemplateLoader = (function () {
             var text;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, loader.loadText(entry.address)];
+                    case 0: return [4, loader.loadText(entry.address)];
                     case 1:
                         text = _a.sent();
                         entry.template = aurelia_pal_1.DOM.createTemplateFromMarkup(text);
-                        return [2 /*return*/];
+                        return [2];
                 }
             });
         });
@@ -126,12 +123,12 @@ var FuseBoxAureliaLoader = (function (_super) {
                         case 0:
                             debugPrint('info', 'template-registry-entry- fetch =>', address);
                             entry = this.getOrCreateTemplateRegistryEntry(address);
-                            if (!!entry.templateIsLoaded) return [3 /*break*/, 2];
-                            return [4 /*yield*/, this.templateLoader.loadTemplate(this, entry)];
+                            if (!!entry.templateIsLoaded) return [3, 2];
+                            return [4, this.templateLoader.loadTemplate(this, entry)];
                         case 1:
                             _a.sent();
                             _a.label = 2;
-                        case 2: return [2 /*return*/, entry];
+                        case 2: return [2, entry];
                     }
                 });
             }); }
@@ -173,20 +170,20 @@ var FuseBoxAureliaLoader = (function (_super) {
                         debugPrint('info', 'loadModule => ', moduleId);
                         existing = this.moduleRegistry[moduleId];
                         if (existing) {
-                            return [2 /*return*/, existing];
+                            return [2, existing];
                         }
                         beingLoaded = this.modulesBeingLoaded.get(moduleId);
                         if (beingLoaded) {
-                            return [2 /*return*/, beingLoaded];
+                            return [2, beingLoaded];
                         }
                         beingLoaded = this._import(moduleId);
                         this.modulesBeingLoaded.set(moduleId, beingLoaded);
-                        return [4 /*yield*/, beingLoaded];
+                        return [4, beingLoaded];
                     case 1:
                         moduleExports = _a.sent();
                         this.moduleRegistry[moduleId] = ensureOriginOnExports(moduleExports, moduleId);
                         this.modulesBeingLoaded.delete(moduleId);
-                        return [2 /*return*/, moduleExports];
+                        return [2, moduleExports];
                 }
             });
         });
@@ -202,25 +199,39 @@ var FuseBoxAureliaLoader = (function (_super) {
     ;
     FuseBoxAureliaLoader.prototype._import = function (address) {
         return __awaiter(this, void 0, void 0, function () {
-            var addressParts, moduleId, loaderPlugin, plugin, module;
+            var addressParts, moduleId, loaderPlugin, plugin, err_1, modulePath, module;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         addressParts = address.split('!');
                         moduleId = addressParts.splice(addressParts.length - 1, 1)[0];
                         loaderPlugin = addressParts.length === 1 ? addressParts[0] : null;
-                        if (!loaderPlugin) return [3 /*break*/, 2];
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 4, , 5]);
+                        if (!loaderPlugin) return [3, 3];
                         plugin = this.loaderPlugins[loaderPlugin];
                         if (!plugin) {
                             throw new Error("Plugin " + loaderPlugin + " is not registered in the loader.");
                         }
-                        return [4 /*yield*/, plugin.fetch(moduleId)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                    case 2:
-                        module = this.loadWithFusebox(this.findFuseBoxPath(moduleId));
-                        module = ensureOriginOnExports(module, moduleId);
-                        this.moduleRegistry[moduleId] = module;
-                        return [2 /*return*/, Promise.resolve(module)];
+                        return [4, plugin.fetch(moduleId)];
+                    case 2: return [2, _a.sent()];
+                    case 3: return [3, 5];
+                    case 4:
+                        err_1 = _a.sent();
+                        throw new Error("\n        Fusebox-loader _import() telling this not registered in the loader:" + address + ", module id was: " + moduleId + "\n        Did you forget to add it to bundle?\n\n        " + err_1 + "\n      ");
+                    case 5:
+                        modulePath = this.findFuseBoxPath(moduleId);
+                        try {
+                            module = this.loadWithFusebox(modulePath);
+                            module = ensureOriginOnExports(module, moduleId);
+                            this.moduleRegistry[moduleId] = module;
+                            return [2, Promise.resolve(module)];
+                        }
+                        catch (err) {
+                            throw new Error("\n        Fusebox-loader _import() telling this not registered in the loader:" + address + ", module path returned: " + modulePath + "\n        Did you forget to add it to bundle?\n\n        " + err + "\n      ");
+                        }
+                        return [2];
                 }
             });
         });
@@ -265,7 +276,8 @@ var FuseBoxAureliaLoader = (function (_super) {
                             retunValue = moduleId + "/" + entry;
                         }
                         if (!this.fuseBoxExist(retunValue)) {
-                            debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
+                            debugPrint('error', 'findFuseBoxPath() failed to find', path);
+                            throw new Error("\n                fusebox-loader - findFuseBoxPath() failed to find:" + path + "\n                Did you forget to add it to bundle??\n\n                ");
                         }
                 }
                 break;
@@ -278,7 +290,8 @@ var FuseBoxAureliaLoader = (function (_super) {
                         retunValue = '~/' + path;
                         break;
                     default:
-                        debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
+                        debugPrint('error', 'findFuseBoxPath() failed to find', path);
+                        throw new Error("\n                fusebox-loader - findFuseBoxPath() failed to find:" + path + "\n                Did you forget to add it to bundle??\n\n                ");
                 }
         }
         return retunValue;
@@ -287,20 +300,3 @@ var FuseBoxAureliaLoader = (function (_super) {
 }(aurelia_loader_1.Loader));
 exports.FuseBoxAureliaLoader = FuseBoxAureliaLoader;
 aurelia_pal_1.PLATFORM.Loader = FuseBoxAureliaLoader;
-document.addEventListener('aurelia-started', function () {
-    var env;
-    try {
-        env = FuseBox.import('process').env;
-    }
-    catch (e) {
-        env = {};
-        console.log(e);
-    }
-    var hmr = env.FB_AU_HMR || window.FUSEBOX_AURELIA_LOADER_HMR;
-    var reload = env.FB_AU_RELOAD || window.FUSEBOX_AURELIA_LOADER_RELOAD;
-    if (hmr || reload) {
-        var container = aurelia_dependency_injection_1.Container.instance;
-        var aurelia = container.get(aurelia_framework_1.Aurelia);
-        FuseBox.plugins.push(new fuse_box_aurelia_hmr_plugin_1.FuseBoxAureliaHmrPlugin(aurelia.loader, reload));
-    }
-});

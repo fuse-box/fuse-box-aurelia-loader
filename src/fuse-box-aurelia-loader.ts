@@ -2,11 +2,7 @@ import { Origin } from 'aurelia-metadata';
 import { Loader, TemplateRegistryEntry } from 'aurelia-loader';
 import { PLATFORM, DOM } from 'aurelia-pal';
 import { getLogger, Logger } from 'aurelia-logging';
-import { Container } from 'aurelia-dependency-injection';
-import { Aurelia } from 'aurelia-framework';
-import { FuseBoxAureliaHmrPlugin } from './fuse-box-aurelia-hmr-plugin';
 export type LoaderPlugin = { fetch: (address: string) => Promise<TemplateRegistryEntry> | TemplateRegistryEntry };
-
 const log: Logger = getLogger('fuse-box-aurelia-loader');
 
 
@@ -253,20 +249,38 @@ export class FuseBoxAureliaLoader extends Loader {
     const moduleId = addressParts.splice(addressParts.length - 1, 1)[0];
     const loaderPlugin = addressParts.length === 1 ? addressParts[0] : null;
 
-    if (loaderPlugin) {
-      const plugin = this.loaderPlugins[loaderPlugin];
-      if (!plugin) {
-        throw new Error(`Plugin ${loaderPlugin} is not registered in the loader.`);
+    try {
+      if (loaderPlugin) {
+        const plugin = this.loaderPlugins[loaderPlugin];
+        if (!plugin) {
+          throw new Error(`Plugin ${loaderPlugin} is not registered in the loader.`);
+        }
+        return await plugin.fetch(moduleId);
       }
-      return await plugin.fetch(moduleId);
+    } catch (err) {
+      throw new Error(`
+        Fusebox-loader _import() telling this not registered in the loader:${address}, module id was: ${moduleId}
+        Did you forget to add it to bundle?
+
+        ${err}
+      `);
     }
 
     // not loader plugin....
-    let module = this.loadWithFusebox(this.findFuseBoxPath(moduleId));
-    module = ensureOriginOnExports(module, moduleId);
-    this.moduleRegistry[moduleId] = module;
-    return Promise.resolve(module);
+    let modulePath = this.findFuseBoxPath(moduleId);
+    try {
+      let module = this.loadWithFusebox(modulePath);
+      module = ensureOriginOnExports(module, moduleId);
+      this.moduleRegistry[moduleId] = module;
+      return Promise.resolve(module);
+    } catch (err) {
+      throw new Error(`
+        Fusebox-loader _import() telling this not registered in the loader:${address}, module path returned: ${modulePath}
+        Did you forget to add it to bundle?
 
+        ${err}
+      `);
+    }
 
   }
 
@@ -352,7 +366,12 @@ export class FuseBoxAureliaLoader extends Loader {
             }
 
             if (!this.fuseBoxExist(retunValue)) {
-              debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
+              debugPrint('error', 'findFuseBoxPath() failed to find', path);
+              throw new Error(`
+                fusebox-loader - findFuseBoxPath() failed to find:${path}
+                Did you forget to add it to bundle??
+
+                `);
             }
 
         }
@@ -369,8 +388,12 @@ export class FuseBoxAureliaLoader extends Loader {
             retunValue = '~/' + path;
             break;
           default:
-            debugPrint('error', 'findFuseBoxPath() failed to find', arguments);
+            debugPrint('error', 'findFuseBoxPath() failed to find', path);
+            throw new Error(`
+                fusebox-loader - findFuseBoxPath() failed to find:${path}
+                Did you forget to add it to bundle??
 
+                `);
         }
     }
 
@@ -380,35 +403,4 @@ export class FuseBoxAureliaLoader extends Loader {
 
 }
 
-
-
 PLATFORM.Loader = FuseBoxAureliaLoader;
-
-
-// listen for aurleia started events
-document.addEventListener('aurelia-started', () => {
-
-  // lets check for en
-  let env: any;
-
-  try {
-    env = FuseBox.import('process').env;
-  } catch (e) {
-    env = {};
-    console.log(e);
-  }
-
-  let hmr = env.FB_AU_HMR || (<any>window).FUSEBOX_AURELIA_LOADER_HMR;
-  let reload = env.FB_AU_RELOAD || (<any>window).FUSEBOX_AURELIA_LOADER_RELOAD;
-
-  // if HMR or RELOAD activated
-  if (hmr || reload) {
-
-    // get instance
-    let container = Container.instance;
-    let aurelia = container.get(Aurelia);
-
-    // create and push plugin
-    FuseBox.plugins.push(new FuseBoxAureliaHmrPlugin(aurelia.loader as any, reload));
-  }
-});

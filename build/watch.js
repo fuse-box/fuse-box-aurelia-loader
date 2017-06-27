@@ -1,3 +1,19 @@
+var gulp = require('gulp');
+var path = require('path');
+var runSequence = require('run-sequence');
+var autoLoadAureliaLoaders =function() {
+    var loader = function(){}
+    loader.prototype.init = function(context) {}
+    loader.prototype.bundleEnd = function(context) {
+        context.source.addContent(`FuseBox.import("fuse-box-aurelia-loader")`);
+        context.source.addContent(`FuseBox.import("aurelia-bootstrapper")`);
+    }
+    return new loader();
+}
+
+// so fusebox uses correct path
+process.env.PROJECT_ROOT = path.resolve(process.cwd(), './sample/')
+
 // builtin plugins
 const {
     RawPlugin,
@@ -5,34 +21,58 @@ const {
     HTMLPlugin,
     CSSPlugin,
     Sparky
-} = require("fuse-box");
+} = require("../sample/node_modules/fuse-box");
+
+var TypeHelper = require('../sample/node_modules/fuse-box-typechecker').TypeHelper
 
 
+gulp.task('copy-fonts', () => {
+    return gulp.src('node_modules/materialize-css/dist/fonts/**/**.**')
+        .pipe(gulp.dest('fonts/'));
+});
 
 
+// sample typechecker
+gulp.task('sample-typechecker', function () {
+    // set correct dir first..
+    process.chdir('./sample');
+    var testWatch = TypeHelper({
+        tsConfig: './tsconfig.json',
+        name: 'Sample Watch'
+    })
+    testWatch.runWatch('./src')
+    return true;
+});
 
-Sparky.task('copy-fonts', () => {
-    Sparky.src('node_modules/materialize-css/dist/fonts/**/**.**')
-        .dest('fonts/');
+
+gulp.task('plugin-typechecker', function () {
+    // set correct dir first..
+
+    var testWatch = TypeHelper({
+        tsConfig: './tsconfig.json',
+        name: 'Plugin Watch'
+    })
+    testWatch.runWatch('./src')
+    return true;
 });
 
 
 
+// this task will start fusebox
+gulp.task('fuse-sample', function () {
 
-
-Sparky.task('dev', () => {
-    // typechecker (minor bug first time when caching vendor bundle, its on my todo list(vegar)... just need to talk to fusebox team..)
-    const TypeCheckPlugin = require('fuse-box-typechecker').TypeCheckPlugin;
+    // init fusebox
     const fuse = FuseBox.init({
         homeDir: './src',
         output: './dist/$name.js',
         plugins: [
-            TypeCheckPlugin(),
+            autoLoadAureliaLoaders(),
             CSSPlugin(),
             HTMLPlugin(),
-            RawPlugin(['.css', '.woff'])
+            RawPlugin(['.css'])
         ]
     });
+
 
     fuse.register('materialize-css-styles', {
         homeDir: 'node_modules/materialize-css/dist/css',
@@ -48,7 +88,7 @@ Sparky.task('dev', () => {
         instructions: '**/*.{html,css,js}'
     });
 
-
+    // vendor bundle
     fuse.bundle("vendor")
         .cache(true)
         .instructions(` 
@@ -61,6 +101,7 @@ Sparky.task('dev', () => {
         + aurelia-fetch-client
         + aurelia-pal-browser
         + aurelia-animator-css
+        + fuse-box-css
         + aurelia-logging-console 
         + aurelia-templating-binding 
         + aurelia-templating-resources 
@@ -68,8 +109,8 @@ Sparky.task('dev', () => {
         + aurelia-history-browser 
         + aurelia-templating-router
         + aurelia-materialize-bridge
-        + materialize-css-styles`)
-        .alias({
+        + materialize-css-styles
+        `).alias({
             'jQuery': 'jquery'
         })
         .shim({
@@ -93,30 +134,24 @@ Sparky.task('dev', () => {
             + [**/*.{ts,html,css}]
         `);
 
-
-
+    // web server    
     fuse.dev({
         root: './'
     });
-    fuse.run();
+
+    // run
+    return fuse.run()
 });
 
 
+// this task will start fusebox
+gulp.task('fuse-plugin', function () {
 
-
-
-Sparky.task('loader', () => {
-    // typechecker (minor bug first time when caching vendor bundle, its on my todo list(vegar)... just need to talk to fusebox team..)
-    const TypeCheckPlugin = require('fuse-box-typechecker').TypeCheckPlugin;
+    // package init
     const fuse = FuseBox.init({
         homeDir: '../src',
         output: './dist/$name.js',
-        plugins: [
-            TypeCheckPlugin(),
-            CSSPlugin(),
-            HTMLPlugin(),
-            RawPlugin(['.css', '.woff'])
-        ],
+        plugins: [],
         package: {
             name: "fuse-box-aurelia-loader",
             main: "fuse-box-aurelia-loader.ts"
@@ -124,23 +159,22 @@ Sparky.task('loader', () => {
     });
 
 
-    // app bundle
-    // todo, we need to have vendor bundle and app bundle...
+    // plugin bundle
     fuse.bundle('fuse-box-aurelia-loader')
         .watch().cache(false)
         .instructions(`
             [*.ts]
-           
         `).sourceMaps(true);
 
 
-
-
-    fuse.run();
+    //build file    
+    return fuse.run();
 });
 
 
-// run dev and loader build in parallell
-Sparky.task("run", ["&loader", "&dev"], () => {
-
+// this task will start fusebox
+gulp.task('watch', function () {
+    return runSequence(
+        'fuse-plugin', 'fuse-sample', 'plugin-typechecker', 'sample-typechecker', 'copy-fonts'
+    );
 });
