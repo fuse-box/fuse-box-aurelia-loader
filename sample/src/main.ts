@@ -1,5 +1,3 @@
-(<any>window).FUSEBOX_AURELIA_LOADER_LOGGING = true;
-
 import { Aurelia } from 'aurelia-framework';
 
 

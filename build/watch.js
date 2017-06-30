@@ -5,6 +5,7 @@ var autoLoadAureliaLoaders =function() {
     var loader = function(){}
     loader.prototype.init = function(context) {}
     loader.prototype.bundleEnd = function(context) {
+        context.source.addContent(`window.FUSEBOX_AURELIA_LOADER_LOGGING = true;`);
         context.source.addContent(`FuseBox.import("fuse-box-aurelia-loader")`);
         context.source.addContent(`FuseBox.import("aurelia-bootstrapper")`);
     }
@@ -23,22 +24,24 @@ const {
     Sparky
 } = require("../sample/node_modules/fuse-box");
 
+// typehelper
 var TypeHelper = require('../sample/node_modules/fuse-box-typechecker').TypeHelper
 
 
+//copy fonts needed
 gulp.task('copy-fonts', () => {
-    return gulp.src('node_modules/materialize-css/dist/fonts/**/**.**')
-        .pipe(gulp.dest('fonts/'));
+    gulp.src('./sample/node_modules/materialize-css/dist/fonts/**/*.*')
+        .pipe(gulp.dest('./sample/fonts'));
 });
 
 
 // sample typechecker
 gulp.task('sample-typechecker', function () {
-    // set correct dir first..
-    process.chdir('./sample');
+
     var testWatch = TypeHelper({
         tsConfig: './tsconfig.json',
-        name: 'Sample Watch'
+        name: 'Sample Watch',
+        basePath:'./sample'
     })
     testWatch.runWatch('./src')
     return true;
@@ -46,11 +49,11 @@ gulp.task('sample-typechecker', function () {
 
 
 gulp.task('plugin-typechecker', function () {
-    // set correct dir first..
 
     var testWatch = TypeHelper({
         tsConfig: './tsconfig.json',
-        name: 'Plugin Watch'
+        name: 'Plugin Watch',
+        basePath:'.'
     })
     testWatch.runWatch('./src')
     return true;
