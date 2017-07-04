@@ -1,5 +1,16 @@
 # fuse-box-aurelia-loader
 
+
+### Note
+
+Some features of Fusebox can not be used with this Aurelia loader
+ * [rollup](http://fuse-box.org/page/rollup)
+ * [quantum](http://fuse-box.org/page/quantum)
+ * [code splitting](http://fuse-box.org/page/code-splitting)
+
+Some of these might get added later, feel free to make PR to make these work.
+
+
 ### How to install
 ```npm install git://github.com/fuse-box/fuse-box-aurelia-loader```
 
@@ -20,6 +31,8 @@ window.FUSEBOX_AURELIA_LOADER_LOGGING = true;
 //})
 
 // TIP: If you are having issues check console for FuseBox.import("process").env to make sure it set
+// See "autoLoadAureliaLoaders" in next code block in injecting during bundle
+
 
 
 // The next 2 import statements can be replaced by plugin in your fuse build setup

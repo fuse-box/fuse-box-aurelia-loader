@@ -31,12 +31,12 @@
     "gulp-plumber": "^1.1.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-typescript": "^3.1.7",
-    "merge2": "^1.0.3",
+    "merge2": "^1.1.0",
     "require-dir": "^0.3.2",
-    "run-sequence": "^1.2.2",
+    "run-sequence": "^2.0.0",
     "typings": "^2.1.1",
     "tslint": "^5.4.3",
-    "typescript": "^2.3.4",
+    "typescript": "^2.4.1",
     "vinyl-paths": "^2.1.0"
   }
 }
