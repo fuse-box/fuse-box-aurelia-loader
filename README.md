@@ -69,6 +69,33 @@ var autoLoadAureliaLoaders =function() {
 }
 ```
 
+Want browser to refresh when u make edits? (important!!! need hmr() and cache(true) on app bundle)
+``` javascript
+var autoReload = function (production) {
+    var autoReload = function () {}
+    autoReload.prototype.init = function () { }
+    autoReload.prototype.bundleEnd = function () {
+        context.source.addContent(`
+            const customizedHMRPlugin = {
+                hmrUpdate: ({ type, path, content }) => {
+                    console.log("reload plugin trigger")
+                        location.reload();
+                        return true;
+                }
+            }
+            console.log("adding reload plugin")
+            if(!window.addedPlug){
+                console.log("added reload plugin")
+                window.addedPlug = true;
+                FuseBox.addPlugin(customizedHMRPlugin);
+            }
+            `);
+    }
+    return new autoReload(production);
+}
+
+```
+
 
 ### How to develop/improve loader
  * run `node setup` to to npm install in root and sample folder
