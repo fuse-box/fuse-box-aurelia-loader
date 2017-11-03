@@ -29,14 +29,14 @@
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-plumber": "^1.1.0",
-    "gulp-sourcemaps": "^2.6.0",
-    "gulp-typescript": "^3.1.7",
-    "merge2": "^1.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-typescript": "^3.2.3",
+    "merge2": "^1.2.0",
     "require-dir": "^0.3.2",
-    "run-sequence": "^2.0.0",
+    "run-sequence": "^2.2.0",
     "typings": "^2.1.1",
-    "tslint": "^5.4.3",
-    "typescript": "^2.4.1",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1",
     "vinyl-paths": "^2.1.0"
   }
 }

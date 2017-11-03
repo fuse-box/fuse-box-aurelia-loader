@@ -338,13 +338,13 @@ export class FuseBoxAureliaLoader extends Loader {
    */
   private findFuseBoxPath(path: any): string {
     let retunValue;
-    let modulePart;
+    // let modulePart;
     switch (true) {
 
       case path.indexOf('/') !== -1:
 
         // package path, lets test where it is
-        modulePart = path.split('/')[0];
+        // modulePart = path.split('/')[0];
         switch (true) {
           case this.fuseBoxExist(path):
             retunValue = path;
