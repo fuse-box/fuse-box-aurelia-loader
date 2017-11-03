@@ -12,7 +12,7 @@ Some of these might get added later, feel free to make PR to make these work.
 
 
 ### How to install
-```npm install git://github.com/fuse-box/fuse-box-aurelia-loader```
+```npm install fuse-box-aurelia-loader```
 
 
 ### How to use
