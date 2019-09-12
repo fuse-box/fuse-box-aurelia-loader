@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": "src/",
-    "outDir": "dist/",
+    "outDir": "dev/",
     "sourceMap": true,
     "target": "es5",
     "module": "commonjs",
@@ -15,24 +15,16 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitThis": false,
     "noUnusedLocals": true,
-    "allowUnreachableCode":false,
+    "allowUnreachableCode": false,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "lib": ["es2017", "dom"]
+    "lib": ["es2017", "dom"],
+    "baseUrl": "./",
+    "paths": {
+      "fuse-box-aurelia-loader": ["./src/fuse-box-aurelia-loader"]
+    }
   },
-  "filesGlob": [
-    "./src/**/*.ts",
-    "./node_modules/**/*.ts",
-    "./typings/index.d.ts",
-    "./custom_typings/**/*.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "sample"
-  ],
-  "atom": {
-    "rewriteTsconfig": false
-  }
+  "exclude": ["node_modules", "src/sample"]
 }

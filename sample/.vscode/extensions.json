@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "eg2.tslint",
-    "HookyQR.beautify",
-    "joelday.docthis",
-    "pflannery.vscode-versionlens",
-    "hnw.vscode-auto-open-markdown-preview"
-  ]
-}

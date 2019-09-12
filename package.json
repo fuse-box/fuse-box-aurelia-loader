@@ -1,12 +1,10 @@
 {
   "name": "fuse-box-aurelia-loader",
-  "version": "2.0.1",
+  "version": "3.0.0-next",
   "description": "Fuse-Box loader for Aurelia framework",
   "keywords": [
     "aurelia",
     "fuse-box-bundler",
-    "fuse-box, wow that was fast",
-    "fuse-box, its done already ?",
     "fuse-box",
     "typescript"
   ],
@@ -17,7 +15,7 @@
   "license": "MIT",
   "author": "Fusebox Community",
   "scripts": {
-    "prepare": "./node_modules/.bin/typings install"
+    "start": "node fuse"
   },
   "main": "dist/commonjs/fuse-box-aurelia-loader.js",
   "typings": "dist/commonjs/fuse-box-aurelia-loader.d.ts",
@@ -26,17 +24,21 @@
     "url": "https://github.com/fuse-box/fuse-box-aurelia-loader"
   },
   "devDependencies": {
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-plumber": "^1.1.0",
-    "gulp-sourcemaps": "^2.6.1",
-    "gulp-typescript": "^3.2.3",
-    "merge2": "^1.2.0",
-    "require-dir": "^0.3.2",
-    "run-sequence": "^2.2.0",
-    "typings": "^2.1.1",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.1",
-    "vinyl-paths": "^2.1.0"
+    "aurelia-animator-css": "^1.0.4",
+    "aurelia-binding": "^2.5.0",
+    "aurelia-bootstrapper": "^2.3.3",
+    "aurelia-dependency-injection": "^1.5.1",
+    "aurelia-fetch-client": "^1.8.2",
+    "aurelia-framework": "^1.3.1",
+    "aurelia-loader": "^1.0.2",
+    "aurelia-materialize-bridge": "^1.3.4",
+    "aurelia-metadata": "^1.0.6",
+    "aurelia-pal": "^1.8.2",
+    "aurelia-path": "^1.1.4",
+    "aurelia-task-queue": "^1.3.3",
+    "aurelia-templating": "^1.10.2",
+    "fuse-box": "^4.0.0-next.134",
+    "fuse-box-typechecker": "^3.0.0-next.29",
+    "typescript": "^3.6.3"
   }
 }
