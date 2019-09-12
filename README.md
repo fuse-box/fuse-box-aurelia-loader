@@ -1,7 +1,8 @@
 # fuse-box-aurelia-loader
+For fusebox v4 - needs someone who uses fusebox and wants to maintain.
 
 ### How to install
-```npm install fuse-box-aurelia-loader```
+todo (npm package not ready for v4...)
 
 
 ### How to use
