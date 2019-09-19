@@ -18,7 +18,6 @@ class Context {
                     'fuse-box-aurelia-loader',
                     'aurelia-bootstrapper',
                     'aurelia-pal-browser',
-                    'aurelia-pal-browser',
                     'aurelia-logging-console',
                     'aurelia-templating-binding',
                     'aurelia-templating-resources',
