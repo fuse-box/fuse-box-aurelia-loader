@@ -13,6 +13,20 @@ class Context {
             webIndex: {
                 template: `src/sample/index.html`
             },
+            dependencies: {
+                include: [
+                    'fuse-box-aurelia-loader',
+                    'aurelia-bootstrapper',
+                    'aurelia-pal-browser',
+                    'aurelia-pal-browser',
+                    'aurelia-logging-console',
+                    'aurelia-templating-binding',
+                    'aurelia-templating-resources',
+                    'aurelia-event-aggregator',
+                    'aurelia-history-browser',
+                    'aurelia-templating-router'
+                ]
+            },
             cache: {
                 root: '.cache',
                 enabled: true
